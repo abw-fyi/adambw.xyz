@@ -237,6 +237,34 @@
   .lad input[type=range]::-moz-range-thumb { width: 14px; height: 14px; background: var(--ink); border: 0; border-radius: 0; }
   .lad-text { font-size: 22px !important; line-height: 1.6; max-width: 32em; min-height: 8em; }
   .lad-text s { color: #c4c4c4; text-decoration-color: var(--b); text-decoration-thickness: 1px; transition: color .2s; }
+
+  .rx-page { max-width: 1180px; }
+  .rx { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 0 44px; padding-top: 84px; }
+  .rx:first-child { padding-top: 0; }
+  .rx-title { font: 400 clamp(36px, 4.6vw, 58px)/1.05 var(--serif); color: var(--b); margin: 0 0 16px; letter-spacing: -.01em; }
+  .rx-lede { font-size: 19px !important; line-height: 1.5; margin: 0 0 30px !important; color: var(--ink); }
+  .rx-lede a, .rx-notes a, .rx-foot a { color: var(--b); text-underline-offset: 3px; }
+  .rx-h { font: 400 22px/1.2 var(--mono); color: var(--b); margin: 0 0 14px; display: flex; gap: 14px; align-items: baseline; padding-top: 14px; border-top: 1px dashed var(--b); }
+  .rx-h span { font-size: 13px; }
+  .rx-p { font-size: 19px !important; line-height: 1.5; max-width: 32em; margin: 0 0 24px !important; }
+  .rx-ref { font: 700 11px/0 var(--mono); color: var(--b); margin-left: 1px; }
+  .rx-fig { font: 400 12.5px/1.5 var(--mono) !important; color: var(--grey); margin: 12px 0 0 !important; }
+  .rx-fig i { display: inline-block; width: 22px; vertical-align: middle; margin-right: 4px; }
+  .rx-lede a { white-space: nowrap; }
+  .rx-gap { margin-top: 48px !important; }
+  .rx-notes { padding-top: 62px; }
+  .rx-notes p { font: 400 12.5px/1.55 var(--mono) !important; color: var(--grey); margin: 0 0 18px !important; }
+  .rx-notes sup { font-weight: 700; color: var(--b); margin-right: 6px; }
+  .rx-foot { font: 400 12.5px/1.6 var(--mono) !important; color: var(--grey); margin: 84px 0 0 !important; }
+  .rx .rw-ov { border-top: 1px dashed #bbb; border-bottom: 1px dashed #bbb; }
+  .rx .rw-ov > div { border-bottom: 0; }
+  .rx .rw-steps { margin-top: 6px; border-style: dashed; }
+  .rx .rw-steps figure { border-right-style: dashed; }
+  .rx .rw-steps figcaption { font-size: 12.5px; }
+  .rx .rw-try { margin: 0; border-top: 1px dashed var(--b); }
+  .rx .sh, .rx .lad { margin-top: 10px; }
+  .rx .lad { border-top: 1px dashed var(--ink); margin-top: 48px; }
+  .rx .sh-models { border-top: 1px dashed var(--ink); }
   .rw-ref { display: grid; grid-template-columns: 1.3fr 1fr; gap: 30px; align-items: start; }
   .rw-ref img { display: block; width: 100%; border: 1px solid #e3e3e3; }
   .rw-ref p { font-size: 16px !important; color: var(--grey); }
@@ -355,6 +383,10 @@
     .rw-kinds { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
     .rw-pair { grid-template-columns: 1fr; }
     .sh { grid-template-columns: 1fr; gap: 24px; }
+    .rx { grid-template-columns: 1fr; padding-top: 60px; }
+    .rx-notes { padding-top: 18px; border-top: 1px dashed #ccc; margin-top: 22px; }
+    .rx-notes:empty { display: none; }
+
     .lad-dials { grid-template-columns: 1fr; }
     .lad-text { font-size: 18px !important; }
     .rw-ov svg { height: 120px; }
@@ -498,35 +530,39 @@
   var RW_LAD = {"words": ["2, ", "I ", "think ", "it ", "may ", "will ", "inspire ", "me. ", "rwj ", "is ", "a ", "mindset, ", "whereby ", "the ", "happenings, ", "items, ", "places, ", "and ", "people ", "in ", "my ", "physical ", "world ", "may ", "influence ", "my ", "work, ", "and ", "therefore, ", "they ", "relate ", "to ", "my ", "work. ", "This ", "(with ", "effort ", "on ", "my ", "end) ", "is ", "the ", "journal ", "where ", "I’ll ", "document ", "and ", "take ", "note ", "of ", "those ", "things ", "in ", "my ", "world. ", "Related ", "to ", "work, ", "in ", "a ", "journal, ", "there ", "you ", "go."], "b": [["as written", 0], ["no asides", 5], ["no side phrases", 8], ["−1 sentence", 42], ["one line", 58]], "c": [["as written", 0], ["no hedges", 2], ["−1 soft line", 34], ["sharpest line", 55]], "combos": {"0,0": "0000000000000000000000000000000000000000000000000000000000000000", "0,1": "0110000000000000000000000000000000000000000000000000000000000000", "0,2": "1111111111111111111111111111111111000000000000000000000000000000", "0,3": "1111111111111111111111111111111111111111111111111111111000000000", "1,0": "0000000000000000000000000000000000011111000000000000000000000000", "1,1": "0110000000000000000000000000000000011111000000000000000000000000", "1,2": "1111111111111111111111111111111111011111000000000000000000000000", "1,3": "1111111111111111111111111111111111111111111111111111111000000000", "2,0": "0000000000000000000000000000000000011111000000000000000000111000", "2,1": "0110000000000000000000000000000000011111000000000000000000111000", "2,2": "1111111111111111111111111111111111011111000000000000000000111000", "2,3": "1111111111111111111111111111111111111111111111111111111000111000", "3,0": "1111111111111111111111111111111111011111000000000000000000111000", "3,1": "1111111111111111111111111111111111011111000000000000000000111000", "3,2": "1111111111111111111111111111111111011111000000000000000000111000", "3,3": "1111111111111111111111111111111111111111111111111111111000111000", "4,0": "1111111111111111111111111111111111111111111111111111111000111000", "4,1": "1111111111111111111111111111111111111111111111111111111000111000", "4,2": "1111111111111111111111111111111111111111111111111111111000111000", "4,3": "1111111111111111111111111111111111111111111111111111111000111000"}};
   function rwj() {
     var models = [["The Essay as a Try","Montaigne · Paul Graham"],["They Say, I Say","Graff & Birkenstein"],["Situation and Story","Vivian Gornick"],["Kishōtenketsu","Chinese verse · Japanese essays"],["Classical Argument","Cicero · Quintilian"],["Rogerian Argument","after Carl Rogers"]];
-    return '<div class="rw">' +
-      '<section class="rw-top">' +
-        '<p class="rw-n">Type, lettering and tools</p>' +
-        '<h1>The Related Work Journal</h1>' +
-        '<p class="rw-lede">My journal, and the typefaces, lettering and app I made for it.</p>' +
+    var L = function (u, t) { return '<a href="' + u + '" target="_blank" rel="noopener">' + t + '</a>'; };
+    var row = function (n, h, body, notes) {
+      return '<section class="rx"><div class="rx-main"><h2 class="rx-h"><span>' + n + '</span>' + h + '</h2>' + body + '</div>' +
+        '<aside class="rx-notes">' + notes.map(function (x) { return '<p><sup>' + x[0] + '</sup>' + x[1] + '</p>'; }).join("") + '</aside></section>';
+    };
+    var sup = function (k) { return '<sup class="rx-ref">' + k + '</sup>'; };
+    return '<div class="rw rx-page">' +
+      '<section class="rx"><div class="rx-main">' +
+        '<h1 class="rx-title">The Related Work Journal</h1>' +
+        '<p class="rx-lede">My journal. I made its type, its lettering and the app I write it in. ' + L("https://relatedwork.blog", "Read it ↗") + '</p>' +
         '<div class="rw-ov rw-anim">' + "RaQgf3".split("").map(function (c, i) { return '<div style="--i:' + i + '" aria-label="' + c + ' in IBM Plex Mono and Related Mono">' + RW_OV[c] + '</div>'; }).join("") + '</div>' +
-        '<p class="rw-key"><span><i class="k-dash"></i>IBM Plex Mono</span><span><i class="k-blue"></i>Related Mono</span></p>' +
-      '</section>' +
+        '<p class="rx-fig">fig. 1 &nbsp;<i class="k-dash"></i> IBM Plex Mono &nbsp;<i class="k-blue"></i> Related Mono</p>' +
+      '</div><aside class="rx-notes"></aside></section>' +
 
-      '<section class="rw-sec"><p class="rw-n">01</p>' +
-        '<h2 class="rw-big">Related Mono</h2>' +
-        '<p class="rw-p">After OO Arketa, drawn on IBM Plex. With Related Serif, it sets this site.</p>' +
-        '<div class="rw-try"><div class="rw-try-bar"><button type="button" data-f="mono" aria-pressed="true">Related Mono</button><button type="button" data-f="serif" aria-pressed="false">Related Serif</button></div>' +
-          '<div class="rw-try-text" id="tryText" contenteditable="true" spellcheck="false">Type anything here.</div></div>' +
-        '<p class="rw-facts">1,078 glyphs · 8 styles · 321 versions in 22 days</p>' +
-      '</section>' +
+      row("01", "Related Mono",
+        '<p class="rx-p">After OO Arketa' + sup(1) + ', drawn on IBM Plex' + sup(2) + '. Arketa\'s license forbids changes. Plex\'s invites them.</p>' +
+        '<div class="rw-try"><div class="rw-try-bar"><button type="button" data-f="mono" aria-pressed="true">Mono</button><button type="button" data-f="serif" aria-pressed="false">Serif</button></div>' +
+        '<div class="rw-try-text" id="tryText" contenteditable="true" spellcheck="false">Type anything here.</div></div>' +
+        '<p class="rx-fig">1,078 glyphs · 8 styles · 321 versions in 22 days</p>',
+        [[1, 'A monospace by Laura Csocsán and Samira Schneuwly at ' + L("https://www.outline-online.com/product/arketa", "Outline Online") + ', a Swiss foundry.'],
+         [2, 'IBM\'s own face, by Mike Abbink with Bold Monday. In 2017 it replaced Helvetica, partly to end the license fees. Open source, so anyone may redraw it. ' + L("https://www.ibm.com/plex/", "ibm.com/plex")]]) +
 
-      '<section class="rw-sec"><p class="rw-n">02</p>' +
-        '<h2 class="rw-big">Lettering</h2>' +
-        '<p class="rw-p">A round pen on Hershey\'s 1967 plotter strokes. One ink.</p>' +
-        '<div class="rw-steps"><figure><img src="img/rwj/stroke-R-skeleton.svg" alt=""><figcaption>Stroke</figcaption></figure>' +
-          '<figure><img src="img/rwj/stroke-R-pen.svg" alt=""><figcaption>Pen</figcaption></figure>' +
-          '<figure><img src="img/rwj/stroke-R-draw.svg" alt=""><figcaption>Letter</figcaption></figure></div>' +
-      '</section>' +
+      row("02", "Lettering",
+        '<p class="rx-p">A round pen run along Dr. A. V. Hershey\'s 1967 vector strokes' + sup(3) + '. One ink.</p>' +
+        '<div class="rw-steps"><figure><img src="img/rwj/stroke-R-skeleton.svg" alt=""><figcaption>stroke</figcaption></figure>' +
+          '<figure><img src="img/rwj/stroke-R-pen.svg" alt=""><figcaption>pen</figcaption></figure>' +
+          '<figure><img src="img/rwj/stroke-R-draw.svg" alt=""><figcaption>letter</figcaption></figure></div>' +
+        '<p class="rx-fig">fig. 2</p>',
+        [[3, 'Drawn at the Naval Weapons Laboratory for early screens: points joined by straight lines, nothing else. Free to use, they still run CAD and laser engravers. ' + L("https://en.wikipedia.org/wiki/Hershey_fonts", "Wikipedia") + ' · ' + L("https://lapolice.ch/stories/footnotes-b-article-9/", "Cogitating Vectors")]]) +
 
-      '<section class="rw-sec"><p class="rw-n">03</p>' +
-        '<h2 class="rw-big">RWJ Studio</h2>' +
-        '<p class="rw-p">The app I write in. It suggests. It never writes.</p>' +
-        '<h3 class="rw-h3">Shape</h3><div class="sh"><div class="sh-main">' +
+      row("03", "RWJ Studio",
+        '<p class="rx-p">The app I write in. It suggests. It never writes.</p>' +
+        '<div class="sh"><div class="sh-main">' +
           '<div class="sh-head"><span class="sh-pick">Situation and Story</span><span class="sh-ok">2 of 2 steps ✓</span></div>' +
           '<div class="sh-chain">' +
             '<div class="sh-step on"><b>Situation</b><i>What happened, and where?</i><p>I once was an audio engineer and producer… Now, I’ve moved to a new city where I know two people.</p></div>' +
@@ -535,17 +571,21 @@
           '</div></div>' +
           '<ol class="sh-models">' + models.map(function (m) { return '<li' + (m[0] === "Situation and Story" ? ' class="on"' : '') + '><b>' + esc(m[0]) + '</b><span>' + esc(m[1]) + '</span></li>'; }).join("") + '</ol>' +
         '</div>' +
-        '<h3 class="rw-h3">Brevity · Contrast <span class="rw-hint">drag</span></h3>' +
+        '<p class="rx-fig">fig. 3 &nbsp;Shape' + sup(4) + ': a draft read against six shapes essayists use</p>' +
         '<div class="lad"><div class="lad-dials">' +
           '<label><b>Brevity</b><input type="range" min="0" max="' + (RW_LAD.b.length - 1) + '" value="0" data-k="b"><span data-say="b">as written</span></label>' +
           '<label><b>Contrast</b><input type="range" min="0" max="' + (RW_LAD.c.length - 1) + '" value="0" data-k="c"><span data-say="c">as written</span></label>' +
           '</div><p class="lad-text" id="ladText"></p></div>' +
-        '<h3 class="rw-h3">Suggestions</h3><figure class="rw-one"><img src="img/rwj/app-suggest.jpg" alt="A grammar note in RWJ Studio with choices"></figure>' +
-      '</section>' +
+        '<p class="rx-fig">fig. 4 &nbsp;Brevity and Contrast only cut. Drag them.</p>' +
+        '<figure class="rw-one rx-gap"><img src="img/rwj/app-suggest.jpg" alt="A grammar note in RWJ Studio with choices"></figure>' +
+        '<p class="rx-fig">fig. 5 &nbsp;A usage note' + sup(5) + '. Keeping my wording is one key.</p>',
+        [[4, 'From Montaigne\'s ' + L("https://en.wikipedia.org/wiki/Essays_(Montaigne)", "Essais") + ' (1580; <i>essai</i> means a try) to ' + L("https://en.wikipedia.org/wiki/Vivian_Gornick", "Vivian Gornick") + '\'s <i>The Situation and the Story</i> (2001). See also ' + L("https://paulgraham.com/essay.html", "The Age of the Essay") + '.'],
+         [5, 'After ' + L("https://en.wikipedia.org/wiki/Bryan_A._Garner", "Bryan Garner") + '\'s method: it flags only what standard English rejects, never a superstition.']]) +
 
-      '<p class="rw-foot"><a href="https://relatedwork.blog" target="_blank" rel="noopener">Read the journal ↗</a> · <a href="docs/rwj-style-guide.pdf" target="_blank" rel="noopener">Style guide</a> · Hershey Fonts by Dr. A. V. Hershey, U.S. National Bureau of Standards.</p>' +
+      '<p class="rx-foot">' + L("docs/rwj-style-guide.pdf", "Style guide (PDF)") + ' · The Hershey Fonts were created by Dr. A. V. Hershey at the U.S. National Bureau of Standards.</p>' +
       '<div class="next">Next: <a href="#/diary-films">Diary Films</a></div></div>';
   }
+
 
 
 
