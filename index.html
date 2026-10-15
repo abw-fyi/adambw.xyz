@@ -106,9 +106,12 @@
   .pp .big svg { width: 24px; height: 24px; }
   .pp:hover .big { transform: scale(1.06); }
   .pl.on .pp .big { opacity: 0; } .pl.on:hover .pp .big { opacity: 1; }
-  .pl.auto:not(.on) .pp .big { width: 64px; height: 64px; background: rgba(255,255,255,.85); }
-  .pp .snd { position: absolute; left: 14px; bottom: 14px; font: 400 13px/1 var(--mono); color: #fff; background: rgba(0,0,0,.55); padding: 7px 10px; border-radius: 20px; }
-  .pl.on .pp .snd { display: none; }
+  .pl .tap { all: unset; position: absolute; inset: 0; cursor: pointer; }
+  .pl .snd { all: unset; cursor: pointer; position: absolute; right: 12px; bottom: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 12px; border-radius: 18px;
+    font: 400 13px/1 var(--mono); color: #fff; background: rgba(0,0,0,.5); backdrop-filter: blur(6px); transition: background .15s; }
+  .pl .snd:hover { background: rgba(0,0,0,.72); }
+  .pl.loud .snd span { display: none; }
+  .pl.loud .snd { padding: 0 10px; }
   .score { display: flex; align-items: center; gap: 6px; margin-top: 10px; font: 400 14px/1 var(--mono); }
   .score span { color: var(--grey); margin-right: 6px; }
   .score button { all: unset; cursor: pointer; padding: 8px 12px; border-radius: 20px; color: var(--grey); }
@@ -184,6 +187,7 @@
     .fig { grid-template-columns: 1fr; gap: 14px; }
     .covers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 14px; }
     .pair2 { grid-template-columns: 1fr; }
+    .pl .snd { right: 8px; bottom: 10px; min-height: 30px; padding: 0 9px; font-size: 12px; gap: 5px; }
     .bio { grid-template-columns: 1fr; gap: 22px; } .bioimg { width: 160px; }
     .lean { display: none; }
     /* on phones the index folds up, so the now-playing lines sit at the bottom of the screen */
@@ -244,6 +248,8 @@
     play: '<svg width="14" height="14" viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3l10 6-10 6z" fill="currentColor"/></svg>',
     pause: '<svg width="14" height="14" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 3h3.5v12H4zM10.5 3H14v12h-3.5z" fill="currentColor"/></svg>',
     x: '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg>',
+    muted: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10L5 10H2z" fill="currentColor"/><path d="M11 6l4 4M15 6l-4 4" stroke="currentColor" stroke-width="1.5"/></svg>',
+    sound: '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10L5 10H2z" fill="currentColor"/><path d="M11.2 5.5a3.5 3.5 0 0 1 0 5M13 3.8a6 6 0 0 1 0 8.4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>',
     spin: '<span class="spin" aria-hidden="true"></span>'
   };
   // Every project page: title, the label on the right, its context, the cover with a side note, and a way to hear it.
@@ -428,7 +434,8 @@
   function player(src, opt) {
     opt = opt || {};
     return '<div class="pl' + (opt.tall ? " tall" : "") + (opt.loop ? " auto" : "") + '"><video playsinline preload="' + (opt.loop ? "auto" : "metadata") + '"' + (opt.loop ? " muted loop" : "") + ' poster="' + src + '.jpg" src="' + src + '.mp4?v=3"></video>' +
-      '<button class="pp" type="button" aria-label="Play with sound"><span class="big">' + I.play + '</span>' + (opt.loop ? '<span class="snd">Sound on</span>' : '') + '</button><i class="bar1"><b></b></i></div>';
+      (opt.loop ? '<button class="tap" type="button" aria-label="Pause"></button><button class="snd" type="button" aria-label="Turn sound on">' + I.muted + '<span>Sound on</span></button>'
+                : '<button class="pp" type="button" aria-label="Play with sound"><span class="big">' + I.play + '</span></button>') + '<i class="bar1"><b></b></i></div>';
   }
   // one silent picture with its scores as separate tracks, all playing together; switching crossfades the sound
   function duo(x) {
@@ -468,7 +475,24 @@
   function wirePlayers() {
     var seen = "IntersectionObserver" in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { if (v.muted && v.loop) v.play().catch(function () {}); } else v.pause(); }); }, { threshold: .4 }) : null;
     main.querySelectorAll(".pl.duo").forEach(wireDuo);
-    main.querySelectorAll(".pl:not(.duo)").forEach(function (box) {
+    // looping clips: always moving, silent until the small sound button in the corner is pressed
+    main.querySelectorAll(".pl.auto").forEach(function (box) {
+      var v = box.querySelector("video"), snd = box.querySelector(".snd"), tap = box.querySelector(".tap"), bar = box.querySelector(".bar1 b");
+      var sync = function () { var loud = !v.muted; box.classList.toggle("loud", loud); snd.innerHTML = (loud ? I.sound + '<span>Sound off</span>' : I.muted + '<span>Sound on</span>'); snd.setAttribute("aria-label", loud ? "Turn sound off" : "Turn sound on"); };
+      snd.onclick = function () {
+        if (v.muted) { if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); }
+          main.querySelectorAll(".pl video").forEach(function (o) { if (o !== v && !o.muted) o.pause(); });
+          v.muted = false; v.loop = false; v.currentTime = 0; v.play(); }
+        else { v.muted = true; v.loop = true; v.play().catch(function () {}); }
+      };
+      tap.onclick = function () { if (v.paused) v.play().catch(function () {}); else v.pause(); };
+      v.addEventListener("volumechange", sync);
+      v.addEventListener("ended", function () { v.muted = true; v.loop = true; v.currentTime = 0; v.play().catch(function () {}); });
+      v.addEventListener("timeupdate", function () { if (v.duration) bar.style.width = (v.currentTime / v.duration * 100) + "%"; });
+      if (seen) seen.observe(v); else v.play().catch(function () {});
+      sync();
+    });
+    main.querySelectorAll(".pl:not(.duo):not(.auto)").forEach(function (box) {
       var v = box.querySelector("video"), b = box.querySelector(".pp"), bar = box.querySelector(".bar1 b"), auto = box.classList.contains("auto");
       var sync = function () { var live = !v.paused && !v.muted; box.classList.toggle("on", live); b.querySelector(".big").innerHTML = live ? I.pause : I.play; b.setAttribute("aria-label", live ? "Pause" : "Play with sound"); };
       b.onclick = function () {
