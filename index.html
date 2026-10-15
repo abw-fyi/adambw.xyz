@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adam Butz-Weidner</title>
+<meta name="description" content="Producer in Boston. Podcasts, audio drama, music and sound for film.">
+<meta property="og:title" content="Adam Butz-Weidner">
+<meta property="og:description" content="Producer in Boston. Podcasts, audio drama, music and sound for film.">
+<meta property="og:image" content="https://adambw.xyz/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://cdn.simplecast.com">
+<link rel="preload" href="fonts/RelatedSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/RelatedMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Adam's own faces (SIL OFL, fonts/OFL.txt): Related Mono, his typewriter face after Arketa, and Related Serif for reading. */
+  @font-face { font-family: "Related Mono"; src: url(fonts/RelatedMono-Regular.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Related Mono"; src: url(fonts/RelatedMono-Italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Related Mono"; src: url(fonts/RelatedMono-Bold.woff2) format("woff2"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Related Serif"; src: url(fonts/RelatedSerif-Regular.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: "Related Serif"; src: url(fonts/RelatedSerif-Italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+  @font-face { font-family: "Related Serif"; src: url(fonts/RelatedSerif-Bold.woff2) format("woff2"); font-weight: 700; font-display: swap; }
+  /* adambw.xyz v20 (2026-10-14), after a site Adam likes (lee94josh.com): an index of projects on the left that takes on
+     each project's colors, one project per page with its context in plain paragraphs, white page, Adam's own Related faces.
+     No box buttons: actions are text with a small round icon. */
+  :root { --ink: #000; --text: rgba(0,0,0,.82); --grey: rgba(0,0,0,.42); --side: #efefef; --serif: "Related Serif", Georgia, serif; --mono: "Related Mono", "Courier New", monospace; --font: var(--serif); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: #fff; color: var(--text); font: 400 19px/1.6 var(--serif); }
+  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid #000 !important; outline-offset: 2px; }
+
+  /* the index */
+  .side { position: fixed; top: 0; left: 0; bottom: 0; width: 240px; background: var(--side); padding: 26px 22px; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; font: 400 14px/1.6 var(--mono); isolation: isolate; }
+  .side > * { position: relative; z-index: 1; }
+  .side a { display: block; color: var(--ink); text-decoration: none; padding: 1px 0; }
+  .side a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  /* the wash: each page's cover, blurred into the index */
+  .wash { position: absolute !important; inset: 0; z-index: 0 !important; overflow: hidden; pointer-events: none; transition: background .5s; }
+  .wash canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #holo { filter: blur(16px) saturate(1.15); transform: scale(1.15); opacity: 0; transition: opacity .9s ease; }
+  #holo.on { opacity: .78; }
+  #grain { mix-blend-mode: soft-light; opacity: 0; transition: opacity .9s ease; }
+  #grain.on { opacity: .45; }
+  .side a.cur { color: var(--ink); position: relative; }
+  .side a.cur::before { content: ""; position: absolute; left: -12px; top: .72em; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .side .home { font-weight: 700; }
+  .side .logo { display: block; width: 100%; max-width: 196px; height: auto; margin: 2px 0 6px; }
+  .side .aboutl { margin-bottom: 30px; }
+  .side h4 { margin: 0 0 2px; font-size: 14px; font-weight: 700; color: var(--ink); }
+  .side .grp { margin-bottom: 26px; }
+  .side .foot { margin-top: auto; padding-top: 26px; }
+  .menu { display: none; }
+
+  /* a page */
+  main { margin-left: 240px; padding: 46px 64px 120px 128px; max-width: 1080px; }
+  .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 24px; margin: 0 0 30px; max-width: 760px; }
+  h1 { font: 700 26px/1.2 var(--mono); color: var(--ink); margin: 0; }
+  .meta { color: var(--grey); font: 400 14px/1.4 var(--mono); white-space: nowrap; }
+  .page p { max-width: 38em; margin: 0 0 22px; }
+  .page .big { font-size: 23px; line-height: 1.5; color: var(--ink); }
+  .fig { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 200px); gap: 32px; align-items: start; margin: 36px 0 40px; }
+  .fig img { width: 100%; display: block; }
+  .note { font-style: italic; color: var(--grey); font-size: 17px; line-height: 1.55; margin: 0; }
+  .note b { font: 400 13px/1.5 var(--mono); color: var(--text); display: block; margin-bottom: 6px; }
+  .play { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; min-height: 48px; margin: 0 28px 22px 0; font: 400 15px/1 var(--mono); color: var(--ink); }
+  .play .ic { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; flex: none; transition: transform .15s; }
+  .play:hover .ic { transform: scale(1.08); }
+  .play:hover .lb, .play:hover > span:last-child { text-decoration: underline; text-underline-offset: 4px; }
+  .ext { display: inline-flex; align-items: center; min-height: 48px; margin-bottom: 22px; font: 400 15px/1 var(--mono); }
+  .next { margin-top: 56px; padding-top: 18px; border-top: 1px solid #e6e6e6; max-width: 760px; color: var(--grey); font: 400 14px/1.5 var(--mono); }
+  .next a { color: var(--ink); }
+  h2.sub { font: 700 15px/1.3 var(--mono); color: var(--ink); margin: 44px 0 12px; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; padding-bottom: 14px; margin-bottom: 34px; border-bottom: 1px solid #e6e6e6; max-width: 760px; font: 400 15px/1.4 var(--mono); }
+  .tabs a { color: var(--grey); text-decoration: none; } .tabs a:hover { color: var(--ink); }
+  .tabs b { color: var(--ink); } .tabs span { color: var(--ink); }
+  .sig { font: 400 14px/1.6 var(--mono); margin-top: 34px !important; }
+  .logos { margin: 72px 0 0; padding-top: 18px; border-top: 1px solid #e6e6e6; max-width: 760px; }
+  .logos h4 { font: 400 13px/1 var(--mono); color: var(--grey); margin: 0 0 22px; }
+  .logos div { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 30px; }
+  .logos img { width: auto; mix-blend-mode: multiply; opacity: .72; transition: opacity .2s; }
+  .logos img:hover { opacity: 1; }
+  .bio { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; max-width: 900px; }
+  .bioimg { width: 220px; aspect-ratio: 1; object-fit: cover; display: block; background: #000; }
+  .hello { max-width: 760px; margin: 0 0 34px; }
+  .bio:not(:has(.bioimg)) { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+  .lean { position: fixed; right: -40px; bottom: -30px; width: 230px; z-index: 1; pointer-events: none; transform: rotate(-4deg); transform-origin: bottom right; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+  .lean.in { transform: rotate(0deg) translate(-8px, -4px); }
+  .bio .big { font-size: 21px; }
+  .ph { margin: 34px 0 30px; max-width: 640px; }
+  .ph img, .ph video { display: block; width: 100%; background: #000; }
+  .ph p { margin: 10px 0 0 !important; }
+  .docs { list-style: none; padding: 0; margin: 10px 0 26px; font: 400 15px/1.5 var(--mono); }
+  .docs li { padding: 6px 0; }
+  .stills { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 720px; margin: -10px 0 30px; }
+  .stills img { width: 100%; display: block; }
+
+  .films { display: grid; gap: 40px; margin: 30px 0 10px; max-width: 720px; }
+  .pl { position: relative; background: #000; line-height: 0; }
+  .pl video { display: block; width: 100%; }
+  .pl.tall { display: inline-block; } .pl.tall video { width: auto; max-width: 100%; height: min(78vh, 640px); }
+  .pp { all: unset; cursor: pointer; position: absolute; inset: 0; display: grid; place-items: center; }
+  .pp .big { width: 76px; height: 76px; border-radius: 50%; background: rgba(255,255,255,.94); color: #000; display: grid; place-items: center; box-shadow: 0 6px 24px rgba(0,0,0,.25); transition: transform .15s, opacity .25s; }
+  .pp .big svg { width: 24px; height: 24px; }
+  .pp:hover .big { transform: scale(1.06); }
+  .pl.on .pp .big { opacity: 0; } .pl.on:hover .pp .big { opacity: 1; }
+  .pl.auto:not(.on) .pp .big { width: 64px; height: 64px; background: rgba(255,255,255,.85); }
+  .pp .snd { position: absolute; left: 14px; bottom: 14px; font: 400 13px/1 var(--mono); color: #fff; background: rgba(0,0,0,.55); padding: 7px 10px; border-radius: 20px; }
+  .pl.on .pp .snd { display: none; }
+  .score { display: flex; align-items: center; gap: 6px; margin-top: 10px; font: 400 14px/1 var(--mono); }
+  .score span { color: var(--grey); margin-right: 6px; }
+  .score button { all: unset; cursor: pointer; padding: 8px 12px; border-radius: 20px; color: var(--grey); }
+  .score button:hover { color: var(--ink); }
+  .score button[aria-pressed="true"] { background: #111; color: #fff; }
+  .bar1 { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.18); }
+  .bar1 b { display: block; height: 100%; width: 0; background: #fff; }
+  .film h3 { font: 700 15px/1.4 var(--mono); color: var(--ink); margin: 12px 0 2px; }
+  .film p { margin: 0 !important; font-size: 17px; }
+
+  /* home: the six covers */
+  .covers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin: 40px 0 10px; max-width: 760px; }
+  .covers a { text-decoration: none; color: var(--ink); }
+  .covers img, .covers video { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; margin-bottom: 8px; transition: opacity .15s; background: #000; }
+  .covers a:hover img, .covers a:hover video { opacity: .85; }
+  .covers span { display: block; font: 400 14px/1.4 var(--mono); }
+  .covers small { display: block; color: var(--grey); font: 400 13px/1.4 var(--mono); }
+  .video { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #111; }
+  .adcard { all: unset; cursor: pointer; position: absolute; inset: 0; display: grid; place-items: center; }
+  .adcard .big { width: 76px; height: 76px; border-radius: 50%; background: rgba(255,255,255,.94); color: #000; display: grid; place-items: center; transition: transform .15s; }
+  .adcard .big svg { width: 24px; height: 24px; }
+  .adcard:hover .big { transform: scale(1.06); }
+  .adcard .lbl { position: absolute; left: 18px; bottom: 16px; font: 400 14px/1.3 var(--mono); color: #bbb; }
+  video.gif { display: block; width: 100%; background: #000; }
+  .ph img { display: block; width: 100%; }
+  .pair2 { display: grid; grid-template-columns: 2fr 3fr; gap: 20px; align-items: start; max-width: 640px; margin: 34px 0 6px; }
+  .pair2 figure { margin: 0; } .pair2 img { display: block; width: 100%; }
+  .pair2 figcaption { margin-top: 8px !important; }
+  .vids { display: grid; gap: 34px; margin: 34px 0 10px; max-width: 640px; }
+  .vid .frame { all: unset; cursor: pointer; position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; background: #000 center / cover; }
+  .vid .frame .ic { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 76px; height: 76px; border-radius: 50%; background: rgba(255,255,255,.94); color: #000; display: grid; place-items: center; box-shadow: 0 6px 24px rgba(0,0,0,.25); transition: transform .15s; }
+  .vid .frame .ic svg { width: 24px; height: 24px; }
+  .vid .frame:hover .ic { transform: translate(-50%, -50%) scale(1.06); }
+  .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .vid h3 { font: 700 15px/1.4 var(--mono); color: var(--ink); margin: 12px 0 2px; }
+  .vid p { margin: 0 !important; font-size: 17px; }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* the player */
+  .bar { display: none; margin-top: 30px; font: 400 13px/1.45 var(--mono); color: var(--ink); }
+  .bar.up { display: block; }
+  .bar .bh { display: flex; justify-content: space-between; align-items: center; color: var(--grey); margin-bottom: 4px; }
+  .bar b { display: block; font-weight: 700; }
+  .bar .brow { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+  .bar #barN { color: var(--ink); opacity: .7; }
+  .pbtn { all: unset; cursor: pointer; flex: none; width: 24px; height: 24px; display: grid; place-items: center; margin-left: -5px; }
+  .pbtn svg { width: 11px; height: 11px; }
+  .pbtn:hover { opacity: .6; }
+  .bar .track { height: 1px; background: rgba(0,0,0,.18); margin: 8px 0 6px; } .bar .track i { display: block; height: 100%; width: 0; background: #000; }
+  .bar .act { display: inline-block; text-decoration: underline; text-underline-offset: 3px; padding: 2px 0; }
+  .bar .act[hidden] { display: none; }
+  .spin { width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: sp .7s linear infinite; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+  svg { display: block; }
+  .sc { position: absolute; left: -9999px; width: 300px; height: 120px; }
+
+  @media (max-width: 900px) {
+    main { padding: 40px 36px 120px 48px; }
+  }
+  @media (max-width: 700px) {
+    .side { position: relative; width: auto; padding: 14px 18px; overflow: hidden; }
+    .side .home { margin: 0; display: flex; justify-content: space-between; align-items: center; }
+    .side .logo { width: 210px; margin: 0; }
+    .menu { display: inline-block; font-weight: 400; color: var(--grey); }
+    .side .grp, .side .foot { display: none; }
+    body.open .side .grp, body.open .side .foot { display: block; }
+    body.open .side .grp:first-of-type { margin-top: 22px; }
+    main { margin: 0; padding: 30px 18px 96px; }
+    .head { flex-direction: column; gap: 4px; }
+    h1 { font-size: 26px; }
+    .meta { white-space: normal; font-size: 15px; }
+    .page .big { font-size: 19px; }
+    .fig { grid-template-columns: 1fr; gap: 14px; }
+    .covers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 14px; }
+    .pair2 { grid-template-columns: 1fr; }
+    .bio { grid-template-columns: 1fr; gap: 22px; } .bioimg { width: 160px; }
+    .lean { display: none; }
+    /* on phones the index folds up, so the now-playing lines sit at the bottom of the screen */
+    .bar.up { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 30; margin: 0; padding: 10px 14px 8px; background: rgba(255,255,255,.96); backdrop-filter: blur(6px); box-shadow: 0 2px 16px rgba(0,0,0,.12); }
+    body.playing { padding-bottom: 130px; }
+  }
+</style>
+</head>
+<body>
+<nav class="side" id="side">
+  <div class="wash" aria-hidden="true"><canvas id="holo"></canvas><canvas id="grain"></canvas></div>
+  <a class="home" href="#/">Adam Butz-Weidner <span class="menu" id="menu">Index</span></a>
+  <a class="aboutl" href="#/about">About</a>
+  <div class="grp"><h4>Audio</h4>
+    <a href="#/pillowvoices">PillowVoices</a>
+    <a href="#/tom-bennet">The Tragedy of Tom Bennet</a>
+    <a href="#/inside-the-dancers-studio">Inside the Dancer's Studio</a>
+    <a href="#/how-people-move-people">How People Move People</a>
+    <a href="#/stevens">Stevens Studios</a>
+  </div>
+  <div class="grp"><h4>Music</h4>
+    <a href="#/courier-club">Courier Club</a>
+    <a href="#/stucktober">Stucktober</a>
+  </div>
+  <div class="grp"><h4>Film</h4>
+    <a href="#/fledged">Fledged</a>
+  </div>
+  <div class="grp"><h4>Youth Media</h4>
+    <a href="#/media-program">Springside New Media</a>
+  </div>
+  <div class="grp"><h4>Etc.</h4>
+    <a href="#/diary-films">Diary Films</a>
+    <a href="#/touchdesigner">TouchDesigner</a>
+  </div>
+  <div class="bar" id="bar" role="region" aria-label="Now playing">
+    <div class="bh"><span>Now playing</span><button class="pbtn" id="close" type="button" aria-label="Close the player"></button></div>
+    <b id="barT"></b>
+    <div class="brow"><button class="pbtn main" id="pp" type="button" aria-label="Pause"></button><span id="barN"></span></div>
+    <div class="track"><i id="prog"></i></div>
+    <a class="act" id="act" hidden></a>
+  </div>
+  <div class="foot">
+    <a href="https://www.linkedin.com/in/adamwbutz" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://letterboxd.com/abw1/" target="_blank" rel="noopener">Letterboxd</a>
+    <a href="https://relatedwork.blog" target="_blank" rel="noopener">The Related Work Journal</a>
+  </div>
+</nav>
+
+<main id="main" class="page"></main>
+
+<audio id="au" preload="metadata"></audio>
+<div class="sc" id="scBox" aria-hidden="true"></div>
+<script async src="https://w.soundcloud.com/player/api.js"></script>
+<script>
+(function () {
+  var IMG = "img/", MAIL = "adamwbutz@gmail.com";
+  var I = {
+    play: '<svg width="14" height="14" viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3l10 6-10 6z" fill="currentColor"/></svg>',
+    pause: '<svg width="14" height="14" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 3h3.5v12H4zM10.5 3H14v12h-3.5z" fill="currentColor"/></svg>',
+    x: '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2"/></svg>',
+    spin: '<span class="spin" aria-hidden="true"></span>'
+  };
+  // Every project page: title, the label on the right, its context, the cover with a side note, and a way to hear it.
+  // Clips with src/sc play here for len seconds (Apple previews are 30). Fledged's sound can't be posted, so it links out.
+  var WORK = [
+    { id: "pillowvoices", t: "PillowVoices: Dance Through Time", meta: "Podcast / 2020–23", cover: "pillowvoices.webp",
+      p: ["Jacob's Pillow is America's longest-running international dance festival, in the Berkshires of western Massachusetts. Its podcast pairs recordings from the festival's archive, back to 1933, with today's dance scholars.",
+          "I came on as the recording engineer. Much of the archive was old live recordings full of distortion and noise, and I restored them by hand, before AI tools could do that in one click. The job grew from there into producing episodes: the research, the structure, the edit, the mix and the music."],
+      note: "<b>Engineer, then producing episodes; restoration, music</b>Jacob's Pillow, 2020–23.", url: "https://pillowvoices.org/episodes/choreographing-the-social-consciousness-part-1-governmental-affairs", site: "Hear the full episode",
+      src: "https://cdn.simplecast.com/audio/afadbbd6-85c9-41d0-be50-4d8736540db8/episodes/7502bfbd-2116-4306-ae9c-ecb49bbd9d96/audio/1c4c3d0b-1748-49fd-bbfc-8020ce8187d8/default_tc.mp3?aid=rss_feed&feed=s5vXxjwE", start: 67, len: 40 },
+    { id: "tom-bennet", t: "The Tragedy of Tom Bennet", meta: "Audio drama / 2020", cover: "tom-bennet.webp",
+      p: ["A feature-length audio drama about a pirate ship lost at sea. We made it during the pandemic, with a cast of professional and first-time actors, some in the studio and some recording from home.",
+          "I produced and directed it, designed the sound, wrote the score, mixed it and played a part. With each actor I talked through the scene and where their character stood until they were ready to commit to it."],
+      note: "<b>Producer, director, sound design, score, mix</b>Tales From the Outside, 2020.", url: "https://soundcloud.com/adamb-w/sets/the-tragedy-of-tom-bennet", site: "Hear more on SoundCloud",
+      sc: "https://api.soundcloud.com/playlists/1321926355", track: 3, start: 21, len: 38 },
+    { id: "inside-the-dancers-studio", t: "Inside the Dancer's Studio", meta: "Podcast / 2021–22", cover: "inside-the-dancers-studio.webp",
+      p: ["A weekly interview show with choreographers, from the National Center for Choreography in Akron.",
+          "I recorded the conversations, worked in archival material, and mixed and mastered each episode."],
+      note: "<b>Recording, mix, master</b>National Center for Choreography, 2021–22.", url: "https://inside-the-dancers-studio.simplecast.com/", site: "Hear the show",
+      src: "https://cdn.simplecast.com/audio/e58ea147-4640-4df8-9057-31f9b139ecd4/episodes/fb6142c6-beea-4b2d-be74-561c9ff36da0/audio/78eb3803-f597-4bb5-83ed-bea8fa6e29f1/default_tc.mp3?aid=rss_feed&feed=HurYnyt3", start: 62, len: 40 },
+    { id: "how-people-move-people", t: "How People Move People", meta: "Podcast / 2023", cover: "how-people-move-people.webp",
+      p: ["The National Center for Choreography's long-form series about how art and lives shape each other, with a new host and subject each season.",
+          "I recorded the sessions, many of them remote."],
+      note: "<b>Recording engineer</b>National Center for Choreography, 2023.", url: "https://www.nccakron.org/howpeoplemovepeople", site: "Hear the show",
+      src: "https://cdn.simplecast.com/audio/5e965b0d-9821-4693-bf55-5bd54972853d/episodes/96188777-b578-4c2f-b695-1c428affbdf6/audio/65c8360e-f3ea-4083-a1ab-348714654eb4/default_tc.mp3?aid=rss_feed&feed=uAHAu5Sj", start: 182, len: 40 },
+    { id: "fledged", t: "Fledged", meta: "Short film / 2025", cover: "fledged.webp", stills: ["fledged-still-10.webp", "fledged-still-11.webp"],
+      p: ["A short film, and an Official Selection of the Sherman Oaks Film Festival.",
+          "I did the Dolby Atmos mix, ADR, Foley and sound design. The film's sound can't be posted, so this links to the festival."],
+      note: "<b>Dolby Atmos mix, ADR, Foley, sound design</b>2025.", url: "https://shermanoaksfilmfestival.com/2025/10/31/fledged/", site: "See it at the festival" },
+    { id: "stucktober", t: "Stucktober", meta: "Single / 2024", cover: "slow-crawl-towards-the-sun.webp",
+      p: ["A song from Lena Fine's album Slow Crawl Towards The Sun. I produced the whole record."],
+      note: "<b>Producer</b>Lena Fine, 2024.", url: "https://open.spotify.com/track/0kIx7Fsft1KZHF8uZOQi6n", site: "Hear it on Spotify",
+      src: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bf/22/1c/bf221cd2-3fd7-c8d4-2b1e-9d8d9cb279e6/mzaf_9621994895570411740.plus.aac.p.m4a", start: 0, len: 30 }
+  ];
+  // the home grid: six squares, both lanes. [page, title, label, image] (blank = from WORK)
+  var GRID = [["pillowvoices"], ["tom-bennet"], ["inside-the-dancers-studio"],
+    ["courier-club", "Courier Club", "Band / music videos", "img/courier-club-tile.jpg"], ["fledged"],
+    ["media-program", "Springside New Media", "Youth media / 2022–26", "img/springside-tile.jpg"]];
+  var ORDER = ["pillowvoices", "tom-bennet", "inside-the-dancers-studio", "how-people-move-people", "stevens", "courier-club", "stucktober", "fledged", "media-program", "diary-films", "touchdesigner"];
+  var REEL = WORK.map(function (p, i) { return (p.src || p.sc) ? i : -1; }).filter(function (i) { return i >= 0; });
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/'/g, "&#39;"); };
+  var fmt = function (s) { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); };
+  var byId = function (id) { for (var i = 0; i < WORK.length; i++) if (WORK[i].id === id) return i; return -1; };
+  var PAGES = { "stevens": "Stevens Studios", "media-program": "Springside New Media", "courier-club": "Courier Club", "about": "About", "diary-films": "Diary Films", "touchdesigner": "TouchDesigner" };
+  var title = function (id) { return PAGES[id] || WORK[byId(id)].t; };
+  var main = $("main");
+
+  // ---------- pages
+  function home() {
+    return '<p class="big">I\'m a producer in Boston. I make podcasts, audio drama and music, for clients like Jacob\'s Pillow, the National Center for Choreography and the band <a href="#/courier-club">Courier Club</a>. For four years I also built and ran <a href="#/media-program">a school media program</a> in Philadelphia, set up like a small production company.</p>' +
+      '<p class="big">I\'m looking for my next job as a producer.</p>' +
+      '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · 3 min</span></button>' +
+      '<div class="covers">' + GRID.map(function (g) {
+        var i = byId(g[0]), p = i >= 0 ? WORK[i] : null, t = g[1] || p.t, m = g[2] || p.meta, pic = g[3] || IMG + p.cover;
+        var media = /\.mp4$/.test(pic) ? '<video autoplay muted loop playsinline preload="auto" poster="' + pic.replace(".mp4", ".jpg") + '" src="' + pic + '"></video>' : '<img alt="" src="' + pic + '">';
+        return '<a href="#/' + g[0] + '">' + media + '<span>' + esc(t) + '</span><small>' + esc(m) + '</small></a>'; }).join("") + '</div>';
+  }
+  function project(i) {
+    var p = WORK[i], plays = !!(p.src || p.sc), k = ORDER.indexOf(p.id), nx = ORDER[(k + 1) % ORDER.length];
+    return '<div class="head"><h1>' + esc(p.t) + '</h1><span class="meta">' + esc(p.meta) + '</span></div>' +
+      p.p.map(function (x, j) { return '<p' + (j === 0 ? ' class="big"' : '') + '>' + esc(x) + '</p>'; }).join("") +
+      (plays ? '<button class="play" type="button" data-i="' + i + '"><span class="ic"></span><span class="lb"></span></button>' : '') +
+      '<a class="ext" href="' + p.url + '" target="_blank" rel="noopener">' + p.site + ' ↗</a>' +
+      '<div class="fig"><img alt="' + esc(p.t) + ' cover" src="' + IMG + p.cover + '"><p class="note">' + p.note + '</p></div>' +
+      (p.stills ? '<div class="stills">' + p.stills.map(function (x) { return '<img loading="lazy" alt="Still from ' + esc(p.t) + '" src="' + IMG + x + '">'; }).join("") + '</div>' : '') +
+      '<div class="next">Next: <a href="#/' + nx + '">' + esc(title(nx)) + '</a></div>';
+  }
+  function stevens() {
+    return '<div class="head"><h1>Stevens Studios</h1><span class="meta">Studio Assistant / 2016–17</span></div>' +
+      '<p class="big">At Stevens Institute of Technology I helped build and run the school\'s two studios: a traditional recording studio and an ambisonic studio, the only one on campus.</p>' +
+      '<p>I set up recording and mix-down sessions in both, in stereo and ambisonics.</p>' +
+      '<div class="ph"><img src="img/stevens-ambisonic.jpg" alt="The ambisonic studio at Stevens Institute of Technology"><p class="note">The ambisonic studio.</p></div>' +
+      '<div class="next">Next: <a href="#/courier-club">Courier Club</a></div>';
+  }
+  function program() {
+    return '<div class="head"><h1>Springside New Media</h1><span class="meta">Entrepreneurship &amp; New Media Educator / 2022–26</span></div>' +
+      '<p class="big">For four years I built and ran the new media program at Springside Chestnut Hill Academy in Philadelphia, inside its Center for Entrepreneurial Leadership. I set it up like a small production company.</p>' +
+      '<div class="ph"><img src="img/teaching.jpg" alt="Adam teaching in the media lab"></div>' +
+      '<h2 class="sub">How it worked</h2>' +
+      '<p>I wrote the whole curriculum and worked with 10 to 30 students each semester. Most started with no experience. By the end they were running multicam shoots of scripts they wrote, editing in DaVinci Resolve, syncing sound and handling their own reshoots and effects.</p>' +
+      '<div class="ph"><video class="gif" autoplay muted loop playsinline preload="auto" poster="video/edit-suite.jpg" src="video/edit-suite.mp4" aria-label="Students editing in the media lab"></video><p class="note">The edit suite.</p></div>' +
+      '<p>Students also ran a production company. They pitched local businesses, and the businesses paid them to make their ads. I taught them the whole process, from storyboards and budgets to casting and the shoot.</p>' +
+      '<p>I also designed the tenth-grade capstone, a venture incubator where each student found a problem worth solving and built something to answer it, from an app to a film or a podcast.</p>' +
+      '<h2 class="sub">What came of it</h2>' +
+      '<p>My video production class won the WHYY Youth Film Festival with a short film. Another group made a documentary about SEPTA\'s budget crisis and interviewed former Mayor Michael Nutter. With another teacher, I set up partnerships with PBS NewsHour and the Pulitzer Center. In a school-wide survey, families named the Center for Entrepreneurial Leadership as their top reason for choosing the school.</p>' +
+      '<div class="pair2"><figure><img src="img/withers-soul-poster.jpg" alt="Poster for The Site of Withers Soul"><figcaption class="note">Poster for <i>The Site of Withers Soul</i>, a student film.</figcaption></figure>' +
+      '<figure>' + player("video/multicam-shoot") + '<figcaption class="note">On set for a student multicam shoot.</figcaption></figure></div>' +
+      '<p class="note">Student work on this page was released publicly by the school.</p>' +
+      '<div class="ph"><div class="video" id="video" style="background:#111 url(img/school-ad.jpg) center / cover"><button class="adcard" type="button" id="vBtn" aria-label="Play the school\'s ad"><span class="big">' + I.play + '</span></button></div><p class="note">The school\'s ad, which I helped make.</p></div>' +
+      '<h2 class="sub">Lessons I wrote</h2>' +
+      '<ul class="docs"><li><a href="docs/documentary-day-1.pdf" target="_blank" rel="noopener">Documentary Day 1: Remembering Curiosity ↗</a></li><li><a href="docs/documentary-day-2.pdf" target="_blank" rel="noopener">Documentary Day 2: Interview Practice ↗</a></li><li><a href="docs/interview-persona-cards.pdf" target="_blank" rel="noopener">Interview Persona Cards ↗</a></li></ul>' +
+      '<p class="note">Before Springside, I helped build and run the <a href="#/stevens">studios at Stevens Institute of Technology</a>.</p>' +
+      '<div class="next">Next: <a href="#/diary-films">Diary Films</a></div>';
+  }
+
+  var VIDS = [
+    { v: "Cv-Pu2rU52Q", t: "Soapbox Sunday", d: "I worked on the song in the studio: song notes, some instruments, ideas. It has millions of streams." },
+    { v: "cBBIZ4IgYFc", t: "We All Want to Be There", d: "I was a production assistant on the video shoot and helped produce the song." },
+    { v: "R5m8vMtVy9E", t: "Foreign Ground", d: "I ran the VFX camera on the video." }
+  ];
+  function courier() {
+    return '<div class="head"><h1>Courier Club</h1><span class="meta">Band / 2019–24</span></div>' +
+      '<p class="big">Courier Club is the band I\'ve worked with longest. From 2020 to 2024 I produced and mixed for them, and I\'d been in the studio with them since the 2019 sessions for "Soapbox Sunday." They\'ve since become Monobloc.</p>' +
+      '<p>I also worked on their videos.</p>' +
+      '<div class="vids">' + VIDS.map(function (x) { return '<div class="vid"><button class="frame" type="button" data-v="' + x.v + '" style="background-image:url(img/yt-' + x.v + '.jpg)" aria-label="Play ' + esc(x.t) + '"><span class="ic">' + I.play + '</span></button><h3>' + esc(x.t) + '</h3><p>' + esc(x.d) + '</p></div>'; }).join("") + '</div>' +
+      '<div class="next">Next: <a href="#/stucktober">Stucktober</a></div>';
+  }
+  // The index takes on each page's image the way a hologram would: soft, grainy, its red and blue drifting apart
+  // as the mouse moves (on phones, slowly on their own). Three color layers are added together with small offsets.
+  var WASH = { "stevens": "img/stevens-ambisonic.jpg", "media-program": "", "courier-club": "img/yt-Cv-Pu2rU52Q.jpg", "diary-films": "video/museum-sunny.jpg", "touchdesigner": "video/td-audio.jpg", "about": "img/about-studio.jpg" };
+  var holo = $("holo"), hx = holo.getContext("2d"), grain = $("grain"), grx = grain.getContext("2d");
+  var layers = null, still = matchMedia("(prefers-reduced-motion: reduce)").matches, touch = matchMedia("(hover: none)").matches;
+  var mx = .5, my = .5, ox = 0, oy = 0, lastGrain = 0;
+  addEventListener("pointermove", function (e) { mx = e.clientX / innerWidth; my = e.clientY / innerHeight; }, { passive: true });
+  function channels(img, w, h) {
+    var iw = img.naturalWidth, ih = img.naturalHeight, k = Math.max(w / iw, h / ih), base = document.createElement("canvas");
+    base.width = w; base.height = h; var b = base.getContext("2d"); b.drawImage(img, (w - iw * k) / 2, (h - ih * k) / 2, iw * k, ih * k);
+    return ["#f00", "#0f0", "#00f"].map(function (c) {
+      var cv = document.createElement("canvas"); cv.width = w; cv.height = h; var x = cv.getContext("2d");
+      x.drawImage(base, 0, 0); x.globalCompositeOperation = "multiply"; x.fillStyle = c; x.fillRect(0, 0, w, h); return cv;
+    });
+  }
+  function drawHolo(t) {
+    if (!layers) return;
+    var w = holo.width, h = holo.height;
+    var tx = touch ? Math.sin(t / 2200) * .5 : mx - .5, ty = touch ? Math.cos(t / 2900) * .5 : my - .5;
+    ox += (tx * 14 - ox) * .07; oy += (ty * 9 - oy) * .07;
+    hx.globalCompositeOperation = "source-over"; hx.fillStyle = "#000"; hx.fillRect(0, 0, w, h);
+    hx.globalCompositeOperation = "lighter";
+    hx.drawImage(layers[0], ox, oy); hx.drawImage(layers[1], 0, 0); hx.drawImage(layers[2], -ox, -oy);
+    if (t - lastGrain > 90) {  // film grain, redrawn a few times a second
+      lastGrain = t; var d = grx.createImageData(grain.width, grain.height), a = d.data;
+      for (var k = 0; k < a.length; k += 4) { var v = 96 + Math.random() * 64; a[k] = a[k + 1] = a[k + 2] = v; a[k + 3] = 255; }
+      grx.putImageData(d, 0, 0);
+    }
+  }
+  function loop(t) { if (layers && !(still && t > 400)) drawHolo(t); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+  function wash(id) {
+    var url = id in WASH ? WASH[id] : byId(id) >= 0 ? IMG + WORK[byId(id)].cover : "";
+    holo.classList.remove("on"); grain.classList.remove("on");
+    if (!url) { layers = null; return; }
+    var r = holo.getBoundingClientRect(), w = Math.max(1, Math.round(r.width / 2)), h = Math.max(1, Math.round(r.height / 2));
+    holo.width = w; holo.height = h; grain.width = Math.round(r.width); grain.height = Math.round(r.height);
+    var im = new Image(); im.onload = function () { layers = channels(im, w, h); drawHolo(performance.now()); requestAnimationFrame(function () { holo.classList.add("on"); grain.classList.add("on"); }); }; im.src = url;
+  }
+  var BIOS = {
+    "About Me": [
+      "I'm a producer in Boston. I make podcasts, audio drama and music.",
+      "I grew into producing on PillowVoices, the podcast of Jacob's Pillow, where I started as the recording engineer. I've produced and mixed for the band Courier Club, produced Lena Fine's album, and mixed the short film Fledged in Dolby Atmos.",
+      "For four years I built and ran the new media program at Springside Chestnut Hill Academy in Philadelphia, set up like a small production company.",
+      "I write The Related Work Journal. I made the typefaces on this site, starting from IBM Plex."
+    ],
+    "Freelance Bio": [
+      "Adam Butz-Weidner is a producer, engineer and composer based in Boston.",
+      "He has produced and engineered podcasts for Jacob's Pillow and the National Center for Choreography, produced and mixed records for Courier Club, and did the Dolby Atmos mix, ADR and Foley for the short film Fledged.",
+      "He works from the first session to final delivery, in the studio or remote."
+    ]
+  };
+  var LOGOS = [["jacobs-pillow", "Jacob's Pillow", 34], ["stevens", "Stevens Institute of Technology", 34], ["rec-philly", "REC Philly", 36], ["penn", "University of Pennsylvania", 30],
+    ["pine-forest-camp", "Pine Forest Camp", 40], ["photolounge", "PhotoLounge", 20], ["jaime", "J'aime French Bakery", 38]];
+  var PHOTO = { "About Me": "video/hello", "Freelance Bio": "img/about-mic.jpg" };
+  function about(tab) {
+    var names = Object.keys(BIOS); tab = names.indexOf(tab) >= 0 ? tab : names[0];
+    return '<nav class="tabs">' + names.map(function (n) { return n === tab ? '<b>' + n + '</b>' : '<a href="#/about?' + encodeURIComponent(n) + '">' + n + '</a>'; }).join('<span>/</span>') + '</nav>' +
+      (/^video\//.test(PHOTO[tab]) ? '<div class="hello">' + player(PHOTO[tab], { loop: 1 }) + '</div>' : '') +
+      '<div class="bio">' + (/^video\//.test(PHOTO[tab]) ? '' : '<img class="bioimg" src="' + PHOTO[tab] + '" alt="Adam Butz-Weidner">') + '<div>' +
+      BIOS[tab].map(function (x, j) { return '<p' + (j === 0 ? ' class="big"' : '') + '>' + esc(x) + '</p>'; }).join("") +
+      '<p class="sig"><a href="mailto:' + MAIL + '">' + MAIL + '</a> / <a href="resume.pdf" target="_blank" rel="noopener">Resume</a></p></div></div>' +
+      '<div class="logos"><h4>Places I\'ve worked</h4><div>' + LOGOS.map(function (l) { return '<img src="img/logos/' + l[0] + '.png" alt="' + l[1] + '" title="' + l[1] + '" style="height:' + (l[2] || 34) + 'px">'; }).join("") + '</div></div>' +
+      '';
+  }
+  var FILMS = [
+    { f: "museum-sunny", t: "Museum", d: "At the Philadelphia Museum of Art. I wrote both scores. Switch between them while it plays.", alt: [["museum-sunny", "Soft"], ["museum-beat", "Beat"]] },
+    { f: "sephora-diary", t: "Sephora Diary", d: "A video diary, shot on a phone.", tall: 1 },
+    { f: "fcp-logic-test", t: "Final Cut to Logic", d: "Everyday footage I cut as a test of sending a Final Cut Pro edit to Logic for the mix." }
+  ];
+  // a video with no browser controls: press anywhere to play with sound, press again to pause.
+  // loop:1 starts muted and looping as soon as it's on screen; the first press restarts it with sound.
+  function player(src, opt) {
+    opt = opt || {};
+    return '<div class="pl' + (opt.tall ? " tall" : "") + (opt.loop ? " auto" : "") + '"><video playsinline preload="' + (opt.loop ? "auto" : "metadata") + '"' + (opt.loop ? " muted loop" : "") + ' poster="' + src + '.jpg" src="' + src + '.mp4?v=3"></video>' +
+      '<button class="pp" type="button" aria-label="Play with sound"><span class="big">' + I.play + '</span>' + (opt.loop ? '<span class="snd">Sound on</span>' : '') + '</button><i class="bar1"><b></b></i></div>';
+  }
+  function film(x) { return '<div class="film">' + player("video/" + x.f, { tall: x.tall, loop: x.loop }) +
+    (x.alt ? '<div class="score" role="group" aria-label="Score"><span>Score</span>' + x.alt.map(function (a, k) { return '<button type="button" data-src="video/' + a[0] + '.mp4?v=3" aria-pressed="' + (k === 0) + '">' + a[1] + '</button>'; }).join("") + '</div>' : '') + (x.t ? '<h3>' + esc(x.t) + '</h3>' : '') + (x.d ? '<p>' + esc(x.d) + '</p>' : '') + '</div>'; }
+  function wirePlayers() {
+    var seen = "IntersectionObserver" in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { if (v.muted && v.loop) v.play().catch(function () {}); } else v.pause(); }); }, { threshold: .4 }) : null;
+    main.querySelectorAll(".pl").forEach(function (box) {
+      var v = box.querySelector("video"), b = box.querySelector(".pp"), bar = box.querySelector(".bar1 b"), auto = box.classList.contains("auto");
+      var sync = function () { var live = !v.paused && !v.muted; box.classList.toggle("on", live); b.querySelector(".big").innerHTML = live ? I.pause : I.play; b.setAttribute("aria-label", live ? "Pause" : "Play with sound"); };
+      b.onclick = function () {
+        if (v.muted) { v.muted = false; v.loop = false; v.currentTime = 0; v.play(); }
+        else if (v.paused) v.play(); else v.pause();
+      };
+      v.addEventListener("play", function () { if (v.muted) return; if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); }
+        main.querySelectorAll(".pl video").forEach(function (o) { if (o !== v && !o.muted) o.pause(); }); });
+      ["play", "pause", "volumechange"].forEach(function (ev) { v.addEventListener(ev, sync); });
+      v.addEventListener("ended", function () { if (auto) { v.muted = true; v.loop = true; v.play().catch(function () {}); } sync(); bar.style.width = "0"; });
+      v.addEventListener("timeupdate", function () { if (v.duration) bar.style.width = (v.currentTime / v.duration * 100) + "%"; });
+      var sw = box.parentNode.querySelector(".score");
+      if (sw) sw.querySelectorAll("button").forEach(function (btn) {
+        btn.onclick = function () {
+          if (btn.getAttribute("aria-pressed") === "true") return;
+          var t = v.currentTime, was = !v.paused;
+          v.src = btn.dataset.src; v.currentTime = t;
+          v.addEventListener("loadedmetadata", function () { v.currentTime = t; if (was) v.play(); }, { once: true });
+          sw.querySelectorAll("button").forEach(function (o) { o.setAttribute("aria-pressed", o === btn); });
+        };
+      });
+      if (auto && seen) seen.observe(v); else if (auto) v.play().catch(function () {});
+      sync();
+    });
+  }
+  function diary() {
+    return '<div class="head"><h1>Diary Films</h1><span class="meta">Shot and edited</span></div>' +
+      '<p class="big">A few personal videos I\'ve shot and edited.</p><div class="films">' + FILMS.map(film).join("") + '</div>' +
+      '<div class="next">Next: <a href="#/touchdesigner">TouchDesigner</a></div>';
+  }
+  function td() {
+    return '<div class="head"><h1>TouchDesigner</h1><span class="meta">Sketch</span></div>' +
+      '<p class="big">Sketches in TouchDesigner.</p><div class="films">' + film({ f: "td-audio", t: "Audio-reactive particles", d: "", loop: 1 }) + film({ f: "td-color", t: "Displacement and color", d: "", loop: 1 }) + film({ f: "td-tracking", t: "Body tracking", d: "", tall: 1, loop: 1 }) + '</div>' +
+      '<div class="next">Next: <a href="#/' + ORDER[0] + '">' + esc(title(ORDER[0])) + '</a></div>';
+  }
+  function route() {
+    var hp = (location.hash.replace(/^#\/?/, "") || "").split("?"), id = hp[0], i = byId(id);
+    main.innerHTML = id === "stevens" ? stevens() : id === "diary-films" ? diary() : id === "touchdesigner" ? td() : id === "about" ? about(decodeURIComponent(hp[1] || "")) : id === "media-program" ? program() : id === "courier-club" ? courier() : i >= 0 ? project(i) : home();
+    wash(id);
+    document.title = (id && (i >= 0 || PAGES[id]) ? title(id) + " · " : "") + "Adam Butz-Weidner";
+    document.querySelectorAll(".side a[href^='#/']").forEach(function (a) { a.classList.toggle("cur", a.getAttribute("href") === "#/" + id && id !== ""); });
+    document.body.classList.remove("open");
+    main.querySelectorAll(".play[data-i], .play[data-reel]").forEach(function (b) {
+      b.onclick = function () { if (b.dataset.reel) return toggle(); var k = +b.dataset.i; if (cur === k && state !== "idle" && state !== "done") toggle(); else go(k); };
+    });
+    if ($("vBtn")) $("vBtn").onclick = function () { var v = $("video"); stopAll(); if (state !== "idle") { state = "paused"; paint(); }
+      v.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/LoLG-fLxA7I?autoplay=1" title="The school\'s ad" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; };
+    main.querySelectorAll(".vid .frame").forEach(function (f) { f.onclick = function () { stopAll(); if (state !== "idle") { state = "paused"; paint(); }
+      f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + f.dataset.v + '?autoplay=1" title="' + f.getAttribute("aria-label").slice(5) + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; f.onclick = null; f.style.cursor = "default"; }; });
+    wirePlayers();
+    paint(); scrollTo(0, 0);
+  }
+  $("menu").addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); document.body.classList.toggle("open"); });
+
+  // ---------- the player
+  var au = $("au"), scBox = $("scBox");
+  // state: idle, loading, playing, paused, blocked (needs a press to go on), done
+  var cur = -1, state = "idle", widget = null, scReady = false, scPos = 0, pendingSC = null, timers = [], token = 0, played = {}, blocks = {};
+  var later = function (f, ms) { timers.push(setTimeout(f, ms)); };
+  var clearTimers = function () { timers.forEach(clearTimeout); timers = []; };
+  var pos = function (i) { return REEL.indexOf(i); };
+  $("close").innerHTML = I.x;
+
+  function paint() {
+    var busy = state === "loading", on = state === "playing", ic = busy ? I.spin : on ? I.pause : I.play;
+    $("pp").innerHTML = ic; $("pp").setAttribute("aria-label", on || busy ? "Pause" : "Play");
+    main.querySelectorAll(".play[data-reel]").forEach(function (b) { b.querySelector(".ic").innerHTML = ic;
+      b.querySelector(".lb").textContent = state === "done" ? "Play again" : on || busy ? "Pause" : (state === "paused" || state === "blocked") ? "Resume" : "Play my work · 3 min"; });
+    main.querySelectorAll(".play[data-i]").forEach(function (b) { var k = +b.dataset.i, mine = k === cur && state !== "idle" && state !== "done";
+      b.querySelector(".ic").innerHTML = mine ? ic : I.play; b.querySelector(".lb").textContent = mine && (on || busy) ? "Pause" : "Listen · " + fmt(WORK[k].len); });
+    document.body.classList.toggle("playing", state !== "idle");
+    $("bar").classList.toggle("up", state !== "idle");
+  }
+  function setAct(text, href) { var a = $("act"); if (!text) { a.hidden = true; return; } a.hidden = false; a.textContent = text; a.href = href; }
+  function info(i) { $("barT").textContent = WORK[i].t; $("barN").textContent = (pos(i) + 1) + " of " + REEL.length; }
+  function stopAll() { token++; clearTimers(); au.pause(); if (widget && scReady) try { widget.pause(); } catch (e) {} }
+  function startLoading(i, kick) {
+    clearTimers(); state = "loading"; setAct(null); info(i); paint();
+    later(function () { if (state === "loading" && cur === i) $("barN").textContent = "Still loading…"; }, 3000);
+    later(function () { if (state === "loading" && cur === i) fail(i); }, 9000);
+    kick();
+  }
+  function go(i) { warmSC(); stopAll(); cur = i; $("prog").style.width = "0"; var p = WORK[i]; startLoading(i, function () { p.sc ? playSC(i, true) : playAudio(i, true); }); }
+  function playAudio(i, fromStart) {
+    var p = WORK[i], t = ++token;
+    if (au.dataset.src !== p.src) { au.src = p.src; au.dataset.src = p.src; }
+    var seek = function () { if (t !== token || cur !== i || state !== "loading") return; if (fromStart || au.currentTime < p.start || au.currentTime - p.start >= p.len) au.currentTime = p.start; au.play().catch(function () { if (t === token) blocked(i); }); };
+    if (au.readyState >= 1) seek(); else { au.addEventListener("loadedmetadata", seek, { once: true }); au.load(); }
+  }
+  function warmSC() {
+    if (widget || typeof SC === "undefined") return;
+    var p = WORK.filter(function (w) { return w.sc; })[0];
+    scBox.innerHTML = '<iframe allow="autoplay" title="SoundCloud" src="https://w.soundcloud.com/player/?url=' + encodeURIComponent(p.sc) + '&visual=false&auto_play=false"></iframe>';
+    widget = SC.Widget(scBox.firstChild);
+    widget.bind(SC.Widget.Events.READY, function () { scReady = true; if (pendingSC && WORK[cur] && WORK[cur].sc && state === "loading") pendingSC(); pendingSC = null; });
+    widget.bind(SC.Widget.Events.PLAY, function () { if (WORK[cur] && WORK[cur].sc && (state === "loading" || state === "blocked")) { played[cur] = 1; clearTimers(); state = "playing"; info(cur); setAct(null); paint(); } });
+    widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (e) { scPos = e.currentPosition; });
+    widget.bind(SC.Widget.Events.ERROR, function () { if (WORK[cur] && WORK[cur].sc) fail(cur); });
+  }
+  function playSC(i, fromStart) {
+    var p = WORK[i];
+    if (typeof SC === "undefined") return fail(i);
+    var start = function () { if (fromStart) { widget.skip(p.track || 0); widget.seekTo(p.start * 1000); scPos = p.start * 1000; } widget.play(); };
+    // browsers may refuse to start the hidden player without a press; ask for one rather than wait
+    later(function () { if (state === "loading" && cur === i) blocked(i); }, 2500);
+    warmSC();
+    if (!scReady) { pendingSC = start; return; }
+    start();
+  }
+  function toggle() {
+    if (cur < 0 || state === "done") { played = {}; return go(REEL[0]); }
+    if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); return; }
+    var i = cur, p = WORK[i]; startLoading(i, function () { p.sc ? playSC(i, false) : playAudio(i, false); });
+  }
+  function next() { var k = pos(cur) + 1; if (k < REEL.length) go(REEL[k]); else finish(); }
+  function blocked(i) {
+    clearTimers(); blocks[i] = (blocks[i] || 0) + 1;
+    if (blocks[i] > 1 && WORK[i].sc) return next();
+    state = "blocked"; paint(); $("barN").textContent = "Press play to keep listening."; setAct("Skip", "#skip");
+  }
+  function fail(i) { clearTimers(); au.pause(); state = "paused"; paint(); $("barN").textContent = "This clip didn't load. Press play to try again."; setAct("Skip", "#skip"); }
+  function finish() {
+    // the end of the reel: thanks, an honest count, and the email right there
+    stopAll(); state = "done"; paint(); $("prog").style.width = "100%";
+    var heard = REEL.filter(function (i) { return played[i]; }).length;
+    $("barT").textContent = heard === REEL.length ? "That's the reel. Thanks for listening." : "You heard " + heard + " of " + REEL.length + ". Thanks for listening.";
+    $("barN").textContent = MAIL; setAct("Email me", "mailto:" + MAIL);
+  }
+  au.addEventListener("playing", function () { if (!WORK[cur] || WORK[cur].sc || state === "paused") return; played[cur] = 1; clearTimers(); state = "playing"; info(cur); paint(); });
+  au.addEventListener("waiting", function () { if (state === "playing") { var i = cur; state = "loading"; paint(); later(function () { if (state === "loading" && cur === i) fail(i); }, 9000); } });
+  au.addEventListener("error", function () { if (cur >= 0 && !WORK[cur].sc && (state === "loading" || state === "playing")) fail(cur); });
+  au.addEventListener("ended", function () { if (state === "playing") next(); });
+  setInterval(function () {
+    if (cur < 0 || state !== "playing") return;
+    var p = WORK[cur], e = p.sc ? scPos / 1000 - p.start : au.currentTime - p.start;
+    $("prog").style.width = Math.min(100, Math.max(0, e) / p.len * 100) + "%";
+    $("barN").textContent = (pos(cur) + 1) + " of " + REEL.length + " · " + fmt(e) + " / " + fmt(p.len);
+    if (e >= p.len) next();
+  }, 200);
+  au.src = WORK[REEL[0]].src; au.dataset.src = au.src;
+  $("pp").onclick = toggle;
+  $("close").onclick = function () { stopAll(); state = "idle"; setAct(null); paint(); };
+  $("act").addEventListener("click", function (e) { if (this.getAttribute("href") === "#skip") { e.preventDefault(); next(); } });
+  addEventListener("keydown", function (e) {
+    if (e.target.closest && e.target.closest("button, a, input, textarea")) return;
+    if (e.key === " " && state !== "idle") { e.preventDefault(); toggle(); }
+    else if (e.key === "Escape" && state !== "idle") $("close").click();
+  });
+  addEventListener("hashchange", route);
+  route();
+})();
+</script>
+</body>
+</html>
