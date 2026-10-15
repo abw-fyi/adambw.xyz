@@ -222,6 +222,7 @@
   .sh-models li.on b { color: var(--b); }
   .sh-models li.on b::after { content: " ●"; font-size: 10px; vertical-align: 2px; }
   .rw-gap { margin-top: 56px !important; }
+  .rw-hint { color: var(--b); margin-left: 8px; letter-spacing: .06em; text-transform: none; }
   .rw-sec { padding-top: 88px !important; }
   .lad { margin: 22px 0 0; border-top: 2px solid var(--ink); padding-top: 18px; }
   .lad-dials { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 40px; margin-bottom: 18px; }
@@ -501,31 +502,31 @@
       '<section class="rw-top">' +
         '<p class="rw-n">Type, lettering and tools</p>' +
         '<h1>The Related Work Journal</h1>' +
-        '<p class="rw-lede">A journal, and everything it runs on, built to three rules: one ink, every word my own, and tools that make me think.</p>' +
+        '<p class="rw-lede">My journal, and the typefaces, lettering and app I made for it.</p>' +
         '<div class="rw-ov rw-anim">' + "RaQgf3".split("").map(function (c, i) { return '<div style="--i:' + i + '" aria-label="' + c + ' in IBM Plex Mono and Related Mono">' + RW_OV[c] + '</div>'; }).join("") + '</div>' +
-        '<p class="rw-key"><span><i class="k-dash"></i>IBM Plex Mono, where it started</span><span><i class="k-blue"></i>Related Mono, where I took it</span></p>' +
+        '<p class="rw-key"><span><i class="k-dash"></i>IBM Plex Mono</span><span><i class="k-blue"></i>Related Mono</span></p>' +
       '</section>' +
 
-      '<section class="rw-sec"><p class="rw-n">01 · The typeface</p>' +
-        '<h2 class="rw-big">A face I could own</h2>' +
-        '<p class="rw-p">I wanted the look of OO Arketa, but its license forbids changing it. So I drew my own on IBM Plex, which is open, until a paragraph sat as dark as Arketa\'s. Related Mono and Related Serif set this page.</p>' +
+      '<section class="rw-sec"><p class="rw-n">01</p>' +
+        '<h2 class="rw-big">Related Mono</h2>' +
+        '<p class="rw-p">After OO Arketa, drawn on IBM Plex. With Related Serif, it sets this site.</p>' +
         '<div class="rw-try"><div class="rw-try-bar"><button type="button" data-f="mono" aria-pressed="true">Related Mono</button><button type="button" data-f="serif" aria-pressed="false">Related Serif</button></div>' +
           '<div class="rw-try-text" id="tryText" contenteditable="true" spellcheck="false">Type anything here.</div></div>' +
         '<p class="rw-facts">1,078 glyphs · 8 styles · 321 versions in 22 days</p>' +
       '</section>' +
 
-      '<section class="rw-sec"><p class="rw-n">02 · The lettering</p>' +
-        '<h2 class="rw-big">One ink. One pen. White paper.</h2>' +
-        '<p class="rw-p">Every title is a round pen run along Dr. A. V. Hershey\'s 1967 plotter strokes. Nothing on the page is there to decorate it.</p>' +
-        '<div class="rw-steps"><figure><img src="img/rwj/stroke-R-skeleton.svg" alt=""><figcaption>The 1967 stroke.</figcaption></figure>' +
-          '<figure><img src="img/rwj/stroke-R-pen.svg" alt=""><figcaption>A round pen along it.</figcaption></figure>' +
-          '<figure><img src="img/rwj/stroke-R-draw.svg" alt=""><figcaption>The letter.</figcaption></figure></div>' +
+      '<section class="rw-sec"><p class="rw-n">02</p>' +
+        '<h2 class="rw-big">Lettering</h2>' +
+        '<p class="rw-p">A round pen on Hershey\'s 1967 plotter strokes. One ink.</p>' +
+        '<div class="rw-steps"><figure><img src="img/rwj/stroke-R-skeleton.svg" alt=""><figcaption>Stroke</figcaption></figure>' +
+          '<figure><img src="img/rwj/stroke-R-pen.svg" alt=""><figcaption>Pen</figcaption></figure>' +
+          '<figure><img src="img/rwj/stroke-R-draw.svg" alt=""><figcaption>Letter</figcaption></figure></div>' +
       '</section>' +
 
-      '<section class="rw-sec"><p class="rw-n">03 · The app</p>' +
-        '<h2 class="rw-big">Tools should make me think, not think for me</h2>' +
-        '<p class="rw-p">RWJ Studio, the Mac app I write in, never writes a word. It reads a draft against six shapes essayists use and asks each step its question.</p>' +
-        '<div class="sh"><div class="sh-main">' +
+      '<section class="rw-sec"><p class="rw-n">03</p>' +
+        '<h2 class="rw-big">RWJ Studio</h2>' +
+        '<p class="rw-p">The app I write in. It suggests. It never writes.</p>' +
+        '<h3 class="rw-h3">Shape</h3><div class="sh"><div class="sh-main">' +
           '<div class="sh-head"><span class="sh-pick">Situation and Story</span><span class="sh-ok">2 of 2 steps ✓</span></div>' +
           '<div class="sh-chain">' +
             '<div class="sh-step on"><b>Situation</b><i>What happened, and where?</i><p>I once was an audio engineer and producer… Now, I’ve moved to a new city where I know two people.</p></div>' +
@@ -534,15 +535,15 @@
           '</div></div>' +
           '<ol class="sh-models">' + models.map(function (m) { return '<li' + (m[0] === "Situation and Story" ? ' class="on"' : '') + '><b>' + esc(m[0]) + '</b><span>' + esc(m[1]) + '</span></li>'; }).join("") + '</ol>' +
         '</div>' +
-        '<p class="rw-p rw-gap">Brevity and Contrast only take words away, never add one. Drag them.</p>' +
+        '<h3 class="rw-h3">Brevity · Contrast <span class="rw-hint">drag</span></h3>' +
         '<div class="lad"><div class="lad-dials">' +
           '<label><b>Brevity</b><input type="range" min="0" max="' + (RW_LAD.b.length - 1) + '" value="0" data-k="b"><span data-say="b">as written</span></label>' +
           '<label><b>Contrast</b><input type="range" min="0" max="' + (RW_LAD.c.length - 1) + '" value="0" data-k="c"><span data-say="c">as written</span></label>' +
           '</div><p class="lad-text" id="ladText"></p></div>' +
-        '<figure class="rw-one rw-gap"><img src="img/rwj/app-suggest.jpg" alt="A grammar note in RWJ Studio with choices"><figcaption>It suggests. It never writes. "Keep mine" is one key.</figcaption></figure>' +
+        '<h3 class="rw-h3">Suggestions</h3><figure class="rw-one"><img src="img/rwj/app-suggest.jpg" alt="A grammar note in RWJ Studio with choices"></figure>' +
       '</section>' +
 
-      '<p class="rw-foot"><a href="https://relatedwork.blog" target="_blank" rel="noopener">Read the journal ↗</a> · <a href="docs/rwj-style-guide.pdf" target="_blank" rel="noopener">Style guide (PDF)</a> · The Hershey Fonts were created by Dr. A. V. Hershey at the U.S. National Bureau of Standards. History: <a href="https://lapolice.ch/stories/footnotes-b-article-9/" target="_blank" rel="noopener">Cogitating Vectors</a>.</p>' +
+      '<p class="rw-foot"><a href="https://relatedwork.blog" target="_blank" rel="noopener">Read the journal ↗</a> · <a href="docs/rwj-style-guide.pdf" target="_blank" rel="noopener">Style guide</a> · Hershey Fonts by Dr. A. V. Hershey, U.S. National Bureau of Standards.</p>' +
       '<div class="next">Next: <a href="#/diary-films">Diary Films</a></div></div>';
   }
 
