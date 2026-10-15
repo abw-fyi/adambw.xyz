@@ -475,19 +475,18 @@
   function wirePlayers() {
     var seen = "IntersectionObserver" in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { if (v.muted && v.loop) v.play().catch(function () {}); } else v.pause(); }); }, { threshold: .4 }) : null;
     main.querySelectorAll(".pl.duo").forEach(wireDuo);
-    // looping clips: always moving, silent until the small sound button in the corner is pressed
+    // looping clips: always moving, silent until the small sound button in the corner is pressed; sound comes in where the clip is
     main.querySelectorAll(".pl.auto").forEach(function (box) {
       var v = box.querySelector("video"), snd = box.querySelector(".snd"), tap = box.querySelector(".tap"), bar = box.querySelector(".bar1 b");
       var sync = function () { var loud = !v.muted; box.classList.toggle("loud", loud); snd.innerHTML = (loud ? I.sound + '<span>Sound off</span>' : I.muted + '<span>Sound on</span>'); snd.setAttribute("aria-label", loud ? "Turn sound off" : "Turn sound on"); };
       snd.onclick = function () {
         if (v.muted) { if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); }
           main.querySelectorAll(".pl video").forEach(function (o) { if (o !== v && !o.muted) o.pause(); });
-          v.muted = false; v.loop = false; v.currentTime = 0; v.play(); }
-        else { v.muted = true; v.loop = true; v.play().catch(function () {}); }
+          v.muted = false; v.play().catch(function () {}); }
+        else v.muted = true;
       };
       tap.onclick = function () { if (v.paused) v.play().catch(function () {}); else v.pause(); };
       v.addEventListener("volumechange", sync);
-      v.addEventListener("ended", function () { v.muted = true; v.loop = true; v.currentTime = 0; v.play().catch(function () {}); });
       v.addEventListener("timeupdate", function () { if (v.duration) bar.style.width = (v.currentTime / v.duration * 100) + "%"; });
       if (seen) seen.observe(v); else v.play().catch(function () {});
       sync();
