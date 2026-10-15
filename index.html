@@ -138,7 +138,11 @@
   video.gif { display: block; width: 100%; background: #000; }
   .ph img { display: block; width: 100%; }
   .pair2 { display: grid; grid-template-columns: 2fr 3fr; gap: 20px; align-items: start; max-width: 640px; margin: 34px 0 6px; }
-  .pair2 figure { margin: 0; } .pair2 img { display: block; width: 100%; }
+  .pair2.even { grid-template-columns: 1fr 1fr; max-width: 720px; }
+  .pair2 figure { margin: 0; }
+  .spec { max-width: 720px; margin: 30px 0 34px; padding: 28px 0; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; }
+  .spec .m { font: 400 36px/1.2 var(--mono); color: var(--ink); margin-bottom: 18px; }
+  .spec .s { font: 400 22px/1.45 var(--serif); color: var(--ink); max-width: 30em; } .pair2 img { display: block; width: 100%; }
   .pair2 figcaption { margin-top: 8px !important; }
   .vids { display: grid; gap: 34px; margin: 34px 0 10px; max-width: 640px; }
   .vid .frame { all: unset; cursor: pointer; position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; background: #000 center / cover; }
@@ -186,7 +190,8 @@
     .page .big { font-size: 19px; }
     .fig { grid-template-columns: 1fr; gap: 14px; }
     .covers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 14px; }
-    .pair2 { grid-template-columns: 1fr; }
+    .pair2, .pair2.even { grid-template-columns: 1fr; }
+    .spec .m { font-size: 28px; } .spec .s { font-size: 18px; }
     .pl .snd { right: 8px; bottom: 10px; min-height: 30px; padding: 0 9px; font-size: 12px; gap: 5px; }
     .bio { grid-template-columns: 1fr; gap: 22px; } .bioimg { width: 160px; }
     .lean { display: none; }
@@ -219,6 +224,7 @@
     <a href="#/media-program">Springside New Media</a>
   </div>
   <div class="grp"><h4>Etc.</h4>
+    <a href="#/rwj">The Related Work Journal</a>
     <a href="#/diary-films">Diary Films</a>
     <a href="#/touchdesigner">TouchDesigner</a>
   </div>
@@ -288,13 +294,13 @@
   var GRID = [["pillowvoices"], ["tom-bennet"], ["inside-the-dancers-studio"],
     ["courier-club", "Courier Club", "Band / music videos", "img/courier-club-tile.jpg"], ["fledged"],
     ["media-program", "Springside New Media", "Youth media", "img/springside-tile.jpg"]];
-  var ORDER = ["pillowvoices", "tom-bennet", "inside-the-dancers-studio", "how-people-move-people", "stevens", "courier-club", "stucktober", "fledged", "media-program", "diary-films", "touchdesigner"];
+  var ORDER = ["pillowvoices", "tom-bennet", "inside-the-dancers-studio", "how-people-move-people", "stevens", "courier-club", "stucktober", "fledged", "media-program", "rwj", "diary-films", "touchdesigner"];
   var REEL = WORK.map(function (p, i) { return (p.src || p.sc) ? i : -1; }).filter(function (i) { return i >= 0; });
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/'/g, "&#39;"); };
   var fmt = function (s) { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); };
   var byId = function (id) { for (var i = 0; i < WORK.length; i++) if (WORK[i].id === id) return i; return -1; };
-  var PAGES = { "stevens": "Stevens Studios", "media-program": "Springside New Media", "courier-club": "Courier Club", "about": "About", "diary-films": "Diary Films", "touchdesigner": "TouchDesigner" };
+  var PAGES = { "rwj": "The Related Work Journal", "stevens": "Stevens Studios", "media-program": "Springside New Media", "courier-club": "Courier Club", "about": "About", "diary-films": "Diary Films", "touchdesigner": "TouchDesigner" };
   var title = function (id) { return PAGES[id] || WORK[byId(id)].t; };
   var main = $("main");
 
@@ -317,6 +323,26 @@
       '<div class="fig"><img alt="' + esc(p.t) + ' cover" src="' + IMG + p.cover + '"><p class="note">' + p.note + '</p></div>' +
       (p.stills ? '<div class="stills">' + p.stills.map(function (x) { return '<img loading="lazy" alt="Still from ' + esc(p.t) + '" src="' + IMG + x + '">'; }).join("") + '</div>' : '') +
       '<div class="next">Next: <a href="#/' + nx + '">' + esc(title(nx)) + '</a></div>';
+  }
+  function rwj() {
+    return '<div class="head"><h1>The Related Work Journal</h1><span class="meta">Writing, type and tools</span></div>' +
+      '<p class="big">I write The Related Work Journal, and I built what it runs on: the app I write it in, its lettering, and the two typefaces on this site.</p>' +
+      '<p><a class="ext" href="https://relatedwork.blog" target="_blank" rel="noopener">Read the journal ↗</a></p>' +
+      '<h2 class="sub">The look</h2>' +
+      '<p>The journal is designed as if a pen plotter printed it, in one ink on white paper. Every title is drawn with a round pen along the strokes of the Hershey Fonts, the vector fonts Dr. A. V. Hershey made for plotters in 1967. Nothing on the page is there to decorate it. I wrote a style guide to keep it that way.</p>' +
+      '<div class="pair2 even"><figure><img src="img/rwj/guide-idea.jpg" alt="Style guide page: The idea"></figure><figure><img src="img/rwj/guide-lettering.jpg" alt="Style guide page: Lettering"></figure></div>' +
+      '<p class="note"><a href="docs/rwj-style-guide.pdf" target="_blank" rel="noopener">The whole style guide (PDF) ↗</a>. For the story of the Hershey Fonts, read Frank Grießhammer\'s <a href="https://lapolice.ch/stories/footnotes-b-article-9/" target="_blank" rel="noopener">Cogitating Vectors</a>.</p>' +
+      '<h2 class="sub">The typefaces</h2>' +
+      '<p>Related Mono is a typewriter face I made after OO Arketa, built on IBM Plex Mono. I redrew Plex\'s squarish curves as near-ellipses, put flat slab serifs on every stroke end, redrew the Q, f and r, and drew the R, M, figures and question mark new.</p>' +
+      '<div class="ph"><img src="img/rwj/plex-vs-related.png" alt="IBM Plex Mono compared with Related Mono"><p class="note">Where it started, and where it went.</p></div>' +
+      '<div class="spec"><div class="m">The quick brown fox<br>jumps over 1,250 lazy dogs.</div><div class="s">Related Serif is its reading partner, built on IBM Plex Serif to the same weight, with the same square dots and quotes. You are reading it now.</div></div>' +
+      '<div class="ph"><img src="img/rwj/olivetti.jpg" alt="Olivetti typewriter characters"><p class="note">A reference: Olivetti\'s typewriter characters.</p></div>' +
+      '<p>Both are free and open (SIL Open Font License). Every word on this site is set in them.</p>' +
+      '<h2 class="sub">The Studio</h2>' +
+      '<p>RWJ Studio is the Mac app I built to write and publish the journal. It shows the post as it will look while I write, and it checks spelling, grammar and usage. It suggests. It never writes.</p>' +
+      '<div class="ph"><img src="img/rwj/studio.jpg" alt="RWJ Studio: the editor beside a live preview of the journal"></div>' +
+      '<p class="note">The Hershey Fonts were created by Dr. A. V. Hershey at the U.S. National Bureau of Standards.</p>' +
+      '<div class="next">Next: <a href="#/diary-films">Diary Films</a></div>';
   }
   function stevens() {
     return '<div class="head"><h1>Stevens Studios</h1><span class="meta">Studio Assistant</span></div>' +
@@ -342,7 +368,7 @@
       '<h2 class="sub">Lessons I wrote</h2>' +
       '<ul class="docs"><li><a href="docs/documentary-day-1.pdf" target="_blank" rel="noopener">Documentary Day 1: Remembering Curiosity ↗</a></li><li><a href="docs/documentary-day-2.pdf" target="_blank" rel="noopener">Documentary Day 2: Interview Practice ↗</a></li><li><a href="docs/interview-persona-cards.pdf" target="_blank" rel="noopener">Interview Persona Cards ↗</a></li></ul>' +
       '<p class="note">Before Springside, I helped build and run the <a href="#/stevens">studios at Stevens Institute of Technology</a>.</p>' +
-      '<div class="next">Next: <a href="#/diary-films">Diary Films</a></div>';
+      '<div class="next">Next: <a href="#/rwj">The Related Work Journal</a></div>';
   }
 
   var VIDS = [
@@ -359,7 +385,7 @@
   }
   // The index takes on each page's image the way a hologram would: soft, grainy, its red and blue drifting apart
   // as the mouse moves (on phones, slowly on their own). Three color layers are added together with small offsets.
-  var WASH = { "stevens": "img/stevens-ambisonic.jpg", "media-program": "", "courier-club": "img/yt-Cv-Pu2rU52Q.jpg", "diary-films": "video/museum-sunny.jpg", "touchdesigner": "video/td-audio.jpg", "about": "img/about-studio.jpg" };
+  var WASH = { "rwj": "img/rwj/guide-lettering.jpg", "stevens": "img/stevens-ambisonic.jpg", "media-program": "", "courier-club": "img/yt-Cv-Pu2rU52Q.jpg", "diary-films": "video/museum-sunny.jpg", "touchdesigner": "video/td-audio.jpg", "about": "img/about-studio.jpg" };
   var holo = $("holo"), hx = holo.getContext("2d"), grain = $("grain"), grx = grain.getContext("2d");
   var layers = null, still = matchMedia("(prefers-reduced-motion: reduce)").matches, touch = matchMedia("(hover: none)").matches;
   var mx = .5, my = .5, ox = 0, oy = 0, lastGrain = 0;
@@ -519,7 +545,7 @@
   }
   function route() {
     var hp = (location.hash.replace(/^#\/?/, "") || "").split("?"), id = hp[0], i = byId(id);
-    main.innerHTML = id === "stevens" ? stevens() : id === "diary-films" ? diary() : id === "touchdesigner" ? td() : id === "about" ? about(decodeURIComponent(hp[1] || "")) : id === "media-program" ? program() : id === "courier-club" ? courier() : i >= 0 ? project(i) : home();
+    main.innerHTML = id === "rwj" ? rwj() : id === "stevens" ? stevens() : id === "diary-films" ? diary() : id === "touchdesigner" ? td() : id === "about" ? about(decodeURIComponent(hp[1] || "")) : id === "media-program" ? program() : id === "courier-club" ? courier() : i >= 0 ? project(i) : home();
     wash(id);
     document.title = (id && (i >= 0 || PAGES[id]) ? title(id) + " · " : "") + "Adam Butz-Weidner";
     document.querySelectorAll(".side a[href^='#/']").forEach(function (a) { a.classList.toggle("cur", a.getAttribute("href") === "#/" + id && id !== ""); });
