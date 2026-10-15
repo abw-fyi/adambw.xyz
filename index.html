@@ -79,7 +79,7 @@
   .sig { font: 400 14px/1.6 var(--mono); margin-top: 34px !important; }
   .logos { margin: 72px 0 0; padding-top: 18px; border-top: 1px solid #e6e6e6; max-width: 760px; }
   .logos h4 { font: 400 13px/1 var(--mono); color: var(--grey); margin: 0 0 22px; }
-  .logos div { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 30px; }
+  .logos div { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px 18px; }
   .logos img { width: auto; mix-blend-mode: multiply; opacity: .72; transition: opacity .2s; }
   .logos img:hover { opacity: 1; }
   .bio { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; max-width: 900px; }
@@ -411,8 +411,8 @@
       "He works from the first session to final delivery, in the studio or remote."
     ]
   };
-  var LOGOS = [["jacobs-pillow", "Jacob's Pillow", 34], ["stevens", "Stevens Institute of Technology", 34], ["rec-philly", "REC Philly", 36], ["penn", "University of Pennsylvania", 30],
-    ["pine-forest-camp", "Pine Forest Camp", 40], ["photolounge", "PhotoLounge", 20], ["jaime", "J'aime French Bakery", 38]];
+  var LOGOS = [["jacobs-pillow", "Jacob's Pillow", 34], ["springside", "Springside Chestnut Hill Academy", 30], ["stevens", "Stevens Institute of Technology", 34], ["rec-philly", "REC Philly", 36], ["penn", "University of Pennsylvania", 30],
+    ["pine-forest-camp", "Pine Forest Camp", 40], ["photolounge", "PhotoLounge", 18], ["jaime", "J'aime French Bakery", 38]];
   var PHOTO = { "About Me": "video/hello", "Freelance Bio": "img/about-mic.jpg" };
   function about(tab) {
     var names = Object.keys(BIOS); tab = names.indexOf(tab) >= 0 ? tab : names[0];
