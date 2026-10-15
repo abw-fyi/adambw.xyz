@@ -101,6 +101,8 @@
   /* The Related Work Journal page: a deck in the journal's own ink */
   .rw { --b: #1F32A6; max-width: 1000px; }
   .rw-hero { position: relative; background: var(--b); color: #fff; padding: 64px 56px 52px; margin: -46px -64px 0 -64px; overflow: hidden; }
+  .rw-amp { position: absolute; right: -40px; bottom: -150px; width: 340px; opacity: .18; pointer-events: none; }
+  .rw-hero > *:not(.rw-amp):not(.rw-dot) { position: relative; }
   .rw-dot { position: absolute; right: 56px; top: 56px; width: 120px; height: 120px; border-radius: 50%; background: #fff; color: var(--b); display: grid; place-items: center; font: 700 34px/1 var(--mono); }
   .rw-eye { font: 400 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .75; margin: 0 0 22px !important; }
   .rw-hero h1 { font: 400 clamp(44px, 6.4vw, 84px)/1.02 var(--serif); color: #fff; margin: 0 0 26px; max-width: 9.5em; letter-spacing: -.01em; }
@@ -253,6 +255,7 @@
     .pl .snd { right: 8px; bottom: 10px; min-height: 30px; padding: 0 9px; font-size: 12px; gap: 5px; }
     .bio { grid-template-columns: 1fr; gap: 22px; } .bioimg { width: 160px; }
     .rw-hero { margin: -30px -18px 0; padding: 40px 20px 36px; }
+    .rw-amp { width: 220px; bottom: -40px; }
     .rw-dot { width: 64px; height: 64px; font-size: 18px; right: 20px; top: 24px; }
     .rw-lede { font-size: 18px !important; }
     .rw-stats { grid-template-columns: 1fr 1fr; } .rw-stats b { font-size: 32px; }
@@ -401,7 +404,7 @@
   function rwj() {
     var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&?!@#%*()[]{}/«»¶§†ÆŒßøåçéñü".split("");
     return '<div class="rw">' +
-      '<section class="rw-hero"><div class="rw-dot">RWJ</div>' +
+      '<section class="rw-hero"><img class="rw-amp" src="img/rwj/hero-amp.svg" alt=""><div class="rw-dot">RWJ</div>' +
         '<p class="rw-eye">Writing, type and tools · 2026</p>' +
         '<h1>The Related Work Journal</h1>' +
         '<p class="rw-lede">I write a journal. Then I built everything it runs on: the app I write it in, the lettering, and the two typefaces this whole site is set in.</p>' +
@@ -420,7 +423,7 @@
         '<h2 class="rw-big">From a 1967 stroke<br>to a letter.</h2>' +
         '<div class="rw-steps"><figure><img src="img/rwj/stroke-R-skeleton.svg" alt=""><figcaption><b>1</b> Hershey\'s stroke: a line through points, no thickness.</figcaption></figure>' +
           '<figure><img src="img/rwj/stroke-R-pen.svg" alt=""><figcaption><b>2</b> A round pen run along it.</figcaption></figure>' +
-          '<figure><img src="img/rwj/stroke-R-letter.svg" alt=""><figcaption><b>3</b> The letter the journal draws.</figcaption></figure></div>' +
+          '<figure><img src="img/rwj/stroke-R-draw.svg" alt=""><figcaption><b>3</b> The letter, drawn the way the journal draws it.</figcaption></figure></div>' +
         '<div class="rw-steps small"><img src="img/rwj/stroke-g-skeleton.svg" alt=""><img src="img/rwj/stroke-g-pen.svg" alt=""><img src="img/rwj/stroke-g-letter.svg" alt=""><img src="img/rwj/stroke-amp-skeleton.svg" alt=""><img src="img/rwj/stroke-amp-pen.svg" alt=""><img src="img/rwj/stroke-amp-letter.svg" alt=""></div>' +
         '<p class="rw-p">Titles are plotted live on the page, stroke by stroke. Everything else is RWJ Plotter, a webfont I made from the same strokes with the same round pen.</p>' +
       '</section>' +
