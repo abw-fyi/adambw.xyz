@@ -127,6 +127,7 @@
   .rw-steps figure:last-child { border-right: 0; }
   .rw-steps img { display: block; width: 100%; height: 260px; object-fit: contain; }
   .rw-steps figcaption { font: 400 13px/1.45 var(--mono); color: var(--b); margin-top: 16px; }
+  .rw-steps figcaption::before { content: none; }
   .rw-steps figcaption b { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--b); color: #fff; font-size: 11px; margin-right: 6px; }
   .rw-steps.small { grid-template-columns: repeat(6, 1fr); border-top: 0; margin: 0 0 30px; }
   .rw-steps.small img { height: 110px; padding: 16px 10px; border-right: 1px solid rgba(31,50,166,.25); }
@@ -139,7 +140,7 @@
   .rw-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(62px, 1fr)); border-left: 1px solid #e3e3e3; border-top: 1px solid #e3e3e3; }
   .rw-wall span { display: grid; place-items: center; aspect-ratio: 1; font: 400 30px/1 var(--mono); color: var(--ink); border-right: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; transition: background .15s, color .15s, transform .15s; cursor: default; }
   .rw-wall span:hover { background: var(--b); color: #fff; transform: scale(1.45); position: relative; z-index: 1; }
-  .rw-blue { background: var(--b); color: #fff; margin: 104px -64px 0; padding: 72px 56px 64px; }
+  .rw-blue { background: var(--b); color: #fff; margin: 96px 0 0; padding: 56px 48px; }
   .rw-blue .rw-n { color: #fff; opacity: .75; }
   .rw-serif { font: 400 clamp(28px, 3.6vw, 44px)/1.3 var(--serif); color: #fff; max-width: 20em; margin: 0 0 30px !important; }
   .rw-mono { font: 400 14px/1.4 var(--mono); letter-spacing: .06em; opacity: .8; margin: 0 !important; }
@@ -152,8 +153,36 @@
   .rw-marks .win figcaption { color: var(--b); }
   .rw-strip { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 6px; }
   .rw-strip img { display: block; height: 180px; width: auto; border: 1px solid #e3e3e3; flex: none; }
-  .rw-shot { margin: 34px -64px 0 0; border: 1px solid #e3e3e3; box-shadow: 0 30px 60px -30px rgba(31,50,166,.35); }
+  .rw-shot { margin: 30px 0 0; border: 1px solid #e3e3e3; box-shadow: 0 30px 60px -30px rgba(31,50,166,.35); }
   .rw-shot img { display: block; width: 100%; }
+
+  .rw-top { padding: 6px 0 0; }
+  .rw-top h1 { font: 400 clamp(40px, 5.6vw, 72px)/1.04 var(--serif); color: var(--b); margin: 0 0 22px; letter-spacing: -.01em; }
+  .rw-top .rw-lede { color: var(--ink); font-size: 22px !important; max-width: 30em; margin: 0 0 40px !important; }
+  .rw-top { container-type: inline-size; }
+  .rw-hero-type { font: 400 18cqi/1 var(--mono); color: var(--b); letter-spacing: .02em; white-space: nowrap; overflow: hidden; padding: 10px 0 26px; border-bottom: 1px solid #e3e3e3; }
+  .rw-facts { font: 400 13px/1.6 var(--mono); color: var(--grey); margin-top: 16px !important; }
+  .rw-facts a { color: var(--b); white-space: nowrap; }
+  .rw-one { margin: 0; }
+  .rw-one img { display: block; width: 100%; border: 1px solid #e3e3e3; }
+  .rw-one figcaption { font: 400 13px/1.45 var(--mono); color: var(--grey); margin-top: 10px; }
+  .rw-big { font-size: clamp(32px, 4.2vw, 52px) !important; }
+  .rw-h3 { font: 400 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--grey); margin: 64px 0 18px; }
+  .rw-try { margin: 0 0 44px; border-top: 2px solid var(--b); }
+  .rw-try-bar { display: flex; align-items: center; gap: 6px; padding: 12px 0; font: 400 13px/1 var(--mono); }
+  .rw-try-bar span { color: var(--grey); margin-right: 8px; letter-spacing: .14em; text-transform: uppercase; }
+  .rw-try-bar button { all: unset; cursor: pointer; padding: 7px 12px; border-radius: 16px; color: var(--grey); }
+  .rw-try-bar button[aria-pressed="true"] { background: var(--b); color: #fff; }
+  .rw-try-text { font: 400 clamp(36px, 5vw, 64px)/1.15 var(--mono); color: var(--b); outline: none; min-height: 1.2em; padding: 6px 0 22px; border-bottom: 1px solid #e3e3e3; caret-color: var(--b); word-break: break-word; }
+  .rw-try-text.serif { font-family: var(--serif); }
+  .rw-kinds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .rw-kinds figure, .rw-pair figure { margin: 0; }
+  .rw-kinds img { display: block; width: 100%; border: 1px solid #e3e3e3; }
+  .rw-kinds figcaption, .rw-pair figcaption { font: 400 13px/1.45 var(--mono); color: var(--grey); margin-top: 10px; }
+  .rw-pair { display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px; align-items: start; }
+  .rw-pair img { display: block; width: 100%; border: 1px solid #e3e3e3; }
+  .rw-foot { font: 400 13px/1.6 var(--mono) !important; color: var(--grey); margin: 96px 0 0 !important; max-width: 56em; }
+  .rw-foot a { color: var(--b); }
   .rw-ref { display: grid; grid-template-columns: 1.3fr 1fr; gap: 30px; align-items: start; }
   .rw-ref img { display: block; width: 100%; border: 1px solid #e3e3e3; }
   .rw-ref p { font-size: 16px !important; color: var(--grey); }
@@ -259,7 +288,7 @@
     .rw-dot { width: 64px; height: 64px; font-size: 18px; right: 20px; top: 24px; }
     .rw-lede { font-size: 18px !important; }
     .rw-stats { grid-template-columns: 1fr 1fr; } .rw-stats b { font-size: 32px; }
-    .rw-blue { margin: 72px -18px 0; padding: 44px 20px; }
+    .rw-blue { margin: 72px 0 0; padding: 32px 20px; }
     .rw-sec { padding-top: 72px; }
     .rw-steps { grid-template-columns: 1fr 1fr 1fr; } .rw-steps img { height: 130px; } .rw-steps figure { padding: 12px 8px; }
     .rw-steps.small { grid-template-columns: repeat(3, 1fr); }
@@ -268,6 +297,11 @@
     .rw-marks { grid-template-columns: 1fr 1fr; }
     .rw-pages img { height: 220px; } .rw-strip img { height: 120px; }
     .rw-shot { margin-right: 0; }
+    .rw-top .rw-lede { font-size: 18px !important; }
+    .rw-kinds { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .rw-pair { grid-template-columns: 1fr; }
+    .rw-try-text { font-size: 32px; }
+
     .rw-ref { grid-template-columns: 1fr; }
     .rw-wall { grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); } .rw-wall span { font-size: 22px; }
 
@@ -404,62 +438,50 @@
   function rwj() {
     var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&?!@#%*()[]{}/«»¶§†ÆŒßøåçéñü".split("");
     return '<div class="rw">' +
-      '<section class="rw-hero"><img class="rw-amp" src="img/rwj/hero-amp.svg" alt=""><div class="rw-dot">RWJ</div>' +
-        '<p class="rw-eye">Writing, type and tools · 2026</p>' +
+      '<section class="rw-top">' +
+        '<p class="rw-n">Type, lettering and tools</p>' +
         '<h1>The Related Work Journal</h1>' +
-        '<p class="rw-lede">I write a journal. Then I built everything it runs on: the app I write it in, the lettering, and the two typefaces this whole site is set in.</p>' +
-        '<div class="rw-stats"><div><b>22</b><span>days of work</span></div><div><b>321</b><span>saved versions</span></div><div><b>2</b><span>typefaces, 8 styles</span></div><div><b>1,078</b><span>glyphs in Related Mono</span></div></div>' +
-        '<a class="rw-go" href="https://relatedwork.blog" target="_blank" rel="noopener">Read the journal ↗</a>' +
+        '<p class="rw-lede">I write a journal. I also made what it runs on: two typefaces, the lettering, and the app I write it in.</p>' +
+        '<div class="rw-hero-type" aria-hidden="true">Rr Gg Qq</div>' +
+        '<p class="rw-facts">1,078 glyphs · 8 styles · 321 versions in 22 days · <a href="https://relatedwork.blog" target="_blank" rel="noopener">Read the journal ↗</a></p>' +
       '</section>' +
 
-      '<section class="rw-sec"><p class="rw-n">01 · The idea</p>' +
-        '<h2 class="rw-big">One ink. One pen.<br>White paper.</h2>' +
-        '<p class="rw-p">The journal is designed as if a pen plotter printed it, in ballpoint blue on white. Every title is drawn with a round pen along the strokes of the Hershey Fonts, the vector fonts Dr. A. V. Hershey made for plotters in 1967. Nothing on the page is there to decorate it. I wrote a style guide to hold that line.</p>' +
-        '<div class="rw-pages">' + ["cover","idea","writing","mark","color","lettering","page","kinds"].map(function (n) { return '<a href="docs/rwj-style-guide.pdf" target="_blank" rel="noopener"><img src="img/rwj/guide-' + n + '.jpg" alt="Style guide page"></a>'; }).join("") + '</div>' +
-        '<p class="rw-cap">The style guide, ten pages. <a href="docs/rwj-style-guide.pdf" target="_blank" rel="noopener">Open the PDF ↗</a></p>' +
+      '<section class="rw-sec"><p class="rw-n">01 · The typeface</p>' +
+        '<h2 class="rw-big">Related Mono</h2>' +
+        '<p class="rw-p">A typewriter face after OO Arketa, built on IBM Plex Mono. The dashed line is where Plex started. The blue is where it went.</p>' +
+        '<div class="rw-ov">' + ["R","a","Q","g","f","3"].map(function (c) { return '<img src="img/rwj/overlay-' + c + '.svg" alt="' + c + ' in IBM Plex Mono and Related Mono">'; }).join("") + '</div>' +
+        '<ol class="rw-list"><li>Squarish curves redrawn as near-ellipses.</li><li>Flat slab serifs on every stroke end.</li><li>Q, f and r redrawn. R, M, the figures and the question mark drawn new.</li><li>The weight evened out so a paragraph is as dark as Arketa\'s.</li></ol>' +
+        '<div class="rw-try"><div class="rw-try-bar"><span>Try it</span><button type="button" data-f="mono" aria-pressed="true">Mono</button><button type="button" data-f="serif" aria-pressed="false">Serif</button></div>' +
+          '<div class="rw-try-text" id="tryText" contenteditable="true" spellcheck="false">Type anything here.</div></div>' +
+        '<div class="rw-wall">' + glyphs.map(function (g) { return '<span>' + esc(g) + '</span>'; }).join("") + '</div>' +
+      '</section>' +
+
+      '<section class="rw-blue"><p class="rw-n">Its partner</p>' +
+        '<p class="rw-serif">Related Serif is the reading face, built on IBM Plex Serif to the same weight, with the same square dots and quotes. You are reading it now.</p>' +
       '</section>' +
 
       '<section class="rw-sec"><p class="rw-n">02 · The lettering</p>' +
-        '<h2 class="rw-big">From a 1967 stroke<br>to a letter.</h2>' +
-        '<div class="rw-steps"><figure><img src="img/rwj/stroke-R-skeleton.svg" alt=""><figcaption><b>1</b> Hershey\'s stroke: a line through points, no thickness.</figcaption></figure>' +
-          '<figure><img src="img/rwj/stroke-R-pen.svg" alt=""><figcaption><b>2</b> A round pen run along it.</figcaption></figure>' +
-          '<figure><img src="img/rwj/stroke-R-draw.svg" alt=""><figcaption><b>3</b> The letter, drawn the way the journal draws it.</figcaption></figure></div>' +
-        '<div class="rw-steps small"><img src="img/rwj/stroke-g-skeleton.svg" alt=""><img src="img/rwj/stroke-g-pen.svg" alt=""><img src="img/rwj/stroke-g-letter.svg" alt=""><img src="img/rwj/stroke-amp-skeleton.svg" alt=""><img src="img/rwj/stroke-amp-pen.svg" alt=""><img src="img/rwj/stroke-amp-letter.svg" alt=""></div>' +
-        '<p class="rw-p">Titles are plotted live on the page, stroke by stroke. Everything else is RWJ Plotter, a webfont I made from the same strokes with the same round pen.</p>' +
+        '<h2 class="rw-big">From a 1967 stroke to a letter</h2>' +
+        '<p class="rw-p">Every title in the journal is drawn with a round pen along the strokes of the Hershey Fonts, the vector fonts Dr. A. V. Hershey made for plotters in 1967.</p>' +
+        '<div class="rw-steps"><figure><img src="img/rwj/stroke-R-skeleton.svg" alt=""><figcaption>The stroke. A line through points.</figcaption></figure>' +
+          '<figure><img src="img/rwj/stroke-R-pen.svg" alt=""><figcaption>A round pen along it.</figcaption></figure>' +
+          '<figure><img src="img/rwj/stroke-R-draw.svg" alt=""><figcaption>The letter, drawn.</figcaption></figure></div>' +
       '</section>' +
 
-      '<section class="rw-sec"><p class="rw-n">03 · The typeface</p>' +
-        '<h2 class="rw-big">Related Mono.</h2>' +
-        '<p class="rw-p">A typewriter face after OO Arketa, built on IBM Plex Mono. Dashed: where Plex started. Blue: where it went.</p>' +
-        '<div class="rw-ov">' + ["R","a","Q","g","f","3"].map(function (c) { return '<img src="img/rwj/overlay-' + c + '.svg" alt="' + c + ' in IBM Plex Mono and Related Mono">'; }).join("") + '</div>' +
-        '<ol class="rw-list"><li>Squarish curves redrawn as near-ellipses.</li><li>Flat slab serifs on every stroke end.</li><li>Q, f and r redrawn. R, M, the figures and the question mark drawn new.</li><li>The weight evened out so a paragraph is as dark as Arketa\'s.</li></ol>' +
-        '<div class="rw-wall">' + glyphs.map(function (g) { return '<span>' + esc(g) + '</span>'; }).join("") + '</div>' +
-        '<p class="rw-cap">A few of its 1,078 glyphs. Hover to look closer.</p>' +
+      '<section class="rw-sec"><p class="rw-n">03 · The app</p>' +
+        '<h2 class="rw-big">RWJ Studio</h2>' +
+        '<p class="rw-p">The Mac app I built to write and publish the journal. The post appears beside the draft exactly as it will look.</p>' +
+        '<div class="rw-shot"><img src="img/rwj/app-split.jpg" alt="RWJ Studio: a draft beside its live preview"></div>' +
+        '<h3 class="rw-h3">Three kinds of post</h3>' +
+        '<div class="rw-kinds"><figure><img src="img/rwj/app-kind-split.jpg" alt=""><figcaption>Plain</figcaption></figure><figure><img src="img/rwj/app-kind-letter.jpg" alt=""><figcaption>Letter</figcaption></figure><figure><img src="img/rwj/app-kind-framed.jpg" alt=""><figcaption>Framed</figcaption></figure></div>' +
+        '<h3 class="rw-h3">It suggests. It never writes.</h3>' +
+        '<figure class="rw-one"><img src="img/rwj/app-suggest.jpg" alt="A grammar note in RWJ Studio with choices"><figcaption>A usage note. Keeping my own wording is one click.</figcaption></figure>' +
       '</section>' +
 
-      '<section class="rw-blue"><p class="rw-n">04 · Its partner</p>' +
-        '<p class="rw-serif">Related Serif is the reading face, built on IBM Plex Serif to the same weight, with the same square dots and quotes. You are reading it now.</p>' +
-        '<p class="rw-mono">Related Mono · Related Serif · SIL Open Font License</p>' +
-      '</section>' +
-
-      '<section class="rw-sec"><p class="rw-n">05 · The mark</p>' +
-        '<h2 class="rw-big">Four marks.<br>One full stop.</h2>' +
-        '<div class="rw-marks"><figure><img src="img/rwj/mark-geometric.jpg" alt=""><figcaption>Geometric</figcaption></figure><figure><img src="img/rwj/mark-sign.jpg" alt=""><figcaption>Hand sign</figcaption></figure><figure><img src="img/rwj/mark-rainbow.jpg" alt=""><figcaption>Gradient</figcaption></figure><figure class="win"><img src="img/rwj/mark-dot.jpg" alt=""><figcaption>The full stop. Kept.</figcaption></figure></div>' +
-        '<div class="rw-strip"><img src="img/rwj/round3-g.jpg" alt=""><img src="img/rwj/round4-g.jpg" alt=""><img src="img/rwj/round4-h.jpg" alt=""></div>' +
-        '<p class="rw-cap">Earlier rounds of the journal\'s layout.</p>' +
-      '</section>' +
-
-      '<section class="rw-sec"><p class="rw-n">06 · The Studio</p>' +
-        '<h2 class="rw-big">An app to write it in.</h2>' +
-        '<p class="rw-p">RWJ Studio is the Mac app I built to write and publish the journal. The post appears beside the draft exactly as it will look. It checks spelling, grammar and usage. It suggests. It never writes.</p>' +
-        '<div class="rw-shot"><img src="img/rwj/studio.jpg" alt="RWJ Studio: the editor beside a live preview"></div>' +
-      '</section>' +
-
-      '<section class="rw-sec rw-refs"><p class="rw-n">References</p>' +
-        '<div class="rw-ref"><img src="img/rwj/olivetti.jpg" alt="Olivetti typewriter characters"><p>Olivetti\'s typewriter characters. For the story of the Hershey Fonts, read Frank Grießhammer\'s <a href="https://lapolice.ch/stories/footnotes-b-article-9/" target="_blank" rel="noopener">Cogitating Vectors</a>. The Hershey Fonts were created by Dr. A. V. Hershey at the U.S. National Bureau of Standards.</p></div>' +
-      '</section>' +
+      '<p class="rw-foot"><a href="docs/rwj-style-guide.pdf" target="_blank" rel="noopener">The style guide (PDF)</a> · Hershey history: <a href="https://lapolice.ch/stories/footnotes-b-article-9/" target="_blank" rel="noopener">Cogitating Vectors</a> · The Hershey Fonts were created by Dr. A. V. Hershey at the U.S. National Bureau of Standards.</p>' +
       '<div class="next">Next: <a href="#/diary-films">Diary Films</a></div></div>';
   }
+
 
   function stevens() {
     return '<div class="head"><h1>Stevens Studios</h1><span class="meta">Studio Assistant</span></div>' +
@@ -675,6 +697,9 @@
     main.querySelectorAll(".vid .frame").forEach(function (f) { f.onclick = function () { stopAll(); if (state !== "idle") { state = "paused"; paint(); }
       f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + f.dataset.v + '?autoplay=1" title="' + f.getAttribute("aria-label").slice(5) + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; f.onclick = null; f.style.cursor = "default"; }; });
     wirePlayers();
+    var tb = main.querySelectorAll(".rw-try-bar button"), tt = $("tryText");
+    if (tt) { tb.forEach(function (x) { x.onclick = function () { tb.forEach(function (o) { o.setAttribute("aria-pressed", o === x); }); tt.classList.toggle("serif", x.dataset.f === "serif"); }; });
+      tt.addEventListener("focus", function () { if (tt.textContent === "Type anything here.") { var r = document.createRange(); r.selectNodeContents(tt); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); } }); }
     paint(); scrollTo(0, 0);
   }
   $("menu").addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); document.body.classList.toggle("open"); });
