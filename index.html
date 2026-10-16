@@ -68,6 +68,7 @@
   .play { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 12px; min-height: 48px; margin: 0 28px 22px 0; font: 400 15px/1 var(--mono); color: var(--ink); }
   .play .ic { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; flex: none; transition: transform .15s; }
   .play:hover .ic { transform: scale(1.08); }
+  .play:focus:not(:focus-visible) { outline: none; }
   .play:hover .lb, .play:hover > span:last-child { text-decoration: underline; text-underline-offset: 4px; }
   .ext { display: inline-flex; align-items: center; min-height: 48px; margin-bottom: 22px; font: 400 15px/1 var(--mono); }
   .next { margin-top: 56px; padding-top: 18px; border-top: 1px solid #e6e6e6; max-width: 760px; color: var(--grey); font: 400 14px/1.5 var(--mono); }
@@ -324,6 +325,27 @@
   .film p { margin: 0 !important; font-size: 17px; }
 
   /* home: the six covers */
+  .hp { margin: 0; max-width: 620px; }
+  .hp { max-width: 540px !important; }
+  .hp a { display: block; }
+  .hp img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 30%; background: #f2f2f2; }
+  .hp img.me { background: #fff; }
+  .hp-go-to { color: var(--ink); text-decoration: none; } .hp-go-to span { display: inline-block; transition: transform .15s; } .hp-go-to:hover { text-decoration: underline; text-underline-offset: 4px; } .hp-go-to:hover span { transform: translateX(3px); }
+  .hp-cap a { color: var(--ink); }
+  .side a.on { text-decoration: underline; text-underline-offset: 3px; }
+  .hp-cap { font-size: 18px !important; line-height: 1.5 !important; color: var(--ink); margin: 14px 0 18px !important; max-width: 540px; min-height: 4.6em; }
+  .hp-cap small { font: 400 13px/1.5 var(--mono); }
+  .hp a { position: relative; }
+  .hp-prog { display: block; height: 2px; background: #e6e6e6; } .hp-prog b { display: block; height: 100%; width: 0; background: var(--ink); }
+  .hp a { cursor: pointer; } #hpVid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hp-cap small.hp-n { margin-top: 2px; }
+  .hp-next { all: unset; cursor: pointer; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; padding: 4px 0; }
+  .hp-go { position: absolute; left: 16px; bottom: 16px; width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,.6); color: #fff; display: grid; place-items: center; transition: transform .15s; }
+  .hp a:hover .hp-go { transform: scale(1.08); }
+  body.home .bar { display: none !important; }
+  body.home.playing .hp-go, .hp a:not([data-reel]) .hp-go { display: none; }
+  .hp-cap small { display: block; color: #555; margin-top: 4px; }
+  .hp-list { display: none; }
   .covers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin: 40px 0 10px; max-width: 760px; }
   .covers a { text-decoration: none; color: var(--ink); }
   .covers img, .covers video { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; margin-bottom: 8px; transition: opacity .15s; background: #000; }
@@ -413,6 +435,10 @@
     .rw-kinds { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
     .rw-pair { grid-template-columns: 1fr; }
     .sh { grid-template-columns: 1fr; gap: 24px; }
+    .hp-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; margin-top: 26px; font: 400 14px/1.6 var(--mono); }
+    .hp-list h4 { font: 700 14px/1.4 var(--mono); margin: 0 0 4px; }
+    .hp-list a { display: block; color: var(--ink); text-decoration: none; padding: 3px 0; }
+
     .rx { grid-template-columns: 1fr; padding-top: 60px; }
     .rx-notes { padding-top: 18px; border-top: 1px dashed #ccc; margin-top: 22px; }
     .rx-notes:empty { display: none; }
@@ -493,39 +519,40 @@
   // Every project page: title, the label on the right, its context, the cover with a side note, and a way to hear it.
   // Clips with src/sc play here for len seconds (Apple previews are 30). Fledged has no audio here.
   var WORK = [
-    { id: "pillowvoices", t: "PillowVoices: Dance Through Time", meta: "Podcast", cover: "pillowvoices.webp",
+    { id: "pillowvoices", role: "Engineer, then producer, for the Jacob's Pillow dance festival", t: "PillowVoices: Dance Through Time", meta: "Podcast", cover: "pillowvoices.webp",
       p: ["Jacob's Pillow is America's longest-running international dance festival, in the Berkshires of western Massachusetts. Its podcast pairs recordings from the festival's archive, back to 1933, with today's dance scholars.",
           "I came on as the recording engineer. Much of the archive was old live recordings full of distortion and noise, and I restored them by hand, before AI tools could do that in one click. The job grew from there into producing episodes: the research, the structure, the edit, the mix, and the music."],
       note: "<b>Engineer, then producing episodes; restoration, music</b>Jacob's Pillow, 2020–23.", url: "https://pillowvoices.org/episodes/choreographing-the-social-consciousness-part-1-governmental-affairs", site: "More episodes",
-      src: "https://cdn.simplecast.com/audio/afadbbd6-85c9-41d0-be50-4d8736540db8/episodes/7502bfbd-2116-4306-ae9c-ecb49bbd9d96/audio/1c4c3d0b-1748-49fd-bbfc-8020ce8187d8/default_tc.mp3?aid=rss_feed&feed=s5vXxjwE", start: 67, len: 40 },
-    { id: "tom-bennet", t: "The Tragedy of Tom Bennet", meta: "Audio drama", cover: "tom-bennet.webp",
+      src: "https://cdn.simplecast.com/audio/afadbbd6-85c9-41d0-be50-4d8736540db8/episodes/7502bfbd-2116-4306-ae9c-ecb49bbd9d96/audio/1c4c3d0b-1748-49fd-bbfc-8020ce8187d8/default_tc.mp3?aid=rss_feed&feed=s5vXxjwE", start: 67, len: 20 },
+    { id: "tom-bennet", role: "Produced, directed, scored, and mixed", t: "The Tragedy of Tom Bennet", meta: "Audio drama", cover: "tom-bennet.webp",
       p: ["A feature-length audio drama about a pirate ship lost at sea. We made it during the pandemic, with a cast of professional and first-time actors, some in the studio and some recording from home.",
           "I produced and directed it, designed the sound, wrote the score, mixed it, and played a part. With each actor I talked through the scene and where their character stood until they were ready to commit to it."],
       note: "<b>Producer, director, sound design, score, mix</b>Tales From the Outside, 2020.", url: "https://soundcloud.com/adamb-w/sets/the-tragedy-of-tom-bennet", site: "On SoundCloud",
-      sc: "https://api.soundcloud.com/playlists/1321926355", track: 3, start: 21, len: 38 },
-    { id: "inside-the-dancers-studio", t: "Inside the Dancer's Studio", meta: "Podcast", cover: "inside-the-dancers-studio.webp",
+      sc: "https://api.soundcloud.com/playlists/1321926355", track: 3, start: 21, len: 20 },
+    { id: "media-program", t: "Springside New Media", meta: "Youth media", role: "Built and ran the program, 10 to 30 students a semester", cover: "springside-tile.jpg", src: "video/springside-ad.m4a", start: 0, len: 18, p: [], note: "" },
+    { id: "inside-the-dancers-studio", role: "Recorded, mixed, and mastered", t: "Inside the Dancer's Studio", meta: "Podcast", cover: "inside-the-dancers-studio.webp",
       p: ["A weekly interview show from the National Center for Choreography in Akron, hosted by its director, Christy Bolingbroke. In 2021 and 2022 its guests included Bebe Miller, Raja Feather Kelly, and Marc Bamuthi Joseph.",
           "I recorded the conversations, worked in archival material, and mixed and mastered the episodes."],
       note: "<b>Recording, mix, master</b>National Center for Choreography, 2021–22.", url: "https://inside-the-dancers-studio.simplecast.com/", site: "More episodes",
-      src: "https://cdn.simplecast.com/audio/e58ea147-4640-4df8-9057-31f9b139ecd4/episodes/fb6142c6-beea-4b2d-be74-561c9ff36da0/audio/78eb3803-f597-4bb5-83ed-bea8fa6e29f1/default_tc.mp3?aid=rss_feed&feed=HurYnyt3", start: 62, len: 40 },
-    { id: "how-people-move-people", t: "How People Move People", meta: "Podcast", cover: "how-people-move-people.webp",
+      src: "https://cdn.simplecast.com/audio/e58ea147-4640-4df8-9057-31f9b139ecd4/episodes/fb6142c6-beea-4b2d-be74-561c9ff36da0/audio/78eb3803-f597-4bb5-83ed-bea8fa6e29f1/default_tc.mp3?aid=rss_feed&feed=HurYnyt3", start: 62, len: 20 },
+    { id: "how-people-move-people", role: "Recording engineer", t: "How People Move People", meta: "Podcast", cover: "how-people-move-people.webp",
       p: ["The National Center for Choreography's long-form series about how art and lives shape each other, with a new host and subject each season.",
           "I engineered the sessions, in person and remote."],
       note: "<b>Recording engineer</b>National Center for Choreography, 2023.", url: "https://www.nccakron.org/howpeoplemovepeople", site: "More episodes",
-      src: "https://cdn.simplecast.com/audio/5e965b0d-9821-4693-bf55-5bd54972853d/episodes/96188777-b578-4c2f-b695-1c428affbdf6/audio/65c8360e-f3ea-4083-a1ab-348714654eb4/default_tc.mp3?aid=rss_feed&feed=uAHAu5Sj", start: 182, len: 40 },
-    { id: "fledged", t: "Fledged", meta: "Short film", cover: "fledged.webp", stills: ["fledged-still-10.webp", "fledged-still-11.webp"],
+      src: "https://cdn.simplecast.com/audio/5e965b0d-9821-4693-bf55-5bd54972853d/episodes/96188777-b578-4c2f-b695-1c428affbdf6/audio/65c8360e-f3ea-4083-a1ab-348714654eb4/default_tc.mp3?aid=rss_feed&feed=uAHAu5Sj", start: 182, len: 20 },
+    { id: "fledged", role: "Dolby Atmos mix, ADR, Foley, and sound design", t: "Fledged", meta: "Short film", cover: "fledged.webp", stills: ["fledged-still-10.webp", "fledged-still-11.webp"],
       p: ["A short film, and an Official Selection of the Sherman Oaks Film Festival.",
           "I did the Dolby Atmos mix, ADR, Foley, and sound design."],
       note: "<b>Dolby Atmos mix, ADR, Foley, sound design</b>2025.", url: "https://shermanoaksfilmfestival.com/2025/10/31/fledged/", site: "See it at the festival" },
-    { id: "stucktober", t: "Slow Crawl Towards The Sun", meta: "Album", cover: "slow-crawl-towards-the-sun.webp", spotify: "album/5UqzuMtXVlEmvfsCu6Jt3Y",
+    { id: "stucktober", role: "Producer, for Lena Fine", t: "Slow Crawl Towards The Sun", meta: "Album", cover: "slow-crawl-towards-the-sun.webp", spotify: "album/5UqzuMtXVlEmvfsCu6Jt3Y",
       p: ["Lena Fine's album. I produced it."],
       note: "<b>Producer</b>Lena Fine, 2024.", url: "https://open.spotify.com/album/5UqzuMtXVlEmvfsCu6Jt3Y", site: "On Spotify",
-      src: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bf/22/1c/bf221cd2-3fd7-c8d4-2b1e-9d8d9cb279e6/mzaf_9621994895570411740.plus.aac.p.m4a", start: 0, len: 30 }
+      src: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bf/22/1c/bf221cd2-3fd7-c8d4-2b1e-9d8d9cb279e6/mzaf_9621994895570411740.plus.aac.p.m4a", start: 0, len: 20 }
   ];
   // the home grid: six squares, both lanes. [page, title, label, image] (blank = from WORK)
   var GRID = [["pillowvoices"], ["tom-bennet"], ["inside-the-dancers-studio"],
     ["courier-club", "Courier Club", "Band / music videos", "img/courier-club-tile.jpg"], ["fledged"],
-    ["media-program", "Springside New Media", "Youth media", "img/springside-tile.jpg"]];
+    ["media-program", "Springside New Media", "Youth media", "img/teaching.jpg"]];
   var ORDER = ["pillowvoices", "tom-bennet", "inside-the-dancers-studio", "how-people-move-people", "stevens", "courier-club", "stucktober", "fledged", "media-program", "diary-films", "touchdesigner", "rwj"];
   var REEL = WORK.map(function (p, i) { return (p.src || p.sc) ? i : -1; }).filter(function (i) { return i >= 0; });
   var $ = function (id) { return document.getElementById(id); };
@@ -537,14 +564,32 @@
   var main = $("main");
 
   // ---------- pages
-  function home() {
-    return '<p class="big">I\'m a producer in Boston. I make podcasts, audio drama, and music, for Jacob\'s Pillow, the National Center for Choreography, and independent musicians. For four years, I also built and ran <a href="#/media-program">a school media program</a> in Philadelphia, set up like a small production company.</p>' +
-      '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · 3 min</span></button>' +
+  function homeGrid() {
+    return '<p class="big">I\'m a producer in Boston. I make podcasts, audio drama, and music for Jacob\'s Pillow, the National Center for Choreography, and independent musicians. For four years, I also built and ran <a href="#/media-program">a school media program</a> in Philadelphia, set up like a small production company.</p>' +
+      '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · ' + Math.round(REEL.reduce(function (t, i) { return t + WORK[i].len; }, 0) / 60) + ' min</span></button>' +
       '<div class="covers">' + GRID.map(function (g) {
         var i = byId(g[0]), p = i >= 0 ? WORK[i] : null, t = g[1] || p.t, m = g[2] || p.meta, pic = g[3] || IMG + p.cover;
         var media = /\.mp4$/.test(pic) ? '<video autoplay muted loop playsinline preload="auto" poster="' + pic.replace(".mp4", ".jpg") + '" src="' + pic + '"></video>' : '<img alt="" src="' + pic + '">';
         return '<a href="#/' + g[0] + '">' + media + '<span>' + esc(t) + '</span><small>' + esc(m) + '</small></a>'; }).join("") + '</div>';
+  }  // Home, after lee94josh.com: one picture of me beside the index, nothing else. Pointing at a project
+  // in the index swaps the picture for that project and names it underneath; leaving brings me back.
+  var HOMEV = (location.search.match(/home=(\w+)/) || [])[1] || "a";
+  var ME = { a: ["img/cutout.webp", "50% 50%", "contain"], b: ["img/hello-set.jpg", "42% 50%"], c: ["img/about-portrait.jpg", "35% 30%"] };
+  var HOMECAP = 'I make podcasts, audio drama, and records for clients like Jacob\'s Pillow and the National Center for Choreography. For four years, I built and ran <a href="#/media-program">a school media program</a> in Philadelphia.';
+  function picFor(id) {
+    for (var g = 0; g < GRID.length; g++) if (GRID[g][0] === id && GRID[g][3]) return GRID[g][3];
+    var i = byId(id); if (i >= 0) return IMG + WORK[i].cover;
+    return WASH[id] || "";
   }
+  function home() {
+    if (HOMEV === "old") return homeGrid();
+    var me = ME[HOMEV] || ME.a;
+    return '<figure class="hp"><a id="hpLink" href="#/" aria-label="Play my work" data-reel="1"><img id="hpImg"' + (me[2] === "contain" ? ' class="me"' : '') + ' src="' + me[0] + '" alt="Adam Butz-Weidner" style="object-position:' + (me[1] || "50% 30%") + ';object-fit:' + (me[2] || "cover") + '"></a><i class="hp-prog"><b id="hpProg"></b></i></figure>' +
+      '<p class="hp-cap" id="hpCap">' + HOMECAP + '</p>' +
+      '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · ' + Math.round(REEL.reduce(function (t, i) { return t + WORK[i].len; }, 0) / 60) + ' min</span></button>' +
+      '<div class="hp-list">' + Array.prototype.map.call(document.querySelectorAll("#side .grp"), function (g) { return '<div>' + g.innerHTML + '</div>'; }).join("") + '</div>';
+  }
+
   // the whole thing, on the page: an episode in our own player, the drama's playlist, the album
   function full(p) {
     if (p.sc) return '<div class="emb"><iframe title="' + esc(p.t) + ' on SoundCloud" loading="lazy" height="330" allow="autoplay" src="https://w.soundcloud.com/player/?url=' + encodeURIComponent(p.sc) + '&color=%231f32a6&visual=false&show_user=false&show_reposts=false&show_teaser=false&show_comments=false&hide_related=true"></iframe></div>';
@@ -709,7 +754,7 @@
   // loop:1 starts muted and looping as soon as it's on screen; the first press restarts it with sound.
   function player(src, opt) {
     opt = opt || {};
-    return '<div class="pl' + (opt.tall ? " tall" : "") + (opt.loop ? " auto" : "") + '"><video playsinline preload="' + (opt.loop ? "auto" : "metadata") + '"' + (opt.loop ? " muted loop" : "") + ' poster="' + src + '.jpg" src="' + src + '.mp4?v=3"></video>' +
+    return '<div class="pl' + (opt.tall ? " tall" : "") + (opt.loop ? " auto" : "") + '"><video playsinline preload="' + (opt.loop ? "auto" : "metadata") + '"' + (opt.loop ? " muted loop" : "") + ' poster="' + src + '.jpg" src="' + src + '.mp4?v=4"></video>' +
       (opt.loop ? '<button class="tap" type="button" aria-label="Pause"></button><button class="snd" type="button" aria-label="Turn sound on">' + I.muted + '<span>Sound on</span></button>'
                 : '<button class="pp" type="button" aria-label="Play with sound"><span class="big">' + I.play + '</span></button>') + '<i class="bar1"><b></b></i></div>';
   }
@@ -804,6 +849,8 @@
     main.querySelectorAll(".play[data-i], .play[data-reel]").forEach(function (b) {
       b.onclick = function () { if (b.dataset.reel) return toggle(); var k = +b.dataset.i; if (cur === k && state !== "idle" && state !== "done") toggle(); else go(k); };
     });
+    if ($("hpLink")) $("hpLink").onclick = function (e) { if (this.hasAttribute("data-reel")) { e.preventDefault(); toggle(); } };
+    document.body.classList.toggle("home", !id);
     if ($("vBtn")) $("vBtn").onclick = function () { var v = $("video"); stopAll(); if (state !== "idle") { state = "paused"; paint(); }
       v.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/LoLG-fLxA7I?autoplay=1" title="The school\'s ad" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; };
     main.querySelectorAll(".vid .frame").forEach(function (f) { f.onclick = function () { stopAll(); if (state !== "idle") { state = "paused"; paint(); }
@@ -828,6 +875,22 @@
       tt.addEventListener("focus", function () { if (tt.textContent === "Type anything here.") { var r = document.createRange(); r.selectNodeContents(tt); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); } }); }
     paint(); scrollTo(0, 0);
   }
+  // the draft copy (localhost) says so, so it's never mistaken for the live site
+  if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) { var dr = document.createElement("div"); dr.textContent = "Draft · not live"; dr.style.cssText = "position:fixed;right:14px;bottom:14px;z-index:99;font:400 12px/1 var(--mono);background:#1F32A6;color:#fff;padding:8px 12px;border-radius:14px;pointer-events:none"; document.body.appendChild(dr); }
+  // The home frame: me, or the project being pointed at (desktop), or the one the reel is playing (any device).
+  // Hard cuts, like an edit. Clicking the frame opens whatever it shows.
+  function frame(id, cap) {
+    var img = $("hpImg"); if (!img) return;
+    if (!id || state !== "playing") { var fv = $("hpVid"); if (fv) fv.remove(); if (!id && $("hpProg")) $("hpProg").style.width = "0"; }
+    var me = ME[HOMEV] || ME.a; img.src = id ? picFor(id) : me[0]; img.style.objectPosition = id ? "50% 30%" : (me[1] || "50% 30%"); img.style.objectFit = id ? "cover" : (me[2] || "cover"); img.classList.toggle("me", !id && me[2] === "contain");
+    var ln = $("hpLink"); ln.href = "#/" + (id || ""); ln.toggleAttribute("data-reel", !id); ln.setAttribute("aria-label", id ? "Open " + title(id) : "Play my work");
+    $("hpCap").innerHTML = cap || HOMECAP;
+  }
+  (function () {
+    var side = $("side"), back;
+    // load every picture the reel can show, so a cut never flashes
+    setTimeout(function () { REEL.forEach(function (i) { var u = picFor(WORK[i].id); if (u) new Image().src = u; }); }, 1500);
+  })();
   $("menu").addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); document.body.classList.toggle("open"); });
 
   // ---------- the player
@@ -843,14 +906,18 @@
     var busy = state === "loading", on = state === "playing", ic = busy ? I.spin : on ? I.pause : I.play;
     $("pp").innerHTML = ic; $("pp").setAttribute("aria-label", on || busy ? "Pause" : "Play");
     main.querySelectorAll(".play[data-reel]").forEach(function (b) { b.querySelector(".ic").innerHTML = ic;
-      b.querySelector(".lb").textContent = state === "done" ? "Play again" : on || busy ? "Pause" : (state === "paused" || state === "blocked") ? "Resume" : "Play my work · 3 min"; });
+      b.querySelector(".lb").textContent = state === "done" ? "Play again" : on || busy ? "Pause" : (state === "paused" || state === "blocked") ? "Resume" : "Play my work · " + Math.round(REEL.reduce(function (t, i) { return t + WORK[i].len; }, 0) / 60) + " min"; });
     main.querySelectorAll(".play[data-i]").forEach(function (b) { var k = +b.dataset.i, mine = k === cur && state !== "idle" && state !== "done";
       b.querySelector(".ic").innerHTML = mine ? ic : I.play; b.querySelector(".lb").textContent = mine && (on || busy) ? "Pause" : "Listen · " + fmt(WORK[k].len); });
     document.body.classList.toggle("playing", state !== "idle");
     $("bar").classList.toggle("up", state !== "idle");
   }
   function setAct(text, href) { var a = $("act"); if (!text) { a.hidden = true; return; } a.hidden = false; a.textContent = text; a.href = href; }
-  function info(i) { $("barT").textContent = WORK[i].t; $("barN").textContent = (pos(i) + 1) + " of " + REEL.length; }
+  function info(i) { $("barT").textContent = WORK[i].t; $("barN").textContent = (pos(i) + 1) + " of " + REEL.length;
+    frame(WORK[i].id, '<a class="hp-go-to" href="#/' + WORK[i].id + '">' + esc(WORK[i].t) + ' <span>→</span></a> <small>' + esc(WORK[i].role || WORK[i].meta) + '</small><small class="hp-n">' + (pos(i) + 1) + ' of ' + REEL.length + ' · <span id="hpT">0:00</span>' +
+      (pos(i) + 1 < REEL.length ? ' · <button type="button" class="hp-next" id="hpNext">Next ›</button>' : '') + '</small>');
+    if ($("hpNext")) $("hpNext").onclick = function () { next(); };
+   }
   function stopAll() { token++; clearTimers(); au.pause(); if (widget && scReady) try { widget.pause(); } catch (e) {} }
   function startLoading(i, kick) {
     clearTimers(); state = "loading"; setAct(null); info(i); paint();
@@ -903,6 +970,7 @@
     var heard = REEL.filter(function (i) { return played[i]; }).length;
     $("barT").textContent = heard === REEL.length ? "That's the reel. Thanks for listening." : "You heard " + heard + " of " + REEL.length + ". Thanks for listening.";
     $("barN").textContent = MAIL; setAct("Email me", "mailto:" + MAIL);
+    frame(null, 'That\'s the reel. <a href="mailto:' + MAIL + '">' + MAIL + '</a> · <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>');
   }
   au.addEventListener("playing", function () { if (!WORK[cur] || WORK[cur].sc || state === "paused") return; played[cur] = 1; clearTimers(); state = "playing"; info(cur); paint(); });
   au.addEventListener("waiting", function () { if (state === "playing") { var i = cur; state = "loading"; paint(); later(function () { if (state === "loading" && cur === i) fail(i); }, 9000); } });
@@ -913,13 +981,16 @@
     var p = WORK[cur], e = p.sc ? scPos / 1000 - p.start : au.currentTime - p.start;
     $("prog").style.width = Math.min(100, Math.max(0, e) / p.len * 100) + "%";
     $("barN").textContent = (pos(cur) + 1) + " of " + REEL.length + " · " + fmt(e) + " / " + fmt(p.len);
+    if ($("hpProg")) $("hpProg").style.width = Math.min(100, Math.max(0, e) / p.len * 100) + "%";
+    if ($("hpT")) $("hpT").textContent = fmt(e) + " / " + fmt(p.len);
     if (e >= p.len) next();
   }, 200);
-  au.src = WORK[REEL[0]].src; au.dataset.src = au.src;
+  au.src = WORK[REEL[0]].src; au.dataset.src = au.src; au.preload = "auto";
   $("pp").onclick = toggle;
-  $("close").onclick = function () { stopAll(); state = "idle"; setAct(null); paint(); };
+  $("close").onclick = function () { stopAll(); state = "idle"; setAct(null); paint(); frame(null); };
   $("act").addEventListener("click", function (e) { if (this.getAttribute("href") === "#skip") { e.preventDefault(); next(); } });
   addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight" && (state === "playing" || state === "loading") && !(e.target.closest && e.target.closest("input, textarea"))) { e.preventDefault(); return next(); }
     if (e.target.closest && e.target.closest("button, a, input, textarea")) return;
     if (e.key === " " && state !== "idle") { e.preventDefault(); toggle(); }
     else if (e.key === "Escape" && state !== "idle") $("close").click();
