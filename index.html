@@ -324,9 +324,6 @@
   .film p { margin: 0 !important; font-size: 17px; }
 
   /* home: the six covers */
-  .hi { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: start; max-width: 860px; }
-  .hi .big { margin-top: 0; }
-  .hi .play { margin-bottom: 0; }
   .covers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin: 40px 0 10px; max-width: 760px; }
   .covers a { text-decoration: none; color: var(--ink); }
   .covers img, .covers video { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; margin-bottom: 8px; transition: opacity .15s; background: #000; }
@@ -416,7 +413,6 @@
     .rw-kinds { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
     .rw-pair { grid-template-columns: 1fr; }
     .sh { grid-template-columns: 1fr; gap: 24px; }
-    .hi { grid-template-columns: 1fr; gap: 20px; }
     .rx { grid-template-columns: 1fr; padding-top: 60px; }
     .rx-notes { padding-top: 18px; border-top: 1px dashed #ccc; margin-top: 22px; }
     .rx-notes:empty { display: none; }
@@ -542,8 +538,8 @@
 
   // ---------- pages
   function home() {
-    return '<div class="hi"><div class="hi-v">' + player("video/hello", { loop: 1 }) + '</div><div class="hi-t"><p class="big">I\'m a producer in Boston. I make podcasts, audio drama, and music, for Jacob\'s Pillow, the National Center for Choreography, and independent musicians. For four years, I also built and ran <a href="#/media-program">a school media program</a> in Philadelphia, set up like a small production company.</p>' +
-      '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · 3 min</span></button></div></div>' +
+    return '<p class="big">I\'m a producer in Boston. I make podcasts, audio drama, and music, for Jacob\'s Pillow, the National Center for Choreography, and independent musicians. For four years, I also built and ran <a href="#/media-program">a school media program</a> in Philadelphia, set up like a small production company.</p>' +
+      '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · 3 min</span></button>' +
       '<div class="covers">' + GRID.map(function (g) {
         var i = byId(g[0]), p = i >= 0 ? WORK[i] : null, t = g[1] || p.t, m = g[2] || p.meta, pic = g[3] || IMG + p.cover;
         var media = /\.mp4$/.test(pic) ? '<video autoplay muted loop playsinline preload="auto" poster="' + pic.replace(".mp4", ".jpg") + '" src="' + pic + '"></video>' : '<img alt="" src="' + pic + '">';
