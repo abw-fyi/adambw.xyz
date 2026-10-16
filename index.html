@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Adam Butz-Weidner</title>
-<meta name="description" content="Producer in Boston. Podcasts, audio drama, music and sound for film.">
+<meta name="description" content="Producer in Boston. Podcasts, audio drama, music, and sound for film.">
 <meta property="og:title" content="Adam Butz-Weidner">
-<meta property="og:description" content="Producer in Boston. Podcasts, audio drama, music and sound for film.">
+<meta property="og:description" content="Producer in Boston. Podcasts, audio drama, music, and sound for film.">
 <meta property="og:image" content="https://adambw.xyz/og.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -324,6 +324,9 @@
   .film p { margin: 0 !important; font-size: 17px; }
 
   /* home: the six covers */
+  .hi { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: start; max-width: 860px; }
+  .hi .big { margin-top: 0; }
+  .hi .play { margin-bottom: 0; }
   .covers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin: 40px 0 10px; max-width: 760px; }
   .covers a { text-decoration: none; color: var(--ink); }
   .covers img, .covers video { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; margin-bottom: 8px; transition: opacity .15s; background: #000; }
@@ -413,6 +416,7 @@
     .rw-kinds { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
     .rw-pair { grid-template-columns: 1fr; }
     .sh { grid-template-columns: 1fr; gap: 24px; }
+    .hi { grid-template-columns: 1fr; gap: 20px; }
     .rx { grid-template-columns: 1fr; padding-top: 60px; }
     .rx-notes { padding-top: 18px; border-top: 1px dashed #ccc; margin-top: 22px; }
     .rx-notes:empty { display: none; }
@@ -495,16 +499,16 @@
   var WORK = [
     { id: "pillowvoices", t: "PillowVoices: Dance Through Time", meta: "Podcast", cover: "pillowvoices.webp",
       p: ["Jacob's Pillow is America's longest-running international dance festival, in the Berkshires of western Massachusetts. Its podcast pairs recordings from the festival's archive, back to 1933, with today's dance scholars.",
-          "I came on as the recording engineer. Much of the archive was old live recordings full of distortion and noise, and I restored them by hand, before AI tools could do that in one click. The job grew from there into producing episodes: the research, the structure, the edit, the mix and the music."],
+          "I came on as the recording engineer. Much of the archive was old live recordings full of distortion and noise, and I restored them by hand, before AI tools could do that in one click. The job grew from there into producing episodes: the research, the structure, the edit, the mix, and the music."],
       note: "<b>Engineer, then producing episodes; restoration, music</b>Jacob's Pillow, 2020–23.", url: "https://pillowvoices.org/episodes/choreographing-the-social-consciousness-part-1-governmental-affairs", site: "More episodes",
       src: "https://cdn.simplecast.com/audio/afadbbd6-85c9-41d0-be50-4d8736540db8/episodes/7502bfbd-2116-4306-ae9c-ecb49bbd9d96/audio/1c4c3d0b-1748-49fd-bbfc-8020ce8187d8/default_tc.mp3?aid=rss_feed&feed=s5vXxjwE", start: 67, len: 40 },
     { id: "tom-bennet", t: "The Tragedy of Tom Bennet", meta: "Audio drama", cover: "tom-bennet.webp",
       p: ["A feature-length audio drama about a pirate ship lost at sea. We made it during the pandemic, with a cast of professional and first-time actors, some in the studio and some recording from home.",
-          "I produced and directed it, designed the sound, wrote the score, mixed it and played a part. With each actor I talked through the scene and where their character stood until they were ready to commit to it."],
+          "I produced and directed it, designed the sound, wrote the score, mixed it, and played a part. With each actor I talked through the scene and where their character stood until they were ready to commit to it."],
       note: "<b>Producer, director, sound design, score, mix</b>Tales From the Outside, 2020.", url: "https://soundcloud.com/adamb-w/sets/the-tragedy-of-tom-bennet", site: "On SoundCloud",
       sc: "https://api.soundcloud.com/playlists/1321926355", track: 3, start: 21, len: 38 },
     { id: "inside-the-dancers-studio", t: "Inside the Dancer's Studio", meta: "Podcast", cover: "inside-the-dancers-studio.webp",
-      p: ["A weekly interview show from the National Center for Choreography in Akron, hosted by its director, Christy Bolingbroke. In 2021 and 2022 its guests included Bebe Miller, Raja Feather Kelly and Marc Bamuthi Joseph.",
+      p: ["A weekly interview show from the National Center for Choreography in Akron, hosted by its director, Christy Bolingbroke. In 2021 and 2022 its guests included Bebe Miller, Raja Feather Kelly, and Marc Bamuthi Joseph.",
           "I recorded the conversations, worked in archival material, and mixed and mastered the episodes."],
       note: "<b>Recording, mix, master</b>National Center for Choreography, 2021–22.", url: "https://inside-the-dancers-studio.simplecast.com/", site: "More episodes",
       src: "https://cdn.simplecast.com/audio/e58ea147-4640-4df8-9057-31f9b139ecd4/episodes/fb6142c6-beea-4b2d-be74-561c9ff36da0/audio/78eb3803-f597-4bb5-83ed-bea8fa6e29f1/default_tc.mp3?aid=rss_feed&feed=HurYnyt3", start: 62, len: 40 },
@@ -515,7 +519,7 @@
       src: "https://cdn.simplecast.com/audio/5e965b0d-9821-4693-bf55-5bd54972853d/episodes/96188777-b578-4c2f-b695-1c428affbdf6/audio/65c8360e-f3ea-4083-a1ab-348714654eb4/default_tc.mp3?aid=rss_feed&feed=uAHAu5Sj", start: 182, len: 40 },
     { id: "fledged", t: "Fledged", meta: "Short film", cover: "fledged.webp", stills: ["fledged-still-10.webp", "fledged-still-11.webp"],
       p: ["A short film, and an Official Selection of the Sherman Oaks Film Festival.",
-          "I did the Dolby Atmos mix, ADR, Foley and sound design."],
+          "I did the Dolby Atmos mix, ADR, Foley, and sound design."],
       note: "<b>Dolby Atmos mix, ADR, Foley, sound design</b>2025.", url: "https://shermanoaksfilmfestival.com/2025/10/31/fledged/", site: "See it at the festival" },
     { id: "stucktober", t: "Slow Crawl Towards The Sun", meta: "Album", cover: "slow-crawl-towards-the-sun.webp", spotify: "album/5UqzuMtXVlEmvfsCu6Jt3Y",
       p: ["Lena Fine's album. I produced it."],
@@ -538,8 +542,8 @@
 
   // ---------- pages
   function home() {
-    return '<p class="big">I\'m a producer in Boston. I make podcasts, audio drama and music, for Jacob\'s Pillow, the National Center for Choreography and independent musicians. For four years I also built and ran <a href="#/media-program">a school media program</a> in Philadelphia, set up like a small production company.</p>' +
-      '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · 3 min</span></button>' +
+    return '<div class="hi"><div class="hi-v">' + player("video/hello", { loop: 1 }) + '</div><div class="hi-t"><p class="big">I\'m a producer in Boston. I make podcasts, audio drama, and music, for Jacob\'s Pillow, the National Center for Choreography, and independent musicians. For four years, I also built and ran <a href="#/media-program">a school media program</a> in Philadelphia, set up like a small production company.</p>' +
+      '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · 3 min</span></button></div></div>' +
       '<div class="covers">' + GRID.map(function (g) {
         var i = byId(g[0]), p = i >= 0 ? WORK[i] : null, t = g[1] || p.t, m = g[2] || p.meta, pic = g[3] || IMG + p.cover;
         var media = /\.mp4$/.test(pic) ? '<video autoplay muted loop playsinline preload="auto" poster="' + pic.replace(".mp4", ".jpg") + '" src="' + pic + '"></video>' : '<img alt="" src="' + pic + '">';
@@ -569,7 +573,7 @@
     var L = function (u, t) { return '<a href="' + u + '" target="_blank" rel="noopener">' + t + '</a>'; };
     return '<div class="rw rz">' +
       '<h1 class="rz-title">Related Mono</h1>' +
-      '<p class="rz-lede">The type, lettering and writing app I made for my journal, ' + L("https://relatedwork.blog", "The Related Work Journal ↗") + '</p>' +
+      '<p class="rz-lede">The type, lettering, and writing app I made for my journal, ' + L("https://relatedwork.blog", "The Related Work Journal ↗") + '</p>' +
 
       '<div class="rz-r"><figure><img src="img/rwj/stroke-R-skeleton.svg" alt="Hershey stroke for R"><figcaption>1967 stroke</figcaption></figure>' +
         '<figure><img src="img/rwj/stroke-R-pen.svg" alt="Round pen along the stroke"><figcaption>pen</figcaption></figure>' +
@@ -605,12 +609,12 @@
   }
   function program() {
     return '<div class="head"><h1>Springside New Media</h1><span class="meta">Entrepreneurship &amp; New Media Educator</span></div>' +
-      '<p class="big">For four years I built and ran the new media program at Springside Chestnut Hill Academy in Philadelphia, inside its Center for Entrepreneurial Leadership. I set it up like a small production company.</p>' +
+      '<p class="big">For four years, I built and ran the new media program at Springside Chestnut Hill Academy in Philadelphia, inside its Center for Entrepreneurial Leadership. I set it up like a small production company.</p>' +
       '<h2 class="sub">How it worked</h2>' +
-      '<p>I wrote the whole curriculum and worked with 10 to 30 students each semester. Most started with no experience. By the end they were running multicam shoots of scripts they wrote, editing in DaVinci Resolve, syncing sound and handling their own reshoots and effects.</p>' +
+      '<p>I wrote the whole curriculum and worked with 10 to 30 students each semester. Most started with no experience. By the end they were running multicam shoots of scripts they wrote, editing in DaVinci Resolve, syncing sound, and handling their own reshoots and effects.</p>' +
       '<div class="ph"><video class="gif" autoplay muted loop playsinline preload="auto" poster="video/edit-suite.jpg" src="video/edit-suite.mp4" aria-label="Students editing in the media lab"></video><p class="note">The edit suite.</p></div>' +
       '<p>Students also ran a production company. They pitched local businesses, and the businesses paid them to make their ads. I taught them the whole process, from storyboards and budgets to casting and the shoot.</p>' +
-      '<p>I also designed the tenth-grade capstone, a venture incubator where each student found a problem worth solving and built something to answer it, from an app to a film or a podcast.</p>' +
+      '<p>I also designed the tenth-grade capstone, a venture incubator where each student found a problem worth solving and built something to answer it, from apps to films to podcasts.</p>' +
       '<p>A short film from my video production class won an award at the WHYY Youth Film Festival. Another group made a documentary about SEPTA\'s budget crisis and interviewed former Mayor Michael Nutter. We partnered with PBS NewsHour and the Pulitzer Center, and in a school-wide survey, families named the Center for Entrepreneurial Leadership their top reason for choosing the school.</p>' +
       '<div class="pair2"><figure><img src="img/withers-soul-poster.jpg" alt="Poster for The Site of Withers Soul"><figcaption class="note">Poster for <i>The Site of Withers Soul</i>, a student film.</figcaption></figure>' +
       '<figure>' + player("video/multicam-shoot") + '<figcaption class="note">On set for a student multicam shoot.</figcaption></figure></div>' +
@@ -676,14 +680,14 @@
   }
   var BIOS = {
     "About Me": [
-      "I'm a producer in Boston. I make podcasts, audio drama and music.",
+      "I'm a producer in Boston. I make podcasts, audio drama, and music.",
       "I grew into producing on PillowVoices, the podcast of Jacob's Pillow, where I started as the recording engineer. I've produced and mixed for the band Courier Club, produced Lena Fine's album, and mixed the short film Fledged in Dolby Atmos.",
-      "For four years I built and ran the new media program at Springside Chestnut Hill Academy in Philadelphia, set up like a small production company.",
+      "For four years, I built and ran the new media program at Springside Chestnut Hill Academy in Philadelphia, set up like a small production company.",
       "I write The Related Work Journal. I made the typefaces on this site, starting from IBM Plex."
     ],
     "Freelance Bio": [
-      "Adam Butz-Weidner is a producer, engineer and composer based in Boston.",
-      "He has produced and engineered podcasts for Jacob's Pillow and the National Center for Choreography, produced and mixed records for Courier Club, and did the Dolby Atmos mix, ADR and Foley for the short film Fledged.",
+      "Adam Butz-Weidner is a producer, engineer, and composer based in Boston.",
+      "He has produced and engineered podcasts for Jacob's Pillow and the National Center for Choreography, produced and mixed records for Courier Club, and did the Dolby Atmos mix, ADR, and Foley for the short film Fledged.",
       "He works from the first session to final delivery, in the studio or remote."
     ]
   };
