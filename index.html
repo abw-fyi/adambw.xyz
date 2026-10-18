@@ -92,7 +92,7 @@
   .me-col .hello-me { position: absolute; inset: 0; height: 100%; width: 100%; object-fit: contain; object-position: 0% 100%; display: block; }
   .bio-side .bio { max-width: 680px; }
   .bio-side.right { grid-template-columns: minmax(0, 1fr) auto; } .bio-side.right .me-col { order: 2; } .bio-side.right .hello-me { object-position: 100% 100%; }
-  @media (max-width: 1100px) { .bio-side { grid-template-columns: 1fr; gap: 20px; } .me-col { width: auto; height: 320px; } .me-col .hello-me { position: static; height: 320px; } }
+  @media (max-width: 1100px) { .bio-side, .bio-side.right { grid-template-columns: 1fr; gap: 20px; } .bio-side.right .me-col { order: 0; } .bio-side.right .hello-me { object-position: 0% 100%; } .me-col { width: auto; height: 320px; } .me-col .hello-me { position: static; height: 320px; } }
   .bio:not(:has(.bioimg)) { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
   .lean { position: fixed; right: -40px; bottom: -30px; width: 230px; z-index: 1; pointer-events: none; transform: rotate(-4deg); transform-origin: bottom right; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
   .lean.in { transform: rotate(0deg) translate(-8px, -4px); }
