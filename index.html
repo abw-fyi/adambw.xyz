@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Adam Butz-Weidner</title>
-<meta name="description" content="Producer in Boston. Podcasts, audio drama, music, and sound for film.">
+<meta name="description" content="I make podcasts, audio drama, and records for clients like Jacob&#39;s Pillow and the National Center for Choreography. For four years, I built and ran a new media program in Philadelphia.">
 <meta property="og:title" content="Adam Butz-Weidner">
-<meta property="og:description" content="Producer in Boston. Podcasts, audio drama, music, and sound for film.">
+<meta property="og:description" content="I make podcasts, audio drama, and records for clients like Jacob&#39;s Pillow and the National Center for Choreography. For four years, I built and ran a new media program in Philadelphia.">
 <meta property="og:image" content="https://adambw.xyz/og.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -78,24 +78,42 @@
   .tabs a { color: var(--grey); text-decoration: none; } .tabs a:hover { color: var(--ink); }
   .tabs b { color: var(--ink); } .tabs span { color: var(--ink); }
   .sig { font: 400 14px/1.6 var(--mono); margin-top: 34px !important; }
-  .logos { margin: 72px 0 0; padding-top: 18px; border-top: 1px solid #e6e6e6; max-width: 760px; }
+  .logos { margin: 44px 0 0; padding-top: 18px; border-top: 1px solid #e6e6e6; max-width: 760px; }
   .logos h4 { font: 400 13px/1 var(--mono); color: var(--grey); margin: 0 0 22px; }
   .logos div { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px 18px; }
   .logos img { width: auto; mix-blend-mode: multiply; opacity: .72; transition: opacity .2s; }
   .logos img:hover { opacity: 1; }
   .bio { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; max-width: 900px; }
   .bioimg { width: 220px; aspect-ratio: 1; object-fit: cover; display: block; background: #000; }
-  .hello { max-width: 760px; margin: 0 0 34px; }
+  .hello { max-width: 760px; margin: 0 0 26px; }
+  /* About: me standing beside the text, as tall as it */
+  .bio-side { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 36px; align-items: stretch; max-width: 1040px; }
+  .me-col { position: relative; width: 330px; }
+  .me-col .hello-me { position: absolute; inset: 0; height: 100%; width: 100%; object-fit: contain; object-position: 0% 100%; display: block; }
+  .bio-side .bio { max-width: 680px; }
+  .bio-side.right { grid-template-columns: minmax(0, 1fr) auto; } .bio-side.right .me-col { order: 2; } .bio-side.right .hello-me { object-position: 100% 100%; }
+  @media (max-width: 1100px) { .bio-side { grid-template-columns: 1fr; gap: 20px; } .me-col { width: auto; height: 320px; } .me-col .hello-me { position: static; height: 320px; } }
   .bio:not(:has(.bioimg)) { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
   .lean { position: fixed; right: -40px; bottom: -30px; width: 230px; z-index: 1; pointer-events: none; transform: rotate(-4deg); transform-origin: bottom right; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
   .lean.in { transform: rotate(0deg) translate(-8px, -4px); }
   .bio .big { font-size: 21px; }
+  .cta { margin-top: 30px !important; font-size: 19px; }
+  .cta + .sig { margin-top: 6px !important; }
   .ph { margin: 34px 0 30px; max-width: 640px; }
   .ph.top { margin-top: 6px; }
+  .ph.small { max-width: 400px; }
+  .levels p { margin: 0 0 10px !important; font-size: 19px; }
+  .levels p.q { font: 400 14px/1.5 var(--mono) !important; color: var(--grey); margin-top: 18px !important; }
+  .levels p.q:first-child { margin-top: 0 !important; }
   .beat { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 28px; align-items: start; margin: 44px 0; max-width: 900px; }
   .beat > p { margin: 0 !important; font-size: 18px; line-height: 1.55; }
   .beat figure { margin: 0; }
   .beat img { display: block; width: 100%; }
+  .beat .pl.tall { display: block; } .beat .pl.tall video { width: 100%; height: auto; }
+  .beat-solo { font-size: 18px !important; line-height: 1.55; max-width: 620px; margin: 44px 0 !important; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 640px; margin: 56px 0 0; }
+  .pair figure { margin: 0; } .pair img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .pair .video { aspect-ratio: 16 / 9; width: 100%; }
 
   .ph img, .ph video { display: block; width: 100%; background: #000; }
   .ph p { margin: 10px 0 0 !important; }
@@ -275,7 +293,10 @@
   .rx .lad { border-top: 1px dashed var(--ink); margin-top: 48px; }
   .rx .sh-models { border-top: 1px dashed var(--ink); }
 
-  .rz { max-width: 860px; }
+  .rz { --b: #000; max-width: 860px; }
+  .rz-spec { font-family: var(--mono); color: var(--ink); margin: 40px 0 0; padding: 30px 0; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; }
+  .rz-spec p { margin: 0 !important; font-size: clamp(16px, 2.4vw, 26px) !important; line-height: 1.5; letter-spacing: .02em; overflow-wrap: anywhere; }
+  .rz-spec .s1 { font-size: clamp(40px, 7vw, 76px) !important; line-height: 1.1; margin-bottom: 18px !important; }
   .rz-title { font: 400 clamp(34px, 4.2vw, 52px)/1.05 var(--serif); color: var(--b); margin: 0 0 12px; }
   .rz-lede { font-size: 18px !important; margin: 0 0 56px !important; color: var(--ink); }
   .rz a { color: var(--b); text-underline-offset: 3px; }
@@ -283,10 +304,10 @@
   .rz-r { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .rz-r figure { margin: 0; }
   .rz-r img { display: block; width: 100%; height: clamp(150px, 26vw, 300px); object-fit: contain; }
-  .rz-r figcaption { font: 400 12.5px/1 var(--mono); color: var(--grey); text-align: center; margin-top: 10px; }
+  .rz-r figcaption { font: 400 12.5px/1 var(--mono); color: var(--text); text-align: center; margin-top: 10px; }
   .rz-cap { font: 400 12.5px/1.6 var(--mono) !important; color: var(--grey); margin: 22px 0 0 !important; }
   .rz-cap i { display: inline-block; width: 22px; vertical-align: middle; margin-right: 2px; }
-  .rz-h { font: 400 15px/1 var(--mono); color: var(--b); margin: 120px 0 18px; }
+  .rz-h { font: 700 15px/1 var(--mono); color: var(--ink); margin: 88px 0 22px; }
   .rz-p { font-size: 18px !important; margin: 0 0 6px !important; }
   .rz-ov { grid-template-columns: repeat(3, 1fr) !important; border: 0 !important; margin: 0 !important; }
   .rz-ov > div { border: 0 !important; padding: 0 !important; }
@@ -334,9 +355,10 @@
 
   /* home: the six covers */
   .hp { margin: 0; max-width: 620px; }
-  .hp { max-width: 540px !important; }
+  .hp { max-width: min(1200px, calc((100vh - 230px) * 16 / 9)) !important; }
+  @media (min-width: 901px) { body.home main { max-width: none; padding-left: 64px; } }
   .hp a { display: block; }
-  .hp img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 30%; background: #f2f2f2; }
+  .hp img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 30%; background: #fff; }
   .hp img.me { background: #fff; }
   .hp-go-to { color: var(--ink); text-decoration: none; } .hp-go-to span { display: inline-block; transition: transform .15s; } .hp-go-to:hover { text-decoration: underline; text-underline-offset: 4px; } .hp-go-to:hover span { transform: translateX(3px); }
   .hp-cap a { color: var(--ink); }
@@ -349,6 +371,9 @@
   .hp-cap.now { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 16px; align-items: start; }
   .hp-prog { display: block; height: 2px; max-width: 540px; margin: -6px 0 18px; background: transparent; } body.playing .hp-prog { background: #e6e6e6; } .hp-prog b { display: block; height: 100%; width: 0; background: var(--ink); }
   .hp a { cursor: pointer; } #hpVid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hp { position: relative; } .hp #hpVid { background: #000; }
+  .hp .snd { all: unset; cursor: pointer; position: absolute; right: 12px; bottom: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 12px; border-radius: 18px; background: rgba(0,0,0,.55); color: #fff; font: 400 13px/1 var(--mono); }
+  .hp .snd svg { width: 16px; height: 16px; }
   .hp-cap small.hp-n { margin-top: 2px; }
   .hp-next { all: unset; cursor: pointer; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; padding: 4px 0; }
   .hp-go { position: absolute; left: 16px; bottom: 16px; width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,.6); color: #fff; display: grid; place-items: center; transition: transform .15s; }
@@ -447,6 +472,7 @@
     .rw-pair { grid-template-columns: 1fr; }
     .sh { grid-template-columns: 1fr; gap: 24px; }
     .beat { grid-template-columns: 1fr; gap: 14px; margin: 34px 0; }
+    .pair { grid-template-columns: 1fr; }
     .hp { max-width: none !important; }
     .hp-down { display: block; font: 400 14px/1 var(--mono); color: var(--grey); text-decoration: none; margin-top: 4px; }
     .hp-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; margin-top: 64px; padding-top: 22px; border-top: 1px solid #e6e6e6; font: 400 14px/1.6 var(--mono); }
@@ -483,17 +509,17 @@
     <a href="#/tom-bennet">The Tragedy of Tom Bennet</a>
     <a href="#/inside-the-dancers-studio">Inside the Dancer's Studio</a>
     <a href="#/how-people-move-people">How People Move People</a>
-    <a href="#/stevens">Stevens Studios</a>
+  </div>
+  <div class="grp"><h4>Film</h4>
+    <a href="#/fledged">Fledged</a>
   </div>
   <div class="grp"><h4>Music</h4>
     <a href="#/courier-club">Courier Club</a>
     <a href="#/stucktober">Lena Fine</a>
   </div>
-  <div class="grp"><h4>Film</h4>
-    <a href="#/fledged">Fledged</a>
-  </div>
-  <div class="grp"><h4>Youth Media</h4>
-    <a href="#/media-program">Springside New Media</a>
+  <div class="grp"><h4>Education</h4>
+    <a href="#/media-program">Springside Chestnut Hill Academy</a>
+    <a href="#/stevens">Stevens Studios</a>
   </div>
   <div class="grp"><h4>Etc.</h4>
     <a href="#/diary-films">Diary Films</a>
@@ -533,73 +559,66 @@
   // Every project page: title, the label on the right, its context, the cover with a side note, and a way to hear it.
   // Clips with src/sc play here for len seconds (Apple previews are 30). Fledged has no audio here.
   var WORK = [
-    { id: "pillowvoices", clip: "video/reel-pillowvoices.m4a", role: "Engineer, then producer, for the Jacob's Pillow dance festival", t: "PillowVoices: Dance Through Time", meta: "Podcast", cover: "pillowvoices.webp",
-      p: ["Jacob's Pillow is America's longest-running international dance festival, in the Berkshires of western Massachusetts. Its podcast pairs recordings from the festival's archive, back to 1933, with today's dance scholars.",
-          "I came on as the recording engineer. Much of the archive was old live recordings full of distortion and noise, and I restored them by hand, before AI tools could do that in one click. The job grew from there into producing episodes: the research, the structure, the edit, the mix, and the music."],
-      note: "<b>Engineer, then producing episodes; restoration, music</b>Jacob's Pillow, 2020–23.", url: "https://pillowvoices.org/episodes/choreographing-the-social-consciousness-part-1-governmental-affairs", site: "More episodes",
+    { id: "pillowvoices", clip: "video/reel-pillowvoices.m4a?v=6", role: "Engineered, then produced episodes", t: "PillowVoices: Dance Through Time", meta: "Podcast", cover: "pillowvoices.webp",
+      p: ["Jacob's Pillow is a dance festival in the Berkshires. Its podcast pairs recordings from the festival's archive, back to 1933, with commentary from dance scholars.",
+          "I came on as the recording engineer and restored the festival’s archival recordings. Later I wrote music for the show, and by the end I was producing episodes."],
+      note: "<b>Recording, restoration, music, producing</b>Jacob's Pillow, 2020–23.", url: "https://pillowvoices.org/episodes/choreographing-the-social-consciousness-part-1-governmental-affairs", site: "More episodes",
       src: "https://cdn.simplecast.com/audio/afadbbd6-85c9-41d0-be50-4d8736540db8/episodes/7502bfbd-2116-4306-ae9c-ecb49bbd9d96/audio/1c4c3d0b-1748-49fd-bbfc-8020ce8187d8/default_tc.mp3?aid=rss_feed&feed=s5vXxjwE", start: 67, len: 20 },
-    { id: "tom-bennet", clip: "video/reel-tom-bennet.m4a", role: "Produced, directed, scored, and mixed", t: "The Tragedy of Tom Bennet", meta: "Audio drama", cover: "tom-bennet.webp",
-      p: ["A feature-length audio drama about a pirate ship lost at sea. We made it during the pandemic, with a cast of professional and first-time actors, some in the studio and some recording from home.",
-          "I produced and directed it, designed the sound, wrote the score, mixed it, and played a part. With each actor I talked through the scene and where their character stood until they were ready to commit to it."],
+    { id: "tom-bennet", clip: "video/reel-tom-bennet.m4a?v=6", role: "Produced, directed, scored, and mixed", t: "The Tragedy of Tom Bennet", meta: "Audio drama", cover: "tom-bennet.webp",
+      p: ["A feature-length audio drama about a pirate ship lost at sea. We made it during the pandemic, largely to stay sane. The cast was a mix of professional and first-time actors.",
+          "I directed the cast and acted in the show too, with a big part in the finale."],
       note: "<b>Producer, director, sound design, score, mix</b>Tales From the Outside, 2020.", url: "https://soundcloud.com/adamb-w/sets/the-tragedy-of-tom-bennet", site: "On SoundCloud",
       sc: "https://api.soundcloud.com/playlists/1321926355", track: 3, start: 21, len: 20 },
-    { id: "media-program", clip: "video/springside-ad.m4a", t: "Springside New Media", meta: "Youth media", role: "Built and ran the program, 10 to 30 students a semester", cover: "springside-tile.jpg", src: "video/springside-ad.m4a", start: 0, len: 18, p: [], note: "" },
-    { id: "inside-the-dancers-studio", clip: "video/reel-inside.m4a", role: "Recorded, mixed, and mastered", t: "Inside the Dancer's Studio", meta: "Podcast", cover: "inside-the-dancers-studio.webp",
-      p: ["A weekly interview show from the National Center for Choreography in Akron, hosted by its director, Christy Bolingbroke. In 2021 and 2022 its guests included Bebe Miller, Raja Feather Kelly, and Marc Bamuthi Joseph.",
-          "I recorded the conversations, worked in archival material, and mixed and mastered the episodes."],
+    { id: "media-program", clip: "video/springside-ad.m4a?v=6", t: "Springside Chestnut Hill Academy", meta: "Youth media", role: "Designed and taught a high school media program", cover: "springside-tile.jpg", src: "video/springside-ad.m4a", start: 0, len: 18, p: [], note: "" },
+    { id: "inside-the-dancers-studio", clip: "video/reel-inside.m4a?v=6", role: "Recorded, mixed, and mastered", t: "Inside the Dancer's Studio", meta: "Podcast", cover: "inside-the-dancers-studio.webp",
+      p: ["An interview show from the National Center for Choreography in Akron, where choreographers talk about their work.",
+          "I engineered sessions and mixed in archival material."],
       note: "<b>Recording, mix, master</b>National Center for Choreography, 2021–22.", url: "https://inside-the-dancers-studio.simplecast.com/", site: "More episodes",
       src: "https://cdn.simplecast.com/audio/e58ea147-4640-4df8-9057-31f9b139ecd4/episodes/fb6142c6-beea-4b2d-be74-561c9ff36da0/audio/78eb3803-f597-4bb5-83ed-bea8fa6e29f1/default_tc.mp3?aid=rss_feed&feed=HurYnyt3", start: 62, len: 20 },
-    { id: "how-people-move-people", clip: "video/reel-hpmp.m4a", role: "Recording engineer", t: "How People Move People", meta: "Podcast", cover: "how-people-move-people.webp",
-      p: ["The National Center for Choreography's long-form series about how art and lives shape each other, with a new host and subject each season.",
-          "I engineered the sessions, in person and remote."],
+    { id: "how-people-move-people", clip: "video/reel-hpmp.m4a?v=6", role: "Recorded hosts, guests, and musicians", t: "How People Move People", meta: "Podcast", cover: "how-people-move-people.webp",
+      p: ["A podcast from the National Center for Choreography in Akron.",
+          "I ran remote and in-person recording sessions for hosts, guests, and musicians."],
       note: "<b>Recording engineer</b>National Center for Choreography, 2023.", url: "https://www.nccakron.org/howpeoplemovepeople", site: "More episodes",
       src: "https://cdn.simplecast.com/audio/5e965b0d-9821-4693-bf55-5bd54972853d/episodes/96188777-b578-4c2f-b695-1c428affbdf6/audio/65c8360e-f3ea-4083-a1ab-348714654eb4/default_tc.mp3?aid=rss_feed&feed=uAHAu5Sj", start: 182, len: 20 },
-    { id: "fledged", role: "Dolby Atmos mix, ADR, Foley, and sound design", t: "Fledged", meta: "Short film", cover: "fledged.webp", stills: ["fledged-still-10.webp", "fledged-still-11.webp"],
-      p: ["A short film, and an Official Selection of the Sherman Oaks Film Festival.",
+    { id: "fledged", role: "Designed the sound and mixed it in Dolby Atmos", t: "Fledged", meta: "Short film", cover: "fledged.webp", stills: ["fledged-still-10.webp", "fledged-still-11.webp"], crew: ["fledged-crew.jpg", "With the crew, during the mix."],
+      p: ["A short drama by Chloe Tolderlund, and an Official Selection of the Sherman Oaks Film Festival.",
           "I did the Dolby Atmos mix, ADR, Foley, and sound design."],
-      note: "<b>Dolby Atmos mix, ADR, Foley, sound design</b>2025.", url: "https://shermanoaksfilmfestival.com/2025/10/31/fledged/", site: "See it at the festival" },
-    { id: "courier-club", clip: "video/reel-courier.m4a", t: "Courier Club", meta: "Band", role: "\u201cWe All Want to Be There\u201d \u00b7 helped produce the song", cover: "../img/yt-cBBIZ4IgYFc.jpg", len: 20, p: [], note: "" },
-    { id: "stucktober", role: "Producer, for Lena Fine", t: "Slow Crawl Towards The Sun", meta: "Album", cover: "slow-crawl-towards-the-sun.webp", spotify: "album/5UqzuMtXVlEmvfsCu6Jt3Y",
-      p: ["Lena Fine's album. I produced it."],
-      note: "<b>Producer</b>Lena Fine, 2024.", url: "https://open.spotify.com/album/5UqzuMtXVlEmvfsCu6Jt3Y", site: "On Spotify",
+      note: "<b>Dolby Atmos mix, ADR, Foley, sound design</b>Fledged, 2025.", url: "https://shermanoaksfilmfestival.com/2025/10/31/fledged/", site: "Festival page" },
+    { id: "courier-club", clip: "video/reel-courier.m4a?v=6", t: "Courier Club", meta: "Band", role: "Produced \u201cWe All Want to Be There\u201d", cover: "../img/yt-cBBIZ4IgYFc.jpg", len: 20, p: [], note: "" },
+    { id: "stucktober", role: "Produced Lena Fine's album", t: "Slow Crawl Towards The Sun", meta: "Album", cover: "slow-crawl-towards-the-sun.webp", spotify: "album/5UqzuMtXVlEmvfsCu6Jt3Y",
+      p: ["I produced it, played on it, and mastered it."],
+      note: "<b>Producer, musician, mastering</b>Lena Fine, 2024.", url: "https://open.spotify.com/album/5UqzuMtXVlEmvfsCu6Jt3Y", site: "On Spotify",
       src: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bf/22/1c/bf221cd2-3fd7-c8d4-2b1e-9d8d9cb279e6/mzaf_9621994895570411740.plus.aac.p.m4a", start: 0, len: 20 }
   ];
   // the home grid: six squares, both lanes. [page, title, label, image] (blank = from WORK)
   var GRID = [["pillowvoices"], ["tom-bennet"], ["inside-the-dancers-studio"],
     ["courier-club", "Courier Club", "Band / music videos", "img/yt-cBBIZ4IgYFc.jpg"], ["fledged"],
-    ["media-program", "Springside New Media", "Youth media", "img/school-ad.jpg"]];
-  var ORDER = ["pillowvoices", "tom-bennet", "inside-the-dancers-studio", "how-people-move-people", "stevens", "courier-club", "stucktober", "fledged", "media-program", "diary-films", "touchdesigner", "rwj"];
+    ["media-program", "Springside Chestnut Hill Academy", "Youth media", "img/school-ad.jpg"]];
+  var ORDER = ["pillowvoices", "tom-bennet", "inside-the-dancers-studio", "how-people-move-people", "fledged", "courier-club", "stucktober", "media-program", "stevens", "diary-films", "touchdesigner", "rwj"];
   var REEL = WORK.map(function (p, i) { return p.clip ? i : -1; }).filter(function (i) { return i >= 0; });
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/'/g, "&#39;"); };
   var fmt = function (s) { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); };
   var byId = function (id) { for (var i = 0; i < WORK.length; i++) if (WORK[i].id === id) return i; return -1; };
-  var PAGES = { "rwj": "Related Mono", "stevens": "Stevens Studios", "media-program": "Springside New Media", "courier-club": "Courier Club", "about": "About", "diary-films": "Diary Films", "touchdesigner": "TouchDesigner" };
+  var PAGES = { "rwj": "Related Mono", "stevens": "Stevens Studios", "media-program": "Springside Chestnut Hill Academy", "courier-club": "Courier Club", "about": "About", "diary-films": "Diary Films", "touchdesigner": "TouchDesigner" };
   var title = function (id) { return PAGES[id] || WORK[byId(id)].t; };
   var main = $("main");
 
   // ---------- pages
-  function homeGrid() {
-    return '<p class="big">I\'m a producer in Boston. I make podcasts, audio drama, and music for Jacob\'s Pillow, the National Center for Choreography, and independent musicians. For four years, I also built and ran <a href="#/media-program">a school media program</a> in Philadelphia, set up like a small production company.</p>' +
-      '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · ' + Math.round(REEL.reduce(function (t, i) { return t + WORK[i].len; }, 0) / 60) + ' min</span></button>' +
-      '<div class="covers">' + GRID.map(function (g) {
-        var i = byId(g[0]), p = i >= 0 ? WORK[i] : null, t = g[1] || p.t, m = g[2] || p.meta, pic = g[3] || IMG + p.cover;
-        var media = /\.mp4$/.test(pic) ? '<video autoplay muted loop playsinline preload="auto" poster="' + pic.replace(".mp4", ".jpg") + '" src="' + pic + '"></video>' : '<img alt="" src="' + pic + '">';
-        return '<a href="#/' + g[0] + '">' + media + '<span>' + esc(t) + '</span><small>' + esc(m) + '</small></a>'; }).join("") + '</div>';
-  }  // Home, after lee94josh.com: one picture of me beside the index, nothing else. Pointing at a project
-  // in the index swaps the picture for that project and names it underneath; leaving brings me back.
+
+  // Home, after lee94josh.com: my picture beside the index; the reel puts each project's cover in its place.
   var HOMEV = (location.search.match(/home=(\w+)/) || [])[1] || "a";
-  var ME = { a: ["img/cutout.webp", "50% 50%", "contain"], b: ["img/hello-set.jpg", "42% 50%"], c: ["img/about-portrait.jpg", "35% 30%"] };
-  var HOMECAP = 'I make podcasts, audio drama, and records for clients like Jacob\'s Pillow and the National Center for Choreography. For four years, I built and ran <a href="#/media-program">a school media program</a> in Philadelphia.';
+  var ME = { a: ["video/hello.jpg", "50% 50%"], d: ["img/cutout.webp", "50% 50%", "contain"], b: ["img/hello-set.jpg", "42% 50%"], c: ["img/about-portrait.jpg", "35% 30%"] };
+  var HOMECAP = 'I make podcasts, audio drama, and records for clients like Jacob\'s Pillow and the National Center for Choreography. For four years, I built and ran <a href="#/media-program">a new media program</a> in Philadelphia.';
   function picFor(id) {
     for (var g = 0; g < GRID.length; g++) if (GRID[g][0] === id && GRID[g][3]) return GRID[g][3];
     var i = byId(id); if (i >= 0) return IMG + WORK[i].cover;
     return WASH[id] || "";
   }
   function home() {
-    if (HOMEV === "old") return homeGrid();
     var me = ME[HOMEV] || ME.a;
-    return '<figure class="hp"><a id="hpLink" href="#/" aria-label="Play my work" data-reel="1"><img id="hpImg"' + (me[2] === "contain" ? ' class="me"' : '') + ' src="' + me[0] + '" alt="Adam Butz-Weidner" style="object-position:' + (me[1] || "50% 30%") + ';object-fit:' + (me[2] || "cover") + '"></a></figure>' +
+    return '<figure class="hp"><a id="hpLink" href="#/" aria-label="Play my work" data-reel="1"><img id="hpImg"' + (me[2] === "contain" ? ' class="me"' : '') + ' src="' + me[0] + '" alt="Adam Butz-Weidner" style="object-position:' + (me[1] || "50% 30%") + ';object-fit:' + (me[2] || "cover") + '"><video id="hpVid" src="video/hello.mp4?v=6" poster="video/hello.jpg" muted playsinline autoplay preload="auto" aria-hidden="true"></video></a>' +
+      '<button class="snd" id="hpSnd" type="button" aria-label="Turn sound on">' + I.muted + '<span>Sound on</span></button></figure>' +
       '<p class="hp-cap" id="hpCap">' + HOMECAP + '</p><i class="hp-prog"><b id="hpProg"></b></i>' +
       '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · ' + Math.round(REEL.reduce(function (t, i) { return t + WORK[i].len; }, 0) / 60) + ' min</span></button>' +
       '<a class="hp-down" href="#hpList">All work ↓</a><div class="hp-list" id="hpList">' + Array.prototype.map.call(document.querySelectorAll("#side .grp"), function (g) { return '<div>' + g.innerHTML + '</div>'; }).join("") + '</div>';
@@ -621,33 +640,29 @@
       '<a class="ext" href="' + p.url + '" target="_blank" rel="noopener">' + p.site + ' ↗</a>' +
       '<div class="fig"><img alt="' + esc(p.t) + ' cover" src="' + IMG + p.cover + '"><p class="note">' + p.note + '</p></div>' +
       (p.stills ? '<div class="stills">' + p.stills.map(function (x) { return '<img loading="lazy" alt="Still from ' + esc(p.t) + '" src="' + IMG + x + '">'; }).join("") + '</div>' : '') +
+      (p.crew ? '<div class="ph small"><img src="' + IMG + p.crew[0] + '" alt="' + esc(p.crew[1]) + '"><p class="note">' + esc(p.crew[1]) + '</p></div>' : '') +
       '<div class="next">Next: <a href="#/' + nx + '">' + esc(title(nx)) + '</a></div>';
   }
   var RW_OV = {"R": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-9.0 -860 668.0 1120\"><g transform=\"scale(1,-1)\"><line x1=\"-9.0\" x2=\"659.0\" y1=\"0\" y2=\"0\" stroke=\"#e3e3e3\" stroke-width=\"3\"/><g transform=\"scale(1.0)\"><path d=\"M51 -2V51H147V647H51V700Q104 700 156.5 700.0Q209 700 262 700Q293 700 323.5 700.0Q354 700 385 700Q424 700 461.0 684.0Q498 668 524 638Q544 615 555.0 586.0Q566 557 568 526Q570 484 555.0 446.0Q540 408 510.5 380.0Q481 352 440 340Q427 336 414.0 334.5Q401 333 387 332L502 51H599V-2H456L320 332H212V51H308V-2ZM212 387Q242 387 271.5 387.0Q301 387 331 387Q348 387 365.5 387.0Q383 387 400 387Q426 387 447.0 402.5Q468 418 481 440Q490 458 494.0 477.0Q498 496 498 516Q498 536 494.0 555.0Q490 574 481 592Q468 614 447.0 629.5Q426 645 400 645Q383 645 365.5 645.0Q348 645 331 645Q301 645 271.5 645.0Q242 645 212 645Z\" fill=\"#1F32A6\" fill-opacity=\".85\"/></g><g transform=\"scale(1.0)\"><path d=\"M157 0H97V698H347Q440 698 488.0 645.5Q536 593 536 502Q536 417 492.5 366.0Q449 315 364 310H349L538 0H471L287 307H157ZM346 358Q409 358 441.0 392.0Q473 426 473 478V526Q473 578 441.0 612.0Q409 646 346 646H157V358Z\" fill=\"none\" stroke-dasharray=\"22 14\" stroke=\"#111\" stroke-width=\"6.600\"/></g></g></svg>", "a": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"11.0 -860 639.0 1120\"><g transform=\"scale(1,-1)\"><line x1=\"11.0\" x2=\"650.0\" y1=\"0\" y2=\"0\" stroke=\"#e3e3e3\" stroke-width=\"3\"/><g transform=\"scale(1.0)\"><path d=\"M444 63V79H442Q423 38 381 12Q339 -14 265 -14Q177 -14 126 27Q75 68 75 139Q75 174 91 202Q107 229 137 249Q199 289 307 289H441V350Q441 409 403 443Q365 477 298 477Q211 477 164 428V339H105V518H164V497Q166 498 167 499Q219 530 301 530Q397 530 452 483Q478 461 493 429Q507 396 507 356V52H590V-2H519Q480 -2 463 16Q447 33 444 63ZM441 149V242H307Q231 242 187 215Q144 187 144 140Q144 93 179 65Q214 38 275 38Q353 38 397 68Q441 97 441 149Z\" fill=\"#1F32A6\" fill-opacity=\".85\"/></g><g transform=\"scale(1.0)\"><path d=\"M479 0Q444 0 429.0 17.0Q414 34 412 63V81H407Q390 40 351.0 14.0Q312 -12 245 -12Q164 -12 117.5 27.5Q71 67 71 139Q71 173 82.5 200.5Q94 228 119.5 247.0Q145 266 185.0 276.5Q225 287 283 287H409V350Q409 415 373.5 447.0Q338 479 275 479Q169 479 127 394L88 422Q108 467 155.5 497.5Q203 528 278 528Q366 528 416.0 482.5Q466 437 466 356V50H543V0ZM254 36Q287 36 315.0 44.0Q343 52 364.0 66.5Q385 81 397.0 102.0Q409 123 409 149V244H283Q202 244 166.5 219.5Q131 195 131 153V127Q131 82 164.5 59.0Q198 36 254 36Z\" fill=\"none\" stroke-dasharray=\"22 14\" stroke=\"#111\" stroke-width=\"6.600\"/></g></g></svg>", "Q": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"2.0 -860 643.0 1120\"><g transform=\"scale(1,-1)\"><line x1=\"2.0\" x2=\"645.0\" y1=\"0\" y2=\"0\" stroke=\"#e3e3e3\" stroke-width=\"3\"/><g transform=\"scale(1.0)\"><path d=\"M432 -77H541V-130H383L348 -13Q337 -14 325 -14Q265 -14 216 11Q168 36 135 83Q101 131 83 198Q65 265 65 349Q65 433 83 500Q101 567 135 615Q168 662 216 687Q265 712 325 712Q385 712 434 687Q482 662 515 615Q549 567 567 500Q585 433 585 349Q585 212 538 121Q492 31 409 1ZM341 227 342 226 392 57Q448 85 479 159Q512 236 512 349Q512 420 499 478Q486 534 461 574Q437 614 403 635Q368 656 325 656Q282 656 247 635Q213 614 189 574Q164 534 151 478Q138 420 138.0 349.0Q138 278 151 220Q164 164 189 124Q213 84 247 63Q282 42 325 42Q328 42 332 42L276 227Z\" fill=\"#1F32A6\" fill-opacity=\".85\"/></g><g transform=\"scale(1.0)\"><path d=\"M485 -153H353Q311 -153 291.0 -130.5Q271 -108 271 -70V-10Q62 11 62 349Q62 529 120.5 619.5Q179 710 300 710Q421 710 479.5 619.5Q538 529 538 349Q538 11 329 -10V-104H485ZM300 40Q390 40 432.0 108.5Q474 177 474 302V396Q474 520 432.0 589.0Q390 658 300 658Q210 658 168.0 589.0Q126 520 126 396V302Q126 177 168.0 108.5Q210 40 300 40Z\" fill=\"none\" stroke-dasharray=\"22 14\" stroke=\"#111\" stroke-width=\"6.600\"/></g></g></svg>", "g": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"16.0 -860 648.0 1120\"><g transform=\"scale(1,-1)\"><line x1=\"16.0\" x2=\"664.0\" y1=\"0\" y2=\"0\" stroke=\"#e3e3e3\" stroke-width=\"3\"/><g transform=\"scale(1.0)\"><path d=\"M327 -214Q213 -214 147 -179Q115 -162 98 -138Q80 -113 80 -83Q80 -38 107 -12Q133 13 179 26V32Q126 51 126 103Q126 142 155 163Q183 183 223 193V195Q174 215 146 255Q118 295 118 352Q118 393 133 426Q147 459 174 482Q229 530 325 530Q391 530 438 505V523Q438 548 453 563Q467 578 493 578H604V524H476V480Q503 457 518 425Q533 392 533 352Q533 311 518 278Q504 245 477 222Q421 175 325 175Q310 175 297 176Q284 177 269 180Q235 172 209 156Q184 141 184 115Q184 96 225 84Q267 72 340 72Q461 72 531 37Q566 19 584 -5Q602 -30 602 -61Q602 -96 583 -125Q564 -153 528 -173Q455 -214 327 -214ZM406 15H223Q186 4 165 -17Q145 -38 145 -72Q145 -115 193 -139Q241 -164 326 -164Q426 -164 483 -137Q540 -110 540 -63Q540 -27 504 -6Q469 15 406 15ZM464 353Q464 412 427 447Q390 481 325 481Q261 481 224 447Q187 412 187.0 352.5Q187 293 224 258Q261 224 325 224Q390 224 427 258Q464 293 464 353Z\" fill=\"#1F32A6\" fill-opacity=\".85\"/></g><g transform=\"scale(1.0)\"><path d=\"M554 -61Q554 -139 490.0 -175.5Q426 -212 302 -212Q182 -212 129.0 -178.0Q76 -144 76 -83Q76 -39 100.0 -13.5Q124 12 167 25V33Q118 52 118 103Q118 141 144.0 161.5Q170 182 208 192V196Q162 216 136.5 256.0Q111 296 111 352Q111 391 124.5 423.5Q138 456 162.5 479.5Q187 503 222.0 515.5Q257 528 300 528Q362 528 406 502V523Q406 547 417.5 561.5Q429 576 455 576H556V526H438V479Q463 456 476.5 424.0Q490 392 490 352Q490 313 476.5 281.0Q463 249 438.0 225.5Q413 202 378.0 189.5Q343 177 300 177Q286 177 274.0 178.0Q262 179 248 182Q216 174 192.0 158.0Q168 142 168 115Q168 70 252 70H375Q469 70 511.5 34.5Q554 -1 554 -61ZM500 -63Q500 -26 472.5 -4.5Q445 17 375 17H206Q171 6 151.5 -15.5Q132 -37 132 -72Q132 -113 165.5 -139.5Q199 -166 267 -166H334Q411 -166 455.5 -140.5Q500 -115 500 -63ZM300 222Q365 222 397.5 254.0Q430 286 430 336V369Q430 420 397.5 451.5Q365 483 300 483Q236 483 203.5 451.5Q171 420 171 369V336Q171 286 204.0 254.0Q237 222 300 222Z\" fill=\"none\" stroke-dasharray=\"22 14\" stroke=\"#111\" stroke-width=\"6.600\"/></g></g></svg>", "f": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"17.0 -860 630.0 1120\"><g transform=\"scale(1,-1)\"><line x1=\"17.0\" x2=\"647.0\" y1=\"0\" y2=\"0\" stroke=\"#e3e3e3\" stroke-width=\"3\"/><g transform=\"scale(1.0)\"><path d=\"M290 465H82V518H290V742H587V615H528V689H355V518H587V465H355V51H562V-2H92V51H290Z\" fill=\"#1F32A6\" fill-opacity=\".85\"/></g><g transform=\"scale(1.0)\"><path d=\"M87 49H269V467H77V516H269V657Q269 695 288.5 717.5Q308 740 350 740H540V691H326V516H540V467H326V49H517V0H87Z\" fill=\"none\" stroke-dasharray=\"22 14\" stroke=\"#111\" stroke-width=\"6.600\"/></g></g></svg>", "3": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-3.0 -860 613.5555555555555 1120\"><g transform=\"scale(1,-1)\"><line x1=\"-3.0\" x2=\"610.5555555555555\" y1=\"0\" y2=\"0\" stroke=\"#e3e3e3\" stroke-width=\"3\"/><g transform=\"scale(1.0)\"><path d=\"M195 429Q219 436 232.5 441.0Q246 446 254.0 452.0Q262 458 268.5 467.0Q275 476 284.5 490.0Q294 504 310.0 525.0Q326 546 353.5 576.0Q381 606 423 647H156V529H97V700H500V648L299 448Q351 449 402.0 437.0Q453 425 492 389Q536 350 547 293Q555 250 545.0 209.0Q535 168 512.0 130.5Q489 93 458.5 61.5Q428 30 396 6Q320 -49 232 -74Q200 -82 167.0 -88.0Q134 -94 102 -100L91 -43Q122 -37 153.5 -31.5Q185 -26 216 -17Q258 -5 299 17Q338 38 375.0 68.5Q412 99 439.5 137.0Q467 175 477 220Q482 239 482.0 259.5Q482 280 476 299Q467 327 446.5 346.0Q426 365 399 376Q356 393 308.5 390.0Q261 387 217 374Z\" fill=\"#1F32A6\" fill-opacity=\".85\"/></g><g transform=\"scale(1.0)\"><path d=\"M274 392Q348 392 389.0 427.5Q430 463 430 520V533Q430 593 390.5 625.5Q351 658 288 658Q226 658 189.0 632.5Q152 607 130 565L85 597Q97 619 115.5 639.5Q134 660 158.5 676.0Q183 692 215.5 701.0Q248 710 289 710Q333 710 370.5 698.0Q408 686 435.0 663.5Q462 641 477.5 608.5Q493 576 493 535Q493 500 482.5 472.0Q472 444 453.5 424.0Q435 404 409.5 390.5Q384 377 355 370V366Q386 361 414.0 347.5Q442 334 462.5 312.0Q483 290 495.0 259.0Q507 228 507 189Q507 144 491.0 106.5Q475 69 445.0 43.0Q415 17 373.0 2.5Q331 -12 279 -12Q237 -12 203.0 -3.5Q169 5 142.0 20.5Q115 36 94.0 57.0Q73 78 57 102L102 136Q131 91 172.0 65.5Q213 40 279 40Q356 40 400.0 78.5Q444 117 444 183V199Q444 265 401.5 302.5Q359 340 278 340H190V392Z\" fill=\"none\" stroke-dasharray=\"22 14\" stroke=\"#111\" stroke-width=\"6.600\"/></g></g></svg>"};
   var RW_LAD = {"words": ["Sometimes, ", "I ", "think ", "the ", "world ", "forgets ", "how ", "touched ", "it ", "is ", "by ", "the ", "small ", "moments ", "of ", "people’s ", "lives; ", "the ", "moments ", "of ", "a ", "single ", "idea ", "beaming ", "out ", "and ", "covering ", "the ", "world ", "like ", "a ", "blanket. ", "I ", "think ", "people ", "forget ", "those ", "blankets ", "were ", "once ", "a ", "single ", "thread, ", "unformed, ", "puny, ", "delicate. ", "Ideas ", "are ", "so ", "fast, ", "arriving ", "and ", "departing, ", "most ", "times ", "not ", "even ", "touching ", "the ", "ground. ", "But ", "if ", "just ", "for ", "an ", "instant, ", "a ", "twinkling ", "little ", "moment, ", "if ", "it ", "did, ", "if ", "it ", "could ", "reach ", "all ", "the ", "way ", "down ", "and ", "land ", "on ", "solid ", "ground, ", "then ", "just ", "maybe ", "it ", "could ", "become ", "something ", "more. ", "Maybe."], "b": [["as written", 0], ["no fillers", 2], ["−1 repeat", 34]], "c": [["as written", 0], ["no hedges", 6], ["no loud words", 7], ["−2 grey lines", 40], ["just the poles", 53]], "combos": {"0,0": {"g": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", "k": "Sometimes, I think the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. I think people forget those blankets were once a single thread, unformed, puny, delicate. Ideas are so fast, arriving and departing, most times not even touching the ground. But if just for an instant, a twinkling little moment, if it did, if it could reach all the way down and land on solid ground, then just maybe it could become something more. Maybe."}, "0,1": {"g": "01100000000000000000000000000000110000000000000000000000000000000000000000000000000000001000001", "k": "Sometimes, the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. People forget those blankets were once a single thread, unformed, puny, delicate. Ideas are so fast, arriving and departing, most times not even touching the ground. But if just for an instant, a twinkling little moment, if it did, if it could reach all the way down and land on solid ground, then just it could become something more."}, "0,2": {"g": "01100000000000000000000000000000110000000000000010000000000000000000000000000000000000001000001", "k": "Sometimes, the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. People forget those blankets were once a single thread, unformed, puny, delicate. Ideas are fast, arriving and departing, most times not even touching the ground. But if just for an instant, a twinkling little moment, if it did, if it could reach all the way down and land on solid ground, then just it could become something more."}, "0,3": {"g": "01100000000000000000000000000000110000000000000010000000000011111111111111111111111111111111111", "k": "Sometimes, the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. People forget those blankets were once a single thread, unformed, puny, delicate. Ideas are fast, arriving and departing, most times not even touching the ground."}, "0,4": {"g": "01100000000000000000000000000000110000000000001111111111111111111111111111111111111111111111111", "k": "Sometimes, the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. People forget those blankets were once a single thread, unformed, puny, delicate."}, "1,0": {"g": "00000000000000000000000000000000000000000000000000000000000000100000000000000000000000010000000", "k": "Sometimes, I think the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. I think people forget those blankets were once a single thread, unformed, puny, delicate. Ideas are so fast, arriving and departing, most times not even touching the ground. But if for an instant, a twinkling little moment, if it did, if it could reach all the way down and land on solid ground, then maybe it could become something more. Maybe."}, "1,1": {"g": "01100000000000000000000000000000110000000000000000000000000000100000000000000000000000011000001", "k": "Sometimes, the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. People forget those blankets were once a single thread, unformed, puny, delicate. Ideas are so fast, arriving and departing, most times not even touching the ground. But if for an instant, a twinkling little moment, if it did, if it could reach all the way down and land on solid ground, then it could become something more."}, "1,2": {"g": "01100000000000000000000000000000110000000000000010000000000000100000000000000000000000011000001", "k": "Sometimes, the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. People forget those blankets were once a single thread, unformed, puny, delicate. Ideas are fast, arriving and departing, most times not even touching the ground. But if for an instant, a twinkling little moment, if it did, if it could reach all the way down and land on solid ground, then it could become something more."}, "1,3": {"g": "01100000000000000000000000000000110000000000000010000000000011111111111111111111111111111111111", "k": "Sometimes, the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. People forget those blankets were once a single thread, unformed, puny, delicate. Ideas are fast, arriving and departing, most times not even touching the ground."}, "1,4": {"g": "01100000000000000000000000000000110000000000001111111111111111111111111111111111111111111111111", "k": "Sometimes, the world forgets how touched it is by the small moments of people’s lives; the moments of a single idea beaming out and covering the world like a blanket. People forget those blankets were once a single thread, unformed, puny, delicate."}, "2,0": {"g": "11111111111111111111111111111111000000000000000000000000000000100000000000000000000000010000000", "k": "I think people forget those blankets were once a single thread, unformed, puny, delicate. Ideas are so fast, arriving and departing, most times not even touching the ground. But if for an instant, a twinkling little moment, if it did, if it could reach all the way down and land on solid ground, then maybe it could become something more. Maybe."}, "2,1": {"g": "11111111111111111111111111111111110000000000000000000000000000100000000000000000000000011000001", "k": "People forget those blankets were once a single thread, unformed, puny, delicate. Ideas are so fast, arriving and departing, most times not even touching the ground. But if for an instant, a twinkling little moment, if it did, if it could reach all the way down and land on solid ground, then it could become something more."}, "2,2": {"g": "11111111111111111111111111111111110000000000000010000000000000100000000000000000000000011000001", "k": "People forget those blankets were once a single thread, unformed, puny, delicate. Ideas are fast, arriving and departing, most times not even touching the ground. But if for an instant, a twinkling little moment, if it did, if it could reach all the way down and land on solid ground, then it could become something more."}, "2,3": {"g": "11111111111111111111111111111111110000000000000010000000000011111111111111111111111111111111111", "k": "People forget those blankets were once a single thread, unformed, puny, delicate. Ideas are fast, arriving and departing, most times not even touching the ground."}, "2,4": {"g": "11111111111111111111111111111111110000000000001111111111111111111111111111111111111111111111111", "k": "People forget those blankets were once a single thread, unformed, puny, delicate."}}};
   function rwj() {
+    // what it is first (the typeface itself, in black), then how one letter is drawn, then the app
     var L = function (u, t) { return '<a href="' + u + '" target="_blank" rel="noopener">' + t + '</a>'; };
     return '<div class="rw rz">' +
-      '<h1 class="rz-title">Related Mono</h1>' +
-      '<p class="rz-lede">The type, lettering, and writing app I made for my journal, ' + L("https://relatedwork.blog", "The Related Work Journal ↗") + '</p>' +
-
-      '<div class="rz-r"><figure><img src="img/rwj/stroke-R-skeleton.svg" alt="Hershey stroke for R"><figcaption>1967 stroke</figcaption></figure>' +
-        '<figure><img src="img/rwj/stroke-R-pen.svg" alt="Round pen along the stroke"><figcaption>pen</figcaption></figure>' +
-        '<figure><img src="img/rwj/stroke-R-draw.svg" alt="The finished R"><figcaption>letter</figcaption></figure></div>' +
-      '<p class="rz-cap">Lettering, drawn along ' + L("https://en.wikipedia.org/wiki/Hershey_fonts", "Dr. A. V. Hershey\'s 1967 strokes") + '.</p>' +
-
-      '<h2 class="rz-h">The typeface</h2>' +
-      '<div class="rw-ov rw-anim rz-ov">' + "Rag".split("").map(function (c, i) { return '<div style="--i:' + i + '" aria-label="' + c + ' in IBM Plex Mono and Related Mono">' + RW_OV[c] + '</div>'; }).join("") + '</div>' +
-      '<p class="rz-cap"><i class="k-dash"></i> ' + L("https://www.ibm.com/plex/", "IBM Plex") + ', open source &nbsp; <i class="k-blue"></i> my redraw, after ' + L("https://www.outline-online.com/product/arketa", "OO Arketa") + '</p>' +
-
+      '<div class="head"><h1>Related Mono</h1><span class="meta">Typeface and writing app</span></div>' +
+      '<p class="big">A typeface I draw for my blog, ' + L("https://relatedwork.blog", "The Related Work Journal ↗") + '. This site is set in it.</p>' +
+      '<div class="rz-spec"><p class="s1">Related Mono</p><p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p><p>abcdefghijklmnopqrstuvwxyz</p><p>0123456789 &amp; ? ! ( )</p></div>' +
+      '<h2 class="rz-h">One letter, drawn</h2>' +
+      '<div class="rz-r"><figure><img src="img/rwj/stroke-R-skeleton-k.svg" alt="Hershey stroke for R"><figcaption>1. The 1967 stroke</figcaption></figure>' +
+        '<figure><img src="img/rwj/stroke-R-pen-k.svg" alt="Round pen along the stroke"><figcaption>2. A pen along it</figcaption></figure>' +
+        '<figure><img src="img/rwj/stroke-R-draw-k.svg" alt="The finished R"><figcaption>3. The letter</figcaption></figure></div>' +
+      '<p class="rz-cap">Drawn along ' + L("https://en.wikipedia.org/wiki/Hershey_fonts", "Dr. A. V. Hershey\'s 1967 strokes") + '.</p>' +
       '<h2 class="rz-h">RWJ Studio</h2>' +
-      '<p class="rz-p">My writing app. It cuts, never adds. Hold a slider to see the cut, let go to make it. This is a paragraph I wrote in 2018.</p>' +
+      '<p class="rz-p">The app I write the blog in. It only cuts words, never adds them. Hold a slider to see the cut, and let go to make it.</p>' +
       '<div class="lad"><div class="lathe">' + [["b", "Brevity", "fewer words"], ["c", "Contrast", "firmer"]].map(function (d) {
           return '<div class="dial"><b>' + d[1].toUpperCase() + ' <i>' + d[2] + '</i></b><input type="range" min="0" max="' + (RW_LAD[d[0]].length - 1) + '" value="0" step="1" data-k="' + d[0] + '" aria-label="' + d[1] + '">' +
             '<div class="ticks">' + RW_LAD[d[0]].map(function () { return '<i></i>'; }).join("") + '</div><span data-say="' + d[0] + '"></span></div>'; }).join("") +
         '</div><p class="lad-text" id="ladText"></p></div>' +
-
-      '<p class="rz-foot">' + L("docs/rwj-style-guide.pdf", "Style guide") + '</p>' +
       '<div class="next">Next: <a href="#/' + ORDER[0] + '">' + esc(title(ORDER[0])) + '</a></div></div>';
   }
 
@@ -656,43 +671,42 @@
 
 
 
+
   function stevens() {
     return '<div class="head"><h1>Stevens Studios</h1><span class="meta">Studio Assistant</span></div>' +
-      '<p class="big">At Stevens Institute of Technology I helped build and run the school\'s two studios: a traditional recording studio and an ambisonic studio.</p>' +
-      '<p>I set up recording and mix-down sessions in both, in stereo and ambisonics.</p>' +
+      '<p class="big">While I studied at Stevens Institute of Technology, I helped build and run its two studios, one for traditional recording and a newly built one for ambisonic sound.</p>' +
+      '' +
       '<div class="ph"><img src="img/stevens-ambisonic.jpg" alt="The ambisonic studio at Stevens Institute of Technology"><p class="note">The ambisonic studio.</p></div>' +
-      '<div class="next">Next: <a href="#/courier-club">Courier Club</a></div>';
+      '<div class="next">Next: <a href="#/' + ORDER[(ORDER.indexOf("stevens") + 1) % ORDER.length] + '">' + esc(title(ORDER[(ORDER.indexOf("stevens") + 1) % ORDER.length])) + '</a></div>';
   }
   function program() {
-    // short beats, each with its picture beside it
+    // short beats, each with its picture beside it; the set footage leads, the portrait sits small at the end
     var beat = function (text, fig) { return '<div class="beat"><p>' + text + '</p>' + fig + '</div>'; };
-    return '<div class="head"><h1>Springside New Media</h1><span class="meta">Entrepreneurship &amp; New Media Educator</span></div>' +
-      '<p class="big">For four years, I built and ran the new media program at Springside Chestnut Hill Academy in Philadelphia, set up like a small production company.</p>' +
-      '<div class="ph top"><img src="img/sch-lab-wide.jpg" alt="Adam in the center\'s maker lab, with the team at a laser cutter behind him"><p class="note">In the center\'s maker lab.</p></div>' +
-      beat('Ten to thirty students a semester, most with no experience. By the end they were running multicam shoots of scripts they wrote.',
-        '<figure>' + player("video/multicam-shoot") + '<figcaption class="note">On set.</figcaption></figure>') +
-      beat('A short film from my video class won an award at the WHYY Youth Film Festival. Another group interviewed former Mayor Michael Nutter for a documentary on SEPTA\'s budget.',
+    return '<div class="head"><h1>Springside Chestnut Hill Academy</h1><span class="meta">Entrepreneurship &amp; New Media Educator</span></div>' +
+      '<p class="big">I ran the school\'s new media program from 2022 to 2026 and set it up like a small production company.</p>' +
+      '<div class="ph top">' + player("video/multicam-shoot", { loop: true }) + '<p class="note">A multicam shoot in the studio.</p></div>' +
+      beat('Most of my students started with no filmmaking experience. By the end they were running multicam shoots of scripts they wrote.',
         '<figure><img src="img/withers-soul-poster.jpg" alt="Poster for The Site of Withers Soul"><figcaption class="note"><i>The Site of Withers Soul</i>, a student film.</figcaption></figure>') +
-      beat('In the incubator, each student found a problem and built an answer, from apps to films to podcasts. One won $2,500 at Firstrust Bank\'s Entrepreneurs Game Plan pitch competition.',
-        '<figure><img src="img/sch-models.jpg" alt="Student 3D-printed models of a sustainable future"><figcaption class="note">Student models of a sustainable future.</figcaption></figure>') +
-      beat('We partnered with PBS NewsHour and the Pulitzer Center. In a school survey, families named the center their top reason for choosing the school.',
-        '<figure><div class="video" id="video" style="background:#111 url(img/school-ad.jpg) center / cover"><button class="adcard" type="button" id="vBtn" aria-label="Play the school\'s ad"><span class="big">' + I.play + '</span></button></div><figcaption class="note">The school\'s ad, which I helped make.</figcaption></figure>') +
-      '<p class="note">Lessons I wrote: <a href="docs/documentary-day-1.pdf" target="_blank" rel="noopener">Remembering Curiosity ↗</a> · <a href="docs/documentary-day-2.pdf" target="_blank" rel="noopener">Interview Practice ↗</a> · <a href="docs/interview-persona-cards.pdf" target="_blank" rel="noopener">Interview Persona Cards ↗</a></p>' +
-      '<p class="note">Student work here was released publicly by the school.</p>' +
-      '<div class="next">Next: <a href="#/diary-films">Diary Films</a></div>';
+      '<p class="beat-solo">Over four years, my students\' films were recognized at the WHYY Youth Film Festival and by PBS NewsHour and the Pulitzer Center. Their documentaries took on local and national issues, with interviews with politicians, consultants, and citizens.</p>' +
+      beat('I designed the tenth-grade capstone curriculum, which ran like an incubator. Students launched startups, manufacturing and production projects, new media ventures, and nonprofits. They won funding at pitch competitions, and ventures from the program have generated more than $300,000 in revenue.',
+        '<figure>' + player("video/sch-models", { loop: true, tall: true, silent: true }) + '<figcaption class="note">Student models of a sustainable future.</figcaption></figure>') +
+      '<div class="pair"><figure><img src="img/sch-lab-wide.jpg" alt="Adam in the center\'s maker lab, with a laser cutter behind him"><figcaption class="note">In the maker lab at the school\'s Center for Entrepreneurial Leadership.</figcaption></figure>' +
+        '<figure><div class="video" id="video" style="background:#111 url(img/school-ad.jpg) center / cover"><button class="adcard" type="button" id="vBtn" aria-label="Play the school\'s ad"><span class="big">' + I.play + '</span></button></div><figcaption class="note">The school\'s ad, which I helped make.</figcaption></figure></div>' +
+      '<div class="next">Next: <a href="#/' + ORDER[(ORDER.indexOf("media-program") + 1) % ORDER.length] + '">' + esc(title(ORDER[(ORDER.indexOf("media-program") + 1) % ORDER.length])) + '</a></div>';
   }
+
 
 
   var VIDS = [
-    { v: "Cv-Pu2rU52Q", t: "Soapbox Sunday", d: "I was in the studio and helped produce it. It has millions of streams." },
-    { v: "cBBIZ4IgYFc", t: "We All Want to Be There", d: "I helped produce the song and was a PA on the video shoot." },
-    { v: "R5m8vMtVy9E", t: "Foreign Ground", d: "I ran the VFX camera on the video." }
+    { v: "Cv-Pu2rU52Q", t: "Soapbox Sunday", d: "I produced the song and played on it." },
+    { v: "cBBIZ4IgYFc", t: "We All Want to Be There", d: "I produced the song and worked on the video." },
+    { v: "R5m8vMtVy9E", t: "Foreign Ground", d: "I produced the song and worked on the video." }
   ];
   function courier() {
     return '<div class="head"><h1>Courier Club</h1><span class="meta">Band</span></div>' +
-      '<p class="big">The band I\'ve worked with longest. I produced and mixed for them from 2020 to 2024, after first joining them in the studio for "Soapbox Sunday" in 2019.</p>' +
+      '<p class="big">A Philadelphia band, and the one I\'ve worked with longest. I\'ve produced and played on their songs since 2019.</p>' +
       '<div class="vids">' + VIDS.map(function (x) { return '<div class="vid"><button class="frame" type="button" data-v="' + x.v + '" style="background-image:url(img/yt-' + x.v + '.jpg)" aria-label="Play ' + esc(x.t) + '"><span class="ic">' + I.play + '</span></button><h3>' + esc(x.t) + '</h3><p>' + esc(x.d) + '</p></div>'; }).join("") + '</div>' +
-      '<div class="next">Next: <a href="#/stucktober">Lena Fine</a></div>';
+      '<div class="next">Next: <a href="#/' + ORDER[(ORDER.indexOf("courier-club") + 1) % ORDER.length] + '">' + esc(title(ORDER[(ORDER.indexOf("courier-club") + 1) % ORDER.length])) + '</a></div>';
   }
   // The index takes on each page's image the way a hologram would: soft, grainy, its red and blue drifting apart
   // as the mouse moves (on phones, slowly on their own). Three color layers are added together with small offsets.
@@ -735,49 +749,42 @@
     holo.width = w; holo.height = h; grain.width = Math.round(r.width); grain.height = Math.round(r.height);
     var im = new Image(); im.onload = function () { var lum = luma(im); holo.style.opacity = lum < 70 ? .38 : lum < 110 ? .6 : ""; layers = channels(im, w, h); drawHolo(performance.now()); requestAnimationFrame(function () { holo.classList.add("on"); grain.classList.add("on"); }); }; im.src = url;
   }
-  var BIOS = {
-    "About Me": [
-      "I'm a producer in Boston. I make podcasts, audio drama, and music.",
-      "I grew into producing on PillowVoices, the podcast of Jacob's Pillow, where I started as the recording engineer. I've produced and mixed for the band Courier Club, produced Lena Fine's album, and mixed the short film Fledged in Dolby Atmos.",
-      "For four years, I built and ran the new media program at Springside Chestnut Hill Academy in Philadelphia, set up like a small production company.",
-      "I write The Related Work Journal. I made the typefaces on this site, starting from IBM Plex."
-    ],
-    "Freelance Bio": [
-      "Adam Butz-Weidner is a producer, engineer, and composer based in Boston.",
-      "He has produced and engineered podcasts for Jacob's Pillow and the National Center for Choreography, produced and mixed records for Courier Club, and did the Dolby Atmos mix, ADR, and Foley for the short film Fledged.",
-      "He works from the first session to final delivery, in the studio or remote."
-    ]
-  };
+  var BIOS = [
+      "I'm an audio producer and engineer in Boston. I moved here in September.",
+      "A lot of my work has been helping people record their own voices or act for the first time.",
+      "Before Boston, I spent four years running the new media program at Springside Chestnut Hill Academy, a school in Philadelphia.",
+      "My family runs PhotoLounge, a film lab in Philadelphia. I help with its film club and have been an active film photographer my entire life.",
+      "I write a blog, The Related Work Journal, and develop the typeface this site uses."
+  ];
   var LOGOS = [["jacobs-pillow", "Jacob's Pillow", 34], ["springside", "Springside Chestnut Hill Academy", 30], ["stevens", "Stevens Institute of Technology", 34], ["rec-philly", "REC Philly", 36], ["penn", "University of Pennsylvania", 30],
     ["pine-forest-camp", "Pine Forest Camp", 40], ["photolounge", "PhotoLounge", 18], ["jaime", "J'aime French Bakery", 38]];
-  var PHOTO = { "About Me": "video/hello", "Freelance Bio": "img/about-mic.jpg" };
-  function about(tab) {
-    var names = Object.keys(BIOS); tab = names.indexOf(tab) >= 0 ? tab : names[0];
-    return '<nav class="tabs">' + names.map(function (n) { return n === tab ? '<b>' + n + '</b>' : '<a href="#/about?' + encodeURIComponent(n) + '">' + n + '</a>'; }).join('<span>/</span>') + '</nav>' +
-      (/^video\//.test(PHOTO[tab]) ? '<div class="hello">' + player(PHOTO[tab], { loop: 1 }) + '</div>' : '') +
-      '<div class="bio">' + (/^video\//.test(PHOTO[tab]) ? '' : '<img class="bioimg" src="' + PHOTO[tab] + '" alt="Adam Butz-Weidner">') + '<div>' +
-      BIOS[tab].map(function (x, j) { return '<p' + (j === 0 ? ' class="big"' : '') + '>' + esc(x) + '</p>'; }).join("") +
-      '<p class="sig"><a href="mailto:' + MAIL + '">' + MAIL + '</a> / <a href="resume.pdf" target="_blank" rel="noopener">Resume</a></p></div></div>' +
-      '<div class="logos"><h4>Places I\'ve worked</h4><div>' + LOGOS.map(function (l) { return '<img src="img/logos/' + l[0] + '.png" alt="' + l[1] + '" title="' + l[1] + '" style="height:' + (l[2] || 34) + 'px">'; }).join("") + '</div></div>' +
-      '';
+  var PHOTO = "img/cutout.webp";
+  function about() {
+    // who I am, then how to reach me
+    return '<div class="bio-side right"><div class="me-col"><img class="hello-me" src="' + PHOTO + '" alt="Adam Butz-Weidner, leaning"></div>' +
+      '<div class="bio"><div>' + BIOS.map(function (x, j) { return '<p' + (j === 0 ? ' class="big"' : '') + '>' + esc(x) + '</p>'; }).join("") +
+      '<p class="cta">Tell me what you\'re making.</p>' +
+      '<p class="sig"><a href="mailto:' + MAIL + '">' + MAIL + '</a> / <a href="resume.pdf" target="_blank" rel="noopener">Resume</a></p></div></div></div>' +
+      '<div class="logos"><h4>Places I\'ve worked</h4><div>' + LOGOS.map(function (l) { return '<img src="img/logos/' + l[0] + '.png" alt="' + l[1] + '" title="' + l[1] + '" style="height:' + (l[2] || 34) + 'px">'; }).join("") + '</div></div>';
   }
+
   var FILMS = [
     { f: "museum-sunny", t: "Museum", d: "At the Philadelphia Museum of Art. I wrote both scores. Switch between them while it plays.", alt: [["museum-sunny", "Lull"], ["museum-beat", "Rush"]] },
-    { f: "sephora-diary", t: "Sephora Diary", d: "A video diary, shot on a phone.", tall: 1 },
-    { f: "fcp-logic-test", t: "February", d: "A video diary." }
+    { f: "sephora-diary", t: "Sephora Diary", d: "Shot on a phone.", tall: 1 },
+    { f: "fcp-logic-test", t: "February", d: "" }
   ];
   // a video with no browser controls: press anywhere to play with sound, press again to pause.
   // loop:1 starts muted and looping as soon as it's on screen; the first press restarts it with sound.
   function player(src, opt) {
     opt = opt || {};
-    return '<div class="pl' + (opt.tall ? " tall" : "") + (opt.loop ? " auto" : "") + '"><video playsinline preload="' + (opt.loop ? "auto" : "metadata") + '"' + (opt.loop ? " muted loop" : "") + ' poster="' + src + '.jpg" src="' + src + '.mp4?v=4"></video>' +
-      (opt.loop ? '<button class="tap" type="button" aria-label="Pause"></button><button class="snd" type="button" aria-label="Turn sound on">' + I.muted + '<span>Sound on</span></button>'
+    return '<div class="pl' + (opt.tall ? " tall" : "") + (opt.loop ? " auto" : "") + '"><video playsinline preload="' + (opt.loop ? "auto" : "metadata") + '"' + (opt.loop ? " muted loop" : "") + ' poster="' + src + '.jpg" src="' + src + '.mp4?v=6"></video>' +
+      (opt.loop ? '<button class="tap" type="button" aria-label="Pause"></button>' + (opt.silent ? '' : '<button class="snd" type="button" aria-label="Turn sound on">' + I.muted + '<span>Sound on</span></button>')
                 : '<button class="pp" type="button" aria-label="Play with sound"><span class="big">' + I.play + '</span></button>') + '<i class="bar1"><b></b></i></div>';
   }
   // one silent picture with its scores as separate tracks, all playing together; switching crossfades the sound
   function duo(x) {
-    return '<div class="pl duo"><video playsinline muted preload="auto" poster="video/' + x.f + '.jpg" src="video/museum-picture.mp4?v=4"></video>' +
-      x.alt.map(function (a, k) { return '<audio preload="auto" src="video/' + a[0] + '.m4a?v=4"></audio>'; }).join("") +
+    return '<div class="pl duo"><video playsinline muted preload="auto" poster="video/' + x.f + '.jpg" src="video/museum-picture.mp4?v=6"></video>' +
+      x.alt.map(function (a, k) { return '<audio preload="auto" src="video/' + a[0] + '.m4a?v=6"></audio>'; }).join("") +
       '<button class="pp" type="button" aria-label="Play"><span class="big">' + I.play + '</span></button><i class="bar1"><b></b></i></div>';
   }
   function film(x) { return '<div class="film">' + (x.alt ? duo(x) : player("video/" + x.f, { tall: x.tall, loop: x.loop })) +
@@ -814,7 +821,7 @@
     main.querySelectorAll(".pl.duo").forEach(wireDuo);
     // looping clips: always moving, silent until the small sound button in the corner is pressed; sound comes in where the clip is
     main.querySelectorAll(".pl.auto").forEach(function (box) {
-      var v = box.querySelector("video"), snd = box.querySelector(".snd"), tap = box.querySelector(".tap"), bar = box.querySelector(".bar1 b");
+      var v = box.querySelector("video"), snd = box.querySelector(".snd") || document.createElement("button"), tap = box.querySelector(".tap"), bar = box.querySelector(".bar1 b");
       var sync = function () { var loud = !v.muted; box.classList.toggle("loud", loud); snd.innerHTML = (loud ? I.sound + '<span>Sound off</span>' : I.muted + '<span>Sound on</span>'); snd.setAttribute("aria-label", loud ? "Turn sound off" : "Turn sound on"); };
       snd.onclick = function () {
         if (v.muted) { if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); }
@@ -846,13 +853,13 @@
   }
   function diary() {
     return '<div class="head"><h1>Diary Films</h1><span class="meta">Shot and edited</span></div>' +
-      '<p class="big">A few personal videos I\'ve shot and edited.</p><div class="films">' + FILMS.map(film).join("") + '</div>' +
-      '<div class="next">Next: <a href="#/touchdesigner">TouchDesigner</a></div>';
+      '<p class="big">A few personal videos.</p><div class="films">' + FILMS.map(film).join("") + '</div>' +
+      '<div class="next">Next: <a href="#/' + ORDER[(ORDER.indexOf("diary-films") + 1) % ORDER.length] + '">' + esc(title(ORDER[(ORDER.indexOf("diary-films") + 1) % ORDER.length])) + '</a></div>';
   }
   function td() {
     return '<div class="head"><h1>TouchDesigner</h1><span class="meta">Sketch</span></div>' +
-      '<p class="big">Sketches in TouchDesigner.</p><div class="films">' + film({ f: "td-audio", t: "Audio-reactive particles", d: "", loop: 1 }) + film({ f: "td-color", t: "Displacement and color", d: "", loop: 1 }) + film({ f: "td-tracking", t: "Body tracking", d: "", tall: 1, loop: 1 }) + '</div>' +
-      '<div class="next">Next: <a href="#/rwj">Related Mono</a></div>';
+      '<p class="big">Sketches in TouchDesigner, software for live visuals.</p><div class="films">' + film({ f: "td-audio", t: "Audio-reactive particles", d: "", loop: 1 }) + film({ f: "td-color", t: "Displacement and color", d: "", loop: 1 }) + film({ f: "td-tracking", t: "Body tracking", d: "", tall: 1, loop: 1 }) + '</div>' +
+      '<div class="next">Next: <a href="#/' + ORDER[(ORDER.indexOf("touchdesigner") + 1) % ORDER.length] + '">' + esc(title(ORDER[(ORDER.indexOf("touchdesigner") + 1) % ORDER.length])) + '</a></div>';
   }
   function route() {
     var hp = (location.hash.replace(/^#\/?/, "") || "").split("?"), id = hp[0], i = byId(id);
@@ -868,6 +875,17 @@
     if ($("hpCap")) { lockCap(); if (document.fonts) document.fonts.ready.then(lockCap); }
     var hd = main.querySelector(".hp-down"); if (hd) hd.onclick = function (e) { e.preventDefault(); $("hpList").scrollIntoView({ behavior: "smooth" }); };
     if ($("hpLink")) $("hpLink").onclick = function (e) { if (this.hasAttribute("data-reel")) { e.preventDefault(); toggle(); } };
+    // home: the hello video loops silently (stopping before its end flash); Sound on plays it from the top
+    if ($("hpVid")) { var hv = $("hpVid");
+      hv.addEventListener("timeupdate", function () { if (hv.muted && hv.currentTime > 8.3) hv.currentTime = 0; });
+      hv.addEventListener("ended", function () { hv.muted = true; hv.currentTime = 0; hv.play().catch(function () {}); heySync(); });
+      hv.addEventListener("volumechange", heySync);
+      $("hpSnd").onclick = function () {
+        if (hv.muted) { if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); }
+          hv.muted = false; hv.currentTime = 0; hv.play().catch(function () {}); }
+        else hv.muted = true;
+      };
+      heySync(); }
     document.body.classList.toggle("home", !id);
     if ($("vBtn")) $("vBtn").onclick = function () { var v = $("video"); stopAll(); if (state !== "idle") { state = "paused"; paint(); }
       v.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/LoLG-fLxA7I?autoplay=1" title="The school\'s ad" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; };
@@ -901,6 +919,8 @@
   // The home frame: me, or the project being pointed at (desktop), or the one the reel is playing (any device).
   // Hard cuts, like an edit. Clicking the frame opens whatever it shows.
   // the caption keeps the height of its tallest state, so nothing below it ever moves
+  function heySync() { var hv = $("hpVid"), hs = $("hpSnd"); if (!hv || !hs) return;
+    hs.innerHTML = hv.muted ? I.muted + '<span>Sound on</span>' : I.sound + '<span>Sound off</span>'; hs.setAttribute("aria-label", hv.muted ? "Turn sound on" : "Turn sound off"); }
   function lockCap() {
     var hc = $("hpCap"); if (!hc) return; var keep = hc.innerHTML, tall;
     hc.style.minHeight = ""; tall = hc.offsetHeight;
@@ -921,9 +941,12 @@
     var me = ME[HOMEV] || ME.a, src = id ? picFor(id) : me[0], ln = $("hpLink"), pre = new Image();
     ln.href = "#/" + (id || ""); ln.toggleAttribute("data-reel", !id); ln.setAttribute("aria-label", id ? "Open " + title(id) : "Play my work");
     c.innerHTML = cap || HOMECAP;
+    var hv = $("hpVid"), hs = $("hpSnd");
+    if (hv) { hv.style.visibility = id ? "hidden" : ""; if (hs) hs.style.display = id ? "none" : "";
+      if (id) { hv.pause(); hv.muted = true; heySync(); } else hv.play().catch(function () {}); }
     if (img.getAttribute("src") === src) return;
     pre.onload = pre.onerror = function () { if (!$("hpImg")) return;
-      img.src = src; img.style.objectPosition = id ? "50% 30%" : (me[1] || "50% 30%"); img.style.objectFit = id ? "cover" : (me[2] || "cover"); img.classList.toggle("me", !id && me[2] === "contain");
+      img.src = src; img.style.objectPosition = id ? "0% 50%" : (me[1] || "50% 30%"); img.style.objectFit = id ? "contain" : (me[2] || "cover"); img.classList.toggle("me", !id && me[2] === "contain");
     };
     pre.src = src;
   }
