@@ -820,19 +820,26 @@
     };
     b.onclick = function () {
       if (v.paused) {
-        if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); }
-        main.querySelectorAll(".pl:not(.duo) video").forEach(function (o) { if (!o.muted) o.pause(); });
+        hush(box);
         au2.forEach(function (a) { a.currentTime = v.currentTime; a.play().catch(function () {}); }); v.play();
         clearInterval(tick); tick = setInterval(keep, 40);
-      } else { v.pause(); au2.forEach(function (a) { a.pause(); }); clearInterval(tick); }
+      } else v.pause();
     };
-    v.addEventListener("play", sync); v.addEventListener("pause", sync);
+    v.addEventListener("play", sync); v.addEventListener("pause", function () { au2.forEach(function (a) { a.pause(); }); clearInterval(tick); sync(); });
     v.addEventListener("ended", function () { au2.forEach(function (a) { a.pause(); a.currentTime = 0; }); clearInterval(tick); bar.style.width = "0"; sync(); });
     if (sw) sw.querySelectorAll("button").forEach(function (btn) {
       btn.onclick = function () { want = +btn.dataset.k; sw.querySelectorAll("button").forEach(function (o) { o.setAttribute("aria-pressed", o === btn); }); if (v.paused) { vol = [0, 0]; vol[want] = 1; au2.forEach(function (a, k) { a.volume = vol[k]; }); } };
     });
     sync();
   }
+  // one sound at a time: whatever starts playing quiets everything else on the page (keep = the box that is starting)
+  function quiet(keep) {
+    main.querySelectorAll(".pl").forEach(function (box) { if (box === keep) return; var v = box.querySelector("video");
+      if (box.classList.contains("auto")) v.muted = true; else if (!v.paused) v.pause(); });
+    main.querySelectorAll(".fp").forEach(function (f) { if (f !== keep) f.querySelector("audio").pause(); });
+    main.querySelectorAll("[data-embed]").forEach(function (f) { if (f !== keep) { f.innerHTML = f.dataset.embed; f.removeAttribute("data-embed"); } });
+  }
+  function hush(keep) { if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); } quiet(keep); }
   function wirePlayers() {
     var seen = "IntersectionObserver" in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { if (v.muted && v.loop) v.play().catch(function () {}); } else v.pause(); }); }, { threshold: .4 }) : null;
     main.querySelectorAll(".pl.duo").forEach(wireDuo);
@@ -841,8 +848,7 @@
       var v = box.querySelector("video"), snd = box.querySelector(".snd") || document.createElement("button"), tap = box.querySelector(".tap"), bar = box.querySelector(".bar1 b");
       var sync = function () { var loud = !v.muted; box.classList.toggle("loud", loud); snd.innerHTML = (loud ? I.sound + '<span>Sound off</span>' : I.muted + '<span>Sound on</span>'); snd.setAttribute("aria-label", loud ? "Turn sound off" : "Turn sound on"); };
       snd.onclick = function () {
-        if (v.muted) { if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); }
-          main.querySelectorAll(".pl video").forEach(function (o) { if (o !== v && !o.muted) o.pause(); });
+        if (v.muted) { hush(box);
           v.muted = false; v.play().catch(function () {}); }
         else v.muted = true;
       };
@@ -859,8 +865,7 @@
         if (v.muted) { v.muted = false; v.loop = false; v.currentTime = 0; v.play(); }
         else if (v.paused) v.play(); else v.pause();
       };
-      v.addEventListener("play", function () { if (v.muted) return; if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); }
-        main.querySelectorAll(".pl video").forEach(function (o) { if (o !== v && !o.muted) o.pause(); }); });
+      v.addEventListener("play", function () { if (!v.muted) hush(box); });
       ["play", "pause", "volumechange"].forEach(function (ev) { v.addEventListener(ev, sync); });
       v.addEventListener("ended", function () { if (auto) { v.muted = true; v.loop = true; v.play().catch(function () {}); } sync(); bar.style.width = "0"; });
       v.addEventListener("timeupdate", function () { if (v.duration) bar.style.width = (v.currentTime / v.duration * 100) + "%"; });
@@ -903,16 +908,16 @@
       };
       heySync(); }
     document.body.classList.toggle("home", !id);
-    if ($("vBtn")) $("vBtn").onclick = function () { var v = $("video"); stopAll(); if (state !== "idle") { state = "paused"; paint(); }
-      v.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/LoLG-fLxA7I?autoplay=1" title="The school\'s ad" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; };
-    main.querySelectorAll(".vid .frame").forEach(function (f) { f.onclick = function () { stopAll(); if (state !== "idle") { state = "paused"; paint(); }
-      f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + f.dataset.v + '?autoplay=1" title="' + f.getAttribute("aria-label").slice(5) + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; f.onclick = null; f.style.cursor = "default"; }; });
+    if ($("vBtn")) $("video").onclick = function () { var v = $("video"); if (v.dataset.embed) return; hush(v); if (state !== "idle") { state = "paused"; paint(); }
+      v.dataset.embed = v.innerHTML; v.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/LoLG-fLxA7I?autoplay=1" title="The school\'s ad" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; };
+    main.querySelectorAll(".vid .frame").forEach(function (f) { f.onclick = function () { if (f.dataset.embed) return; hush(f); if (state !== "idle") { state = "paused"; paint(); }
+      f.dataset.embed = f.innerHTML; f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + f.dataset.v + '?autoplay=1" title="' + f.getAttribute("aria-label").slice(5) + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; }; });
     wirePlayers();
     main.querySelectorAll(".fp").forEach(function (f) {
       var a = f.querySelector("audio"), b = f.querySelector(".fpb"), r = f.querySelector(".fpr"), bar = r.firstChild;
       var show = function () { b.querySelector(".ic").innerHTML = a.paused ? I.play : I.pause; b.querySelector(".lb").textContent = a.paused ? (a.currentTime ? "Resume" : "Play the episode") : "Pause";
         f.querySelector(".fpt").textContent = fmt(a.currentTime); if (a.duration) { f.querySelector(".fpd").textContent = fmt(a.duration); bar.style.width = a.currentTime / a.duration * 100 + "%"; } };
-      b.onclick = function () { if (a.paused) { if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); } a.play(); } else a.pause(); };
+      b.onclick = function () { if (a.paused) { hush(f); a.play(); } else a.pause(); };
       r.onclick = function (e) { if (!a.duration) return; var k = r.getBoundingClientRect(); a.currentTime = (e.clientX - k.left) / k.width * a.duration; };
       ["play", "pause", "timeupdate", "loadedmetadata"].forEach(function (ev) { a.addEventListener(ev, show); });
     });
@@ -1004,7 +1009,7 @@
     later(function () { if (state === "loading" && cur === i) fail(i); }, 9000);
     kick();
   }
-  function go(i) { main.querySelectorAll(".fp audio").forEach(function (x) { x.pause(); }); stopAll(); cur = i; $("prog").style.width = "0"; var p = WORK[i]; startLoading(i, function () { playAudio(i, true); }); }
+  function go(i) { quiet(null); stopAll(); cur = i; $("prog").style.width = "0"; var p = WORK[i]; startLoading(i, function () { playAudio(i, true); }); }
   function playAudio(i, fromStart) {
     var p = WORK[i], t = ++token;
     // each reel clip is a short file on this site: no seeking into long remote episodes
@@ -1035,7 +1040,7 @@
   function toggle() {
     if (cur < 0 || state === "done") { played = {}; return go(REEL[0]); }
     if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); return; }
-    var i = cur, p = WORK[i]; startLoading(i, function () { playAudio(i, false); });
+    quiet(null); var i = cur, p = WORK[i]; startLoading(i, function () { playAudio(i, false); });
   }
   function next() { var k = pos(cur) + 1; if (k < REEL.length) go(REEL[k]); else finish(); }
   function blocked(i) {
