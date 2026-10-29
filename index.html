@@ -33,7 +33,7 @@
   :focus-visible { outline: 2px solid #000 !important; outline-offset: 2px; }
 
   /* the index */
-  .side { position: fixed; top: 0; left: 0; bottom: 0; width: 240px; background: var(--side); padding: 26px 22px; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; font: 400 14px/1.6 var(--mono); isolation: isolate; }
+  .side { position: fixed; top: 0; left: 0; bottom: 0; width: 284px; background: var(--side); padding: 26px 22px; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; font: 400 14px/1.6 var(--mono); isolation: isolate; }
   .side > * { position: relative; z-index: 1; }
   .side a { display: block; color: var(--ink); text-decoration: none; padding: 1px 0; }
   .side a:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -47,6 +47,8 @@
   .side a.cur { color: var(--ink); position: relative; }
   .side a.cur::before { content: ""; position: absolute; left: -12px; top: .72em; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
   .side .home { font-weight: 700; }
+  /* a title that still wraps hangs its second line, so each title reads as one item */
+  .side .grp a, .side .foot a { padding-left: 1ch; text-indent: -1ch; }
   .side .logo { display: block; width: 100%; max-width: 196px; height: auto; margin: 2px 0 6px; }
   .side .aboutl { margin-bottom: 30px; }
   .side h4 { margin: 0 0 2px; font-size: 14px; font-weight: 700; color: var(--ink); }
@@ -55,7 +57,7 @@
   .menu { display: none; }
 
   /* a page */
-  main { margin-left: 240px; padding: 46px 64px 120px 128px; max-width: 1080px; }
+  main { margin-left: 284px; padding: 46px 64px 120px 128px; max-width: 1080px; }
   .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 24px; margin: 0 0 30px; max-width: 760px; }
   h1 { font: 700 26px/1.2 var(--mono); color: var(--ink); margin: 0; }
   .meta { color: var(--grey); font: 400 14px/1.4 var(--mono); white-space: nowrap; }
@@ -97,6 +99,7 @@
   .lean { position: fixed; right: -40px; bottom: -30px; width: 230px; z-index: 1; pointer-events: none; transform: rotate(-4deg); transform-origin: bottom right; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
   .lean.in { transform: rotate(0deg) translate(-8px, -4px); }
   .bio .big { font-size: 21px; }
+  .bio-tabs { font-size: 14px; margin: 0 0 14px; } .bio-tabs a { color: inherit; opacity: .55; text-decoration: none; } .bio-tabs a[aria-current] { opacity: 1; text-decoration: underline; }
   .cta { margin-top: 30px !important; font-size: 19px; }
   .cta + .sig { margin-top: 6px !important; }
   .ph { margin: 34px 0 30px; max-width: 640px; }
@@ -381,7 +384,7 @@
   body.home .bar { display: none !important; }
   body.home.playing .hp-go, .hp a:not([data-reel]) .hp-go { display: none; }
   .hp-cap small { display: block; color: #555; margin-top: 4px; }
-  .hp-list, .hp-down { display: none; }
+  .hp-list { display: none; }
   .covers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin: 40px 0 10px; max-width: 760px; }
   .covers a { text-decoration: none; color: var(--ink); }
   .covers img, .covers video { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; margin-bottom: 8px; transition: opacity .15s; background: #000; }
@@ -435,14 +438,20 @@
     main { padding: 40px 36px 120px 48px; }
   }
   @media (max-width: 700px) {
-    .side { position: relative; width: auto; padding: 14px 18px; overflow: hidden; }
-    .side .home { margin: 0; display: flex; justify-content: space-between; align-items: center; }
+    /* on phones the index is one slim row: the name, then About and Index; Index opens the list below it */
+    .side { position: relative; width: auto; padding: 0 6px 0 18px; overflow: hidden; flex-direction: row; flex-wrap: wrap; align-items: center; column-gap: 4px; }
+    .side .home { margin: 0 auto 0 0; padding: 14px 0; }
+    .side .aboutl { margin: 0; padding: 14px 10px; }
     .side .logo { width: 210px; margin: 0; }
-    .menu { display: inline-block; font-weight: 400; color: var(--ink); }
-    .side .grp, .side .foot { display: none; }
+    .menu { all: unset; display: block; cursor: pointer; padding: 14px 12px; color: var(--ink); font: 400 14px/1.6 var(--mono); }
+    .menu:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .side .grp, .side .foot { display: none; flex: 0 0 100%; }
+    body.open .side { padding-bottom: 22px; }
     body.open .side .grp, body.open .side .foot { display: block; }
-    body.open .side .grp:first-of-type { margin-top: 22px; }
-    main { margin: 0; padding: 30px 18px 96px; }
+    body.open .side .menu + .grp { margin-top: 14px; }
+    .side .foot { margin-top: 4px; padding-top: 0; }
+    body.open .side .grp a, body.open .side .foot a { padding: 6px 0; }
+    main { margin: 0; padding: 18px 18px 96px; }
     .head { flex-direction: column; gap: 4px; }
     h1 { font-size: 26px; }
     .meta { white-space: normal; font-size: 15px; }
@@ -474,10 +483,9 @@
     .beat { grid-template-columns: 1fr; gap: 14px; margin: 34px 0; }
     .pair { grid-template-columns: 1fr; }
     .hp { max-width: none !important; }
-    .hp-down { display: block; font: 400 14px/1 var(--mono); color: var(--grey); text-decoration: none; margin-top: 4px; }
-    .hp-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; margin-top: 64px; padding-top: 22px; border-top: 1px solid #e6e6e6; font: 400 14px/1.6 var(--mono); }
-    .hp-list h4 { font: 700 14px/1.4 var(--mono); margin: 0 0 4px; }
-    .hp-list a { display: block; color: var(--ink); text-decoration: none; padding: 3px 0; }
+    .hp-list { display: grid; grid-template-columns: 1fr; gap: 26px; margin-top: 72px; font: 400 15px/1.5 var(--mono); }
+    .hp-list h4 { font: 700 15px/1.4 var(--mono); color: var(--ink); margin: 0 0 4px; }
+    .hp-list a { display: block; color: var(--ink); text-decoration: none; padding: 7px 0; }
 
     .rx { grid-template-columns: 1fr; padding-top: 60px; }
     .rx-notes { padding-top: 18px; border-top: 1px dashed #ccc; margin-top: 22px; }
@@ -502,8 +510,9 @@
 <body>
 <nav class="side" id="side">
   <div class="wash" aria-hidden="true"><canvas id="holo"></canvas><canvas id="grain"></canvas></div>
-  <a class="home" href="#/">Adam Butz-Weidner <span class="menu" id="menu">Index</span></a>
+  <a class="home" href="#/">Adam Butz-Weidner</a>
   <a class="aboutl" href="#/about">About</a>
+  <button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="side">Index</button>
   <div class="grp"><h4>Audio</h4>
     <a href="#/pillowvoices">PillowVoices</a>
     <a href="#/tom-bennet">The Tragedy of Tom Bennet</a>
@@ -621,7 +630,7 @@
       '<button class="snd" id="hpSnd" type="button" aria-label="Turn sound on">' + I.muted + '<span>Sound on</span></button></figure>' +
       '<p class="hp-cap" id="hpCap">' + HOMECAP + '</p><i class="hp-prog"><b id="hpProg"></b></i>' +
       '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · ' + Math.round(REEL.reduce(function (t, i) { return t + WORK[i].len; }, 0) / 60) + ' min</span></button>' +
-      '<a class="hp-down" href="#hpList">All work ↓</a><div class="hp-list" id="hpList">' + Array.prototype.map.call(document.querySelectorAll("#side .grp"), function (g) { return '<div>' + g.innerHTML + '</div>'; }).join("") + '</div>';
+      '<div class="hp-list" id="hpList">' + Array.prototype.map.call(document.querySelectorAll("#side .grp"), function (g) { return '<div>' + g.innerHTML + '</div>'; }).join("") + '</div>';
   }
 
   // the whole thing, on the page: an episode in our own player, the drama's playlist, the album
@@ -756,13 +765,21 @@
       "My family runs PhotoLounge, a film lab in Philadelphia. I help with its film club and have been an active film photographer my entire life.",
       "I write a blog, The Related Work Journal, and develop the typeface this site uses."
   ];
+  // The playful tab (Adam, 2026-10-23: the spirit of his notes, on the site too). Every line is a vault fact.
+  var BIOS_ROOMMATE = [
+      "What you'd want to know if we lived together.",
+      "When we toured the apartment, I was the one clapping in the corners to hear the echo.",
+      "I sang in operas through high school, so the shower gets a full performance.",
+      "I moved to Boston in September knowing two people. You'd make three."
+  ];
   var LOGOS = [["jacobs-pillow", "Jacob's Pillow", 34], ["springside", "Springside Chestnut Hill Academy", 30], ["stevens", "Stevens Institute of Technology", 34], ["rec-philly", "REC Philly", 36], ["penn", "University of Pennsylvania", 30],
     ["pine-forest-camp", "Pine Forest Camp", 40], ["photolounge", "PhotoLounge", 18], ["jaime", "J'aime French Bakery", 38]];
   var PHOTO = "img/cutout.webp";
-  function about() {
-    // who I am, then how to reach me
+  function about(sub) {
+    // who I am, then how to reach me; "#/about?roommate" shows the playful version
+    var mate = sub === "roommate", lines = mate ? BIOS_ROOMMATE : BIOS;
     return '<div class="bio-side right"><div class="me-col"><img class="hello-me" src="' + PHOTO + '" alt="Adam Butz-Weidner, leaning"></div>' +
-      '<div class="bio"><div>' + BIOS.map(function (x, j) { return '<p' + (j === 0 ? ' class="big"' : '') + '>' + esc(x) + '</p>'; }).join("") +
+      '<div class="bio"><div><p class="bio-tabs"><a href="#/about"' + (mate ? '' : ' aria-current="page"') + '>About me</a> / <a href="#/about?roommate"' + (mate ? ' aria-current="page"' : '') + '>Roommate bio</a></p>' + lines.map(function (x, j) { return '<p' + (j === 0 ? ' class="big"' : '') + '>' + esc(x) + '</p>'; }).join("") +
       '<p class="cta">Tell me what you\'re making.</p>' +
       '<p class="sig"><a href="mailto:' + MAIL + '">' + MAIL + '</a> / <a href="resume.pdf" target="_blank" rel="noopener">Resume</a></p></div></div></div>' +
       '<div class="logos"><h4>Places I\'ve worked</h4><div>' + LOGOS.map(function (l) { return '<img src="img/logos/' + l[0] + '.png" alt="' + l[1] + '" title="' + l[1] + '" style="height:' + (l[2] || 34) + 'px">'; }).join("") + '</div></div>';
@@ -868,12 +885,11 @@
     wash(id);
     document.title = (id && (i >= 0 || PAGES[id]) ? title(id) + " · " : "") + "Adam Butz-Weidner";
     document.querySelectorAll(".side a[href^='#/']").forEach(function (a) { a.classList.toggle("cur", a.getAttribute("href") === "#/" + id && id !== ""); });
-    document.body.classList.remove("open");
+    document.body.classList.remove("open"); $("menu").setAttribute("aria-expanded", "false"); $("menu").textContent = "Index";
     main.querySelectorAll(".play[data-i], .play[data-reel]").forEach(function (b) {
       b.onclick = function () { if (b.dataset.reel) return toggle(); var k = +b.dataset.i; if (cur === k && state !== "idle" && state !== "done") toggle(); else go(k); };
     });
     if ($("hpCap")) { lockCap(); if (document.fonts) document.fonts.ready.then(lockCap); }
-    var hd = main.querySelector(".hp-down"); if (hd) hd.onclick = function (e) { e.preventDefault(); $("hpList").scrollIntoView({ behavior: "smooth" }); };
     if ($("hpLink")) $("hpLink").onclick = function (e) { if (this.hasAttribute("data-reel")) { e.preventDefault(); toggle(); } };
     // home: the hello video loops silently (stopping before its end flash); Sound on plays it from the top
     if ($("hpVid")) { var hv = $("hpVid");
@@ -955,7 +971,7 @@
     // load every picture the reel can show, so a cut never flashes
     REEL.forEach(function (i) { var u = picFor(WORK[i].id); if (u) new Image().src = u; });
   })();
-  $("menu").addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); document.body.classList.toggle("open"); });
+  $("menu").addEventListener("click", function (e) { e.stopPropagation(); var o = document.body.classList.toggle("open"); this.setAttribute("aria-expanded", o); this.textContent = o ? "Close" : "Index"; });
 
   // ---------- the player
   var au = $("au"), scBox = $("scBox");
