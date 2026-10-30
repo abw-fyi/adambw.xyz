@@ -107,15 +107,13 @@
   .levels p { margin: 0 0 10px !important; font-size: 19px; }
   .levels p.q { font: 400 14px/1.5 var(--mono) !important; color: var(--grey); margin-top: 18px !important; }
   .levels p.q:first-child { margin-top: 0 !important; }
-  .beat { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 28px; align-items: start; margin: 44px 0; max-width: 900px; }
-  .beat > p { margin: 0 !important; font-size: 18px; line-height: 1.55; }
-  .beat figure { margin: 0; }
-  .beat img { display: block; width: 100%; }
-  .beat .pl.tall { display: block; } .beat .pl.tall video { width: 100%; height: auto; }
-  .beat-solo { font-size: 18px !important; line-height: 1.55; max-width: 620px; margin: 44px 0 !important; }
-  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 640px; margin: 56px 0 0; }
-  .pair figure { margin: 0; } .pair img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-  .pair .video { aspect-ratio: 16 / 9; width: 100%; }
+  .sch .ph { max-width: 760px; }
+  .sch .t { font-size: 18px; line-height: 1.55; max-width: 620px; margin: 48px 0 22px !important; }
+  /* pictures side by side at one height, filling the column: each grows by its own width-to-height ratio (--r) */
+  .row { display: flex; gap: 16px; align-items: flex-start; max-width: 760px; }
+  .row figure { margin: 0; min-width: 0; flex: var(--r) 1 0; }
+  .row img, .row .video, .row .pl video { display: block; width: 100%; height: auto; aspect-ratio: var(--r); object-fit: cover; }
+  .row figcaption { margin-top: 8px !important; }
 
   .ph img, .ph video { display: block; width: 100%; background: #000; }
   .ph p { margin: 10px 0 0 !important; }
@@ -476,8 +474,8 @@
     .rw-kinds { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
     .rw-pair { grid-template-columns: 1fr; }
     .sh { grid-template-columns: 1fr; gap: 24px; }
-    .beat { grid-template-columns: 1fr; gap: 14px; margin: 34px 0; }
-    .pair { grid-template-columns: 1fr; }
+    .sch .t { margin: 36px 0 18px !important; }
+    .row { flex-direction: column; gap: 22px; } .row figure { flex: none; width: 100%; }
     .hp { max-width: none !important; }
     .hp-list { display: grid; grid-template-columns: 1fr; gap: 26px; margin-top: 72px; font: 400 15px/1.5 var(--mono); }
     .hp-list h4 { font: 700 15px/1.4 var(--mono); color: var(--ink); margin: 0 0 4px; }
@@ -685,19 +683,19 @@
       '<div class="next">Next: <a href="#/' + ORDER[(ORDER.indexOf("stevens") + 1) % ORDER.length] + '">' + esc(title(ORDER[(ORDER.indexOf("stevens") + 1) % ORDER.length])) + '</a></div>';
   }
   function program() {
-    // short beats, each with its picture beside it; the set footage leads, the portrait sits small at the end
-    var beat = function (text, fig) { return '<div class="beat"><p>' + text + '</p>' + fig + '</div>'; };
-    return '<div class="head"><h1>Springside Chestnut Hill Academy</h1><span class="meta">Entrepreneurship &amp; New Media Educator</span></div>' +
-      '<p class="big">I ran the school\'s new media program from 2022 to 2026 and set it up like a small production company.</p>' +
+    // one column, the width of the header: the shoot leads, then each paragraph with its pictures in a row beneath it
+    var fig = function (r, media, cap) { return '<figure style="--r:' + r + '">' + media + '<figcaption class="note">' + cap + '</figcaption></figure>'; };
+    return '<div class="sch"><div class="head"><h1>Springside Chestnut Hill Academy</h1><span class="meta">Entrepreneurship &amp; New Media Educator</span></div>' +
+      '<p class="big">I ran the school\'s new media program from 2022 to 2026 as a production company for high schoolers.</p>' +
       '<div class="ph top">' + player("video/multicam-shoot", { loop: true }) + '<p class="note">A multicam shoot in the studio.</p></div>' +
-      beat('Most of my students started with no filmmaking experience. By the end they were running multicam shoots of scripts they wrote.',
-        '<figure><img src="img/withers-soul-poster.jpg" alt="Poster for The Site of Withers Soul"><figcaption class="note"><i>The Site of Withers Soul</i>, a student film.</figcaption></figure>') +
-      '<p class="beat-solo">Over four years, my students\' films were recognized at the WHYY Youth Film Festival and by PBS NewsHour and the Pulitzer Center. Their documentaries took on local and national issues, with interviews with politicians, consultants, and citizens.</p>' +
-      beat('I designed the tenth-grade capstone curriculum, which ran like an incubator. Students launched startups, manufacturing and production projects, new media ventures, and nonprofits. They won funding at pitch competitions, and ventures from the program have generated more than $300,000 in revenue.',
-        '<figure>' + player("video/sch-models", { loop: true, tall: true, silent: true }) + '<figcaption class="note">Student models of a sustainable future.</figcaption></figure>') +
-      '<div class="pair"><figure><img src="img/sch-lab-wide.jpg" alt="Adam in the center\'s maker lab, with a laser cutter behind him"><figcaption class="note">In the maker lab at the school\'s Center for Entrepreneurial Leadership.</figcaption></figure>' +
-        '<figure><div class="video" id="video" style="background:#111 url(img/school-ad.jpg) center / cover"><button class="adcard" type="button" id="vBtn" aria-label="Play the school\'s ad"><span class="big">' + I.play + '</span></button></div><figcaption class="note">The school\'s ad, which I helped make.</figcaption></figure></div>' +
-      '<div class="next">Next: <a href="#/' + ORDER[(ORDER.indexOf("media-program") + 1) % ORDER.length] + '">' + esc(title(ORDER[(ORDER.indexOf("media-program") + 1) % ORDER.length])) + '</a></div>';
+      '<p class="t">Most of my students had never made a film. They ran multicam shoots of scripts they wrote and edited them in DaVinci Resolve. Local businesses paid them to make ads, and I taught them the whole job, from budgets and casting to storyboards and the shoot.</p>' +
+      '<div class="row">' + fig(.786, '<img src="img/withers-soul-poster.jpg" alt="Poster for The Site of Withers Soul">', '<i>The Site of Withers Soul</i>, a student film.') +
+        fig(1.778, '<div class="video" id="video" style="background:#111 url(img/school-ad.jpg) center / cover"><button class="adcard" type="button" id="vBtn" aria-label="Play the school\'s ad"><span class="big">' + I.play + '</span></button></div>', 'The school\'s ad, which I helped make.') + '</div>' +
+      '<p class="t">Students made projects like an investigative documentary on SEPTA\'s budget crisis and a reported podcast on attending a predominantly white school as a person of color. Their work was recognized at the WHYY Youth Film Festival. We partnered with organizations like PBS NewsHour and the Pulitzer Center.</p>' +
+      '<p class="t">I designed the tenth-grade capstone. Students found a problem worth solving and built toward an answer, whether an app, a startup, a film, or a podcast. They won money at pitch competitions and from customers, and ventures from the program have made more than $300,000 in revenue. The ones I worked with ranged from prosthetic legs for animals to a sports broadcast network.</p>' +
+      '<div class="row">' + fig(.8, player("video/sch-models", { loop: true, silent: true }), 'Student models of a sustainable future.') +
+        fig(1.25, '<img src="img/sch-lab-wide.jpg" alt="Adam in the center\'s maker lab, with a laser cutter behind him">', 'In the maker lab at the school\'s Center for Entrepreneurial Leadership.') + '</div>' +
+      '<div class="next">Next: <a href="#/' + ORDER[(ORDER.indexOf("media-program") + 1) % ORDER.length] + '">' + esc(title(ORDER[(ORDER.indexOf("media-program") + 1) % ORDER.length])) + '</a></div></div>';
   }
 
 
