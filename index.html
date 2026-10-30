@@ -99,7 +99,6 @@
   .lean { position: fixed; right: -40px; bottom: -30px; width: 230px; z-index: 1; pointer-events: none; transform: rotate(-4deg); transform-origin: bottom right; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
   .lean.in { transform: rotate(0deg) translate(-8px, -4px); }
   .bio .big { font-size: 21px; }
-  .bio-tabs { font-size: 14px; margin: 0 0 14px; } .bio-tabs a { color: inherit; opacity: .55; text-decoration: none; } .bio-tabs a[aria-current] { opacity: 1; text-decoration: underline; }
   .cta { margin-top: 30px !important; font-size: 19px; }
   .cta + .sig { margin-top: 6px !important; }
   .ph { margin: 34px 0 30px; max-width: 640px; }
@@ -370,19 +369,16 @@
   .hp-cap small { font: 400 13px/1.5 var(--mono); }
   .hp a { position: relative; }
 
-  .hp a[href^="#/"]:not([data-reel]) { cursor: alias; }
   .hp-cap.now { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 16px; align-items: start; }
   .hp-prog { display: block; height: 2px; max-width: 540px; margin: -6px 0 18px; background: transparent; } body.playing .hp-prog { background: #e6e6e6; } .hp-prog b { display: block; height: 100%; width: 0; background: var(--ink); }
   .hp a { cursor: pointer; } #hpVid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hp { position: relative; } .hp #hpVid { background: #000; }
   .hp .snd { all: unset; cursor: pointer; position: absolute; right: 12px; bottom: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 12px; border-radius: 18px; background: rgba(0,0,0,.55); color: #fff; font: 400 13px/1 var(--mono); }
   .hp .snd svg { width: 16px; height: 16px; }
+  body.playing .hp .snd { right: auto; left: 12px; } /* the reel's covers are square and sit at the left of the frame */
   .hp-cap small.hp-n { margin-top: 2px; }
   .hp-next { all: unset; cursor: pointer; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; padding: 4px 0; }
-  .hp-go { position: absolute; left: 16px; bottom: 16px; width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,.6); color: #fff; display: grid; place-items: center; transition: transform .15s; }
-  .hp a:hover .hp-go { transform: scale(1.08); }
   body.home .bar { display: none !important; }
-  body.home.playing .hp-go, .hp a:not([data-reel]) .hp-go { display: none; }
   .hp-cap small { display: block; color: #555; margin-top: 4px; }
   .hp-list { display: none; }
   .covers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; margin: 40px 0 10px; max-width: 760px; }
@@ -626,7 +622,7 @@
   }
   function home() {
     var me = ME[HOMEV] || ME.a;
-    return '<figure class="hp"><a id="hpLink" href="#/" aria-label="Play my work" data-reel="1"><img id="hpImg"' + (me[2] === "contain" ? ' class="me"' : '') + ' src="' + me[0] + '" alt="Adam Butz-Weidner" style="object-position:' + (me[1] || "50% 30%") + ';object-fit:' + (me[2] || "cover") + '"><video id="hpVid" src="video/hello.mp4?v=6" poster="video/hello.jpg" muted playsinline autoplay preload="auto" aria-hidden="true"></video></a>' +
+    return '<figure class="hp"><a id="hpLink" aria-hidden="true"><img id="hpImg"' + (me[2] === "contain" ? ' class="me"' : '') + ' src="' + me[0] + '" alt="Adam Butz-Weidner" style="object-position:' + (me[1] || "50% 30%") + ';object-fit:' + (me[2] || "cover") + '"><video id="hpVid" src="video/hello.mp4?v=6" poster="video/hello.jpg" muted playsinline autoplay preload="auto" aria-hidden="true"></video></a>' +
       '<button class="snd" id="hpSnd" type="button" aria-label="Turn sound on">' + I.muted + '<span>Sound on</span></button></figure>' +
       '<p class="hp-cap" id="hpCap">' + HOMECAP + '</p><i class="hp-prog"><b id="hpProg"></b></i>' +
       '<button class="play" type="button" data-reel="1"><span class="ic"></span><span class="lb">Play my work · ' + Math.round(REEL.reduce(function (t, i) { return t + WORK[i].len; }, 0) / 60) + ' min</span></button>' +
@@ -765,21 +761,13 @@
       "My family runs PhotoLounge, a film lab in Philadelphia. I help with its film club and have been an active film photographer my entire life.",
       "I write a blog, The Related Work Journal, and develop the typeface this site uses."
   ];
-  // The playful tab (Adam, 2026-10-23: the spirit of his notes, on the site too). Every line is a vault fact.
-  var BIOS_ROOMMATE = [
-      "What you'd want to know if we lived together.",
-      "When we toured the apartment, I was the one clapping in the corners to hear the echo.",
-      "I sang in operas through high school, so the shower gets a full performance.",
-      "I moved to Boston in September knowing two people. You'd make three."
-  ];
   var LOGOS = [["jacobs-pillow", "Jacob's Pillow", 34], ["springside", "Springside Chestnut Hill Academy", 30], ["stevens", "Stevens Institute of Technology", 34], ["rec-philly", "REC Philly", 36], ["penn", "University of Pennsylvania", 30],
     ["pine-forest-camp", "Pine Forest Camp", 40], ["photolounge", "PhotoLounge", 18], ["jaime", "J'aime French Bakery", 38]];
   var PHOTO = "img/cutout.webp";
-  function about(sub) {
-    // who I am, then how to reach me; "#/about?roommate" shows the playful version
-    var mate = sub === "roommate", lines = mate ? BIOS_ROOMMATE : BIOS;
+  function about() {
+    // who I am, then how to reach me
     return '<div class="bio-side right"><div class="me-col"><img class="hello-me" src="' + PHOTO + '" alt="Adam Butz-Weidner, leaning"></div>' +
-      '<div class="bio"><div><p class="bio-tabs"><a href="#/about"' + (mate ? '' : ' aria-current="page"') + '>About me</a> / <a href="#/about?roommate"' + (mate ? ' aria-current="page"' : '') + '>Roommate bio</a></p>' + lines.map(function (x, j) { return '<p' + (j === 0 ? ' class="big"' : '') + '>' + esc(x) + '</p>'; }).join("") +
+      '<div class="bio"><div>' + BIOS.map(function (x, j) { return '<p' + (j === 0 ? ' class="big"' : '') + '>' + esc(x) + '</p>'; }).join("") +
       '<p class="cta">Tell me what you\'re making.</p>' +
       '<p class="sig"><a href="mailto:' + MAIL + '">' + MAIL + '</a> / <a href="resume.pdf" target="_blank" rel="noopener">Resume</a></p></div></div></div>' +
       '<div class="logos"><h4>Places I\'ve worked</h4><div>' + LOGOS.map(function (l) { return '<img src="img/logos/' + l[0] + '.png" alt="' + l[1] + '" title="' + l[1] + '" style="height:' + (l[2] || 34) + 'px">'; }).join("") + '</div></div>';
@@ -886,7 +874,7 @@
   function route() {
     var hp = (location.hash.replace(/^#\/?/, "") || "").split("?"), id = hp[0], i = byId(id);
     main.querySelectorAll(".fp audio").forEach(function (x) { x.pause(); });
-    main.innerHTML = id === "rwj" ? rwj() : id === "stevens" ? stevens() : id === "diary-films" ? diary() : id === "touchdesigner" ? td() : id === "about" ? about(decodeURIComponent(hp[1] || "")) : id === "media-program" ? program() : id === "courier-club" ? courier() : i >= 0 ? project(i) : home();
+    main.innerHTML = id === "rwj" ? rwj() : id === "stevens" ? stevens() : id === "diary-films" ? diary() : id === "touchdesigner" ? td() : id === "about" ? about() : id === "media-program" ? program() : id === "courier-club" ? courier() : i >= 0 ? project(i) : home();
     wash(id);
     document.title = (id && (i >= 0 || PAGES[id]) ? title(id) + " · " : "") + "Adam Butz-Weidner";
     document.querySelectorAll(".side a[href^='#/']").forEach(function (a) { a.classList.toggle("cur", a.getAttribute("href") === "#/" + id && id !== ""); });
@@ -895,16 +883,18 @@
       b.onclick = function () { if (b.dataset.reel) return toggle(); var k = +b.dataset.i; if (cur === k && state !== "idle" && state !== "done") toggle(); else go(k); };
     });
     if ($("hpCap")) { lockCap(); if (document.fonts) document.fonts.ready.then(lockCap); }
-    if ($("hpLink")) $("hpLink").onclick = function (e) { if (this.hasAttribute("data-reel")) { e.preventDefault(); toggle(); } };
+    if ($("hpLink")) $("hpLink").onclick = function () { $("hpSnd").click(); };
     // home: the hello video loops silently (stopping before its end flash); Sound on plays it from the top
     if ($("hpVid")) { var hv = $("hpVid");
       hv.addEventListener("timeupdate", function () { if (hv.muted && hv.currentTime > 8.3) hv.currentTime = 0; });
       hv.addEventListener("ended", function () { hv.muted = true; hv.currentTime = 0; hv.play().catch(function () {}); heySync(); });
-      hv.addEventListener("volumechange", heySync);
+      ["volumechange", "play", "pause"].forEach(function (ev) { hv.addEventListener(ev, heySync); });
+      // the button on the picture, and the picture itself: pause or resume the reel while it runs;
+      // otherwise sound on from the top, then pause and play
       $("hpSnd").onclick = function () {
-        if (hv.muted) { if (state === "playing" || state === "loading") { stopAll(); state = "paused"; paint(); }
-          hv.muted = false; hv.currentTime = 0; hv.play().catch(function () {}); }
-        else hv.muted = true;
+        if (reelOn()) return toggle();
+        if (hv.muted) { hv.muted = false; hv.currentTime = 0; hv.play().catch(function () {}); }
+        else if (hv.paused) hv.play().catch(function () {}); else hv.pause();
       };
       heySync(); }
     document.body.classList.toggle("home", !id);
@@ -940,8 +930,11 @@
   // The home frame: me, or the project being pointed at (desktop), or the one the reel is playing (any device).
   // Hard cuts, like an edit. Clicking the frame opens whatever it shows.
   // the caption keeps the height of its tallest state, so nothing below it ever moves
+  function reelOn() { return state !== "idle" && state !== "done"; }
   function heySync() { var hv = $("hpVid"), hs = $("hpSnd"); if (!hv || !hs) return;
-    hs.innerHTML = hv.muted ? I.muted + '<span>Sound on</span>' : I.sound + '<span>Sound off</span>'; hs.setAttribute("aria-label", hv.muted ? "Turn sound on" : "Turn sound off"); }
+    var on = state === "playing" || state === "loading",
+      say = reelOn() ? [on ? I.pause : I.play, on ? "Pause" : "Resume"] : hv.muted ? [I.muted, "Sound on"] : hv.paused ? [I.play, "Play"] : [I.pause, "Pause"];
+    hs.innerHTML = say[0] + '<span>' + say[1] + '</span>'; hs.setAttribute("aria-label", say[1]); }
   function lockCap() {
     var hc = $("hpCap"); if (!hc) return; var keep = hc.innerHTML, tall;
     hc.style.minHeight = ""; tall = hc.offsetHeight;
@@ -959,12 +952,11 @@
   function frame(id, cap) {
     var img = $("hpImg"), c = $("hpCap"); if (!img) return;
     if (!id && $("hpProg")) $("hpProg").style.width = "0";
-    var me = ME[HOMEV] || ME.a, src = id ? picFor(id) : me[0], ln = $("hpLink"), pre = new Image();
-    ln.href = "#/" + (id || ""); ln.toggleAttribute("data-reel", !id); ln.setAttribute("aria-label", id ? "Open " + title(id) : "Play my work");
+    var me = ME[HOMEV] || ME.a, src = id ? picFor(id) : me[0], pre = new Image();
     c.innerHTML = cap || HOMECAP;
-    var hv = $("hpVid"), hs = $("hpSnd");
-    if (hv) { hv.style.visibility = id ? "hidden" : ""; if (hs) hs.style.display = id ? "none" : "";
-      if (id) { hv.pause(); hv.muted = true; heySync(); } else hv.play().catch(function () {}); }
+    var hv = $("hpVid");
+    if (hv) { hv.style.visibility = id ? "hidden" : "";
+      if (id) { hv.pause(); hv.muted = true; } else hv.play().catch(function () {}); heySync(); }
     if (img.getAttribute("src") === src) return;
     pre.onload = pre.onerror = function () { if (!$("hpImg")) return;
       img.src = src; img.style.objectPosition = id ? "0% 50%" : (me[1] || "50% 30%"); img.style.objectFit = id ? "contain" : (me[2] || "cover"); img.classList.toggle("me", !id && me[2] === "contain");
@@ -994,7 +986,7 @@
       b.querySelector(".lb").textContent = state === "done" ? "Play again" : on || busy ? "Pause" : (state === "paused" || state === "blocked") ? "Resume" : "Play my work · " + Math.round(REEL.reduce(function (t, i) { return t + WORK[i].len; }, 0) / 60) + " min"; });
     main.querySelectorAll(".play[data-i]").forEach(function (b) { var k = +b.dataset.i, mine = k === cur && state !== "idle" && state !== "done";
       b.querySelector(".ic").innerHTML = mine ? ic : I.play; b.querySelector(".lb").textContent = mine && (on || busy) ? "Pause" : "Listen · " + fmt(WORK[k].len); });
-    document.body.classList.toggle("playing", state !== "idle");
+    document.body.classList.toggle("playing", state !== "idle"); heySync();
     $("bar").classList.toggle("up", state !== "idle");
   }
   function setAct(text, href) { var a = $("act"); if (!text) { a.hidden = true; return; } a.hidden = false; a.textContent = text; a.href = href; }
